@@ -6,7 +6,7 @@ class Navigation extends Component {
             <nav className="nav">
   <div className="nav-left">
     <a className="nav-item">
-      <img src="http://bulma.io/images/bulma-logo.png" alt="Bulma logo" />
+      <img src="./assets/img/logo/logo.png" alt="Bulma logo" />
     </a>
   </div>
 
@@ -36,19 +36,11 @@ class Navigation extends Component {
     <div className="nav-item">
       <div className="field is-grouped">
         <p className="control">
-          <a className="button" >
-            <span className="icon">
-              <i className="fa fa-twitter"></i>
-            </span>
-            <span>Tweet</span>
-          </a>
-        </p>
-        <p className="control">
           <a className="button is-primary">
             <span className="icon">
-              <i className="fa fa-download"></i>
+              <i className="fa fa-sign-out"></i>
             </span>
-            <span>Download</span>
+            <span>Logout</span>
           </a>
         </p>
       </div>

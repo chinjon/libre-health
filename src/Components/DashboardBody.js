@@ -9,12 +9,12 @@ const dashboardBodyStyle = {
 class DashboardBody extends Component {
     render() {
         return (
-            <div clasName="container" style={dashboardBodyStyle}>
-                <div className="tile is-ancestor">
-                    <div className="tile is-parent is-2">
+            <div style={dashboardBodyStyle}>
+                <div className="columns">
+                    <div className="column is-2">
                         <DashboardNav />
                     </div>
-                    <div className="tile is-parent is-3">
+                    <div className="column is-4">
                         <MedsListBody />
                     </div>
                 </div>
