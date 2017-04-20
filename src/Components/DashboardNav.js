@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-class DashboardNav extends Component {
+class DashboardNav extends React.Component {
     render() {
         return (
             <aside className="menu">

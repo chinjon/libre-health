@@ -1,21 +1,32 @@
 import React, {Component} from 'react';
 import DashboardNav from './DashboardNav';
 import MedsListBody from './MedsListBody';
+import DashboardPatientCard from './DashboardPatientCard';
 
-const dashboardBodyStyle = {
-    padding: "3rem 1rem",
+import Radium from 'radium';
+
+
+let styles = {
+    base: {
+        padding: '2.4rem',
+        margin: '1rem',
+        border: 'black solid 1px',
+    }
 }
 
-class DashboardBody extends Component {
+class DashboardBody extends React.Component {
     render() {
         return (
-            <div style={dashboardBodyStyle}>
-                <div className="columns">
+            <div>
+                <div className="columns" style={styles.base}>
                     <div className="column is-2">
                         <DashboardNav />
                     </div>
-                    <div className="column is-4">
+                    <div className="column is-3">
                         <MedsListBody />
+                    </div>
+                    <div className="column is-3">
+                        <DashboardPatientCard />
                     </div>
                 </div>
                 
@@ -24,4 +35,4 @@ class DashboardBody extends Component {
     }
 }
 
-export default DashboardBody;
+export default Radium(DashboardBody);

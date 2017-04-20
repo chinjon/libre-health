@@ -3,7 +3,6 @@ import React, {Component} from 'react';
 class MedsListBody extends Component {
     render() {
         return (
-            <div className="container">
                 <nav className="panel">
                     <p className="panel-heading has-text-centered">
                         Medications
@@ -45,7 +44,6 @@ class MedsListBody extends Component {
                         Medication #4
                     </a>
                 </nav>
-            </div>
 
         )
     }

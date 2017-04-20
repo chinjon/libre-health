@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-class PatientCard extends Component {
+class DashboardPatientCard extends React.Component {
     render() {
         return (
             <div className="box">
@@ -12,29 +12,25 @@ class PatientCard extends Component {
                     <div className="media-content">
                         <div className="content">
                             <p>
-                                <strong>John Smith</strong>
-                                <small>@johnsmith</small>
-                                <small>31m</small>
+                                <strong>Patient #1</strong>
                                 <br/>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur sit
-                                amet massa fringilla egestas. Nullam condimentum luctus turpis.
                             </p>
                         </div>
                         <nav className="level is-mobile">
                             <div className="level-left">
                                 <a className="level-item">
                                     <span className="icon is-small">
-                                        <i className="fa fa-reply"></i>
+                                        <i className="fa fa-heartbeat"></i>
                                     </span>
                                 </a>
                                 <a className="level-item">
                                     <span className="icon is-small">
-                                        <i className="fa fa-retweet"></i>
+                                        <i className="fa fa-user-md"></i>
                                     </span>
                                 </a>
                                 <a className="level-item">
                                     <span className="icon is-small">
-                                        <i className="fa fa-heart"></i>
+                                        <i className="fa fa-medkit"></i>
                                     </span>
                                 </a>
                             </div>
@@ -46,4 +42,4 @@ class PatientCard extends Component {
     }
 }
 
-export default PatientCard;
+export default DashboardPatientCard;
