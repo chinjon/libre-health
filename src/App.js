@@ -10,9 +10,7 @@ class App extends Component {
     return (
       <div>
         <Navigation />
-        <DashboardBody>
-          {this.props.children}
-        </DashboardBody>
+        <Landing />
       </div>
     );
   }

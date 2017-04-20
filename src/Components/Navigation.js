@@ -6,7 +6,7 @@ class Navigation extends React.Component {
       <nav className="nav">
         <div className="nav-left">
           <a className="nav-item">
-            <img src="./assets/img/logo/logo.png" alt="Bulma logo"/>
+            <img src="./assets/img/logo/logo.png" alt="logo"/>
           </a>
         </div>
         <div className="nav-center"></div>

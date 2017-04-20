@@ -1,6 +1,16 @@
 import React, {Component} from 'react';
 
-class MedsListBody extends Component {
+class MedsListBody extends React.Component {
+    
+    constructor(props) {
+        super(props);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+    handleSubmit(e) {
+        console.log(this.input.value);
+        e.preventDefault();
+    }
+    
     render() {
         return (
                 <nav className="panel">
@@ -8,16 +18,16 @@ class MedsListBody extends Component {
                         Medications
                     </p>
                     <div className="panel-block">
-                        <p className="control has-icons-left">
+                        <div className="control has-icons-left">
                             <div className="field has-addons">
                                 <p className="control">
-                                    <input className="input is-small" type="text" placeholder="Add medication"/>
+                                    <input className="input is-small" ref={(input) => this.input = input} type="text" placeholder="Add medication"/>
                                 </p>
                                 <p className="control">
                                     <a className="button is-small">Add</a>
                                 </p>
                             </div>
-                        </p>
+                        </div>
                     </div>
                     <a className="panel-block">
                         <span className="panel-icon">
