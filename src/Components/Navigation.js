@@ -1,6 +1,11 @@
 import React, {Component} from 'react';
 
+import NavLogin from './NavLogin';
+
 class Navigation extends React.Component {
+  constructor(props) {
+    super(props);
+  }
   render() {
     return (
       <nav className="nav">
@@ -22,9 +27,8 @@ class Navigation extends React.Component {
           <a className="nav-item">
             Documentation
           </a>
-          <a className="nav-item">
-            Blog
-          </a>
+          <NavLogin type="text" placeholder="username"/>
+          <NavLogin type="password" placeholder="password"/>
           <div className="nav-item">
             <div className="field is-grouped">
               <p className="control">
