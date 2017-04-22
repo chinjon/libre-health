@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import passportLocalMongoose from 'passport-local-mongoose';
+
 const Schema = mongoose.Schema;
 
 const User = new Schema({
@@ -26,6 +27,6 @@ const User = new Schema({
 });
 
 // plugin options https://github.com/saintedlama/passport-local-mongoose#options
-Account.plugin(passportLocalMongoose);
+User.plugin(passportLocalMongoose);
 
 module.exports = mongoose.model('User', User);
