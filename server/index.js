@@ -1,8 +1,8 @@
-import passport from 'passport';
-import User from './models/User';
-import express from 'express';
-
+const express = require('express');
 const routes = express.Router();
+const auth = require('./controllers/AuthControllers');
+
+
 
 routes.get('/', (req, res)=>{
   res.render('index');
@@ -11,6 +11,18 @@ routes.get('/', (req, res)=>{
 routes.get('/register', (req, res)=>{
   res.render('register');
 })
+
+userController.doRegister = function(req, res) {
+  User.register(new User({ username : req.body.username, name: req.body.name }), req.body.password, function(err, user) {
+    if (err) {
+      return res.render('register', { user : user });
+    }
+
+    passport.authenticate('local')(req, res, function () {
+      res.redirect('/');
+    });
+  });
+};
 
 
 // app.post('/api/signup', function(req, res) {
@@ -29,4 +41,4 @@ routes.get('/register', (req, res)=>{
 // });
 
 
-export default routes;
+module.exports = routes;
