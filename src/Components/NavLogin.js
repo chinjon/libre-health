@@ -9,7 +9,7 @@ class NavLogin extends React.Component {
       <div className="nav-item">
         <div className="field">
           <p className="control has-icons-left has-icons-right">
-            <input className="input" type={this.props.type} placeholder={this.props.placeholder} />
+            <input className="input" type={this.props.type} placeholder={this.props.placeholder} value={this.props.value} />
             </p>
           </div>
         </div>

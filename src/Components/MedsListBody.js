@@ -1,16 +1,31 @@
 import React, {Component} from 'react';
 
+var MedicationList = [
+    {
+        name: "Med #1"
+    },
+    {
+        name: "Med #2"
+    },
+    {
+        name: "Med #3"
+    }
+];
+
 class MedsListBody extends React.Component {
-    
+
     constructor(props) {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
+
     handleSubmit(e) {
         console.log(this.input.value);
         e.preventDefault();
     }
-    
+
+
+
     render() {
         return (
                 <nav className="panel">
@@ -29,34 +44,29 @@ class MedsListBody extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <a className="panel-block">
-                        <span className="panel-icon">
-                            <i className="fa fa-heart"></i>
-                        </span>
-                        Medication #1
-                    </a>
-                    <a className="panel-block">
-                        <span className="panel-icon">
-                            <i className="fa fa-user-md"></i>
-                        </span>
-                        Medication #2
-                    </a>
-                    <a className="panel-block">
-                        <span className="panel-icon">
-                            <i className="fa fa-plus-square"></i>
-                        </span>
-                        Medication #3
-                    </a>
-                    <a className="panel-block">
-                        <span className="panel-icon">
-                            <input type="checkbox"/>
-                        </span>
-                        Medication #4
-                    </a>
+                    <MedicationBlock MedicationList={MedicationList} />
                 </nav>
 
         )
     }
 }
+
+
+const MedicationBlock = ({MedicationList}) => {
+
+        return(
+            <div>
+            {MedicationList.map((e) =>
+                <a className="panel-block">
+                    <span className="panel-icon">
+                        <i className="fa fa-plus-square"></i>
+                    </span>
+                    {e.name}
+                </a>
+            )}
+            </div>
+        )
+}
+
 
 export default MedsListBody;
