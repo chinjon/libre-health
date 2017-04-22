@@ -1,11 +1,14 @@
 import mongoose from 'mongoose';
+import passportLocalMongoose from 'passport-local-mongoose';
+const Schema = mongoose.Schema;
 
-let Schema = mongoose.Schema;
-
-const UserSchema = new Schema({
+const User = new Schema({
   userName: {
     type: String,
-    required: true
+    required: true,
+    index: {
+      unique: true
+    }
   },
   email: {
     type: String,
@@ -20,8 +23,9 @@ const UserSchema = new Schema({
     type: Array,
     required: false
   }
-})
+});
 
-const User = mongoose.model("User, UserSchema");
+// plugin options https://github.com/saintedlama/passport-local-mongoose#options
+Account.plugin(passportLocalMongoose);
 
-export default User;
+module.exports = mongoose.model('User', User);
