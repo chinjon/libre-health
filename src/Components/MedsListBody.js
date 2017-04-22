@@ -2,13 +2,13 @@ import React, {Component} from 'react';
 
 var MedicationList = [
     {
-        name: "Med #1"
+        name: "Medication #1"
     },
     {
-        name: "Med #2"
+        name: "Medication #2"
     },
     {
-        name: "Med #3"
+        name: "Medication #3"
     }
 ];
 
@@ -23,9 +23,6 @@ class MedsListBody extends React.Component {
         console.log(this.input.value);
         e.preventDefault();
     }
-
-
-
     render() {
         return (
                 <nav className="panel">
@@ -53,7 +50,6 @@ class MedsListBody extends React.Component {
 
 
 const MedicationBlock = ({MedicationList}) => {
-
         return(
             <div>
             {MedicationList.map((e) =>

@@ -2,10 +2,20 @@ import React, {Component} from 'react';
 
 import NavLogin from './NavLogin';
 
-class Navigation extends React.Component {
+class Navigation extends Component {
   constructor(props) {
     super(props);
+    // this.state.username='';
+  //  this.state.props='';
   }
+// updateName(name){this.setState....}
+// updatePW(pw){this.setState....}
+//
+// submitLogin(){
+//
+//   axios.post('/login', {data:{ this.username, password}})
+//
+// }
   render() {
     return (
       <nav className="nav">
@@ -27,8 +37,10 @@ class Navigation extends React.Component {
           <a className="nav-item">
             Documentation
           </a>
-          <NavLogin type="text" placeholder="username"/>
+
+          <NavLogin type="text" onChange={(e)=>this.setName(e)} placeholder="username"/>
           <NavLogin type="password" placeholder="password"/>
+
           <div className="nav-item">
             <div className="field is-grouped">
               <p className="control">
