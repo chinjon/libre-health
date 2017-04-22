@@ -4,9 +4,9 @@ bodyParser = require('body-parser');
 
 app.use(express.static('./public'));
 
-const PORT = process.env.PORT || 4000;
+// app.use(express.static(path.resolve(__dirname, '..', 'build')));
 
-app.use(express.static(path.resolve(__dirname, '..', 'build')));
+const PORT = process.env.PORT || 4000;
 
 app.post('/api/signup', function(req, res) {
   //todo

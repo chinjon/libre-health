@@ -11,7 +11,8 @@ class App extends Component {
     return (
       <div>
         <Navigation />
-        <SignUpForm />
+          <DashboardBody>
+          </DashboardBody>
       </div>
     );
   }
