@@ -14,7 +14,9 @@ const routes = require('./routes');
 const app = express();
 
 app.use(express.static('./public'));
+
 // build folder is where create-react-app CLI will export production
+// need to use the 'create-react-app build' command in the cli
 // app.use(express.static(path.resolve(__dirname, '..', 'build')));
 
 app.use(bodyParser.json());
@@ -28,6 +30,7 @@ app.use(require('express-session')({
     resave: false,
     saveUninitialized: false
 }));
+
 // Configure passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
