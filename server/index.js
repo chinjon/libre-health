@@ -40,5 +40,10 @@ userController.doRegister = function(req, res) {
 //   //return user with new info
 // });
 
+app.post('/api/addMeds', function(req, res) {
+  // updates user model with new medication
+  // return with updated medication list 
+})
+
 
 module.exports = routes;

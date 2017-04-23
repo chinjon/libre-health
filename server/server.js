@@ -3,14 +3,11 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const session = require('cookie-session');
 const bodyParser = require('body-parser');
-
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-
 const routes = require('./routes');
-
 const app = express();
 
 app.use(express.static('./public'));
@@ -49,11 +46,7 @@ if(process.env.MONGODB_URI) {
     .catch((err)=> console.log(err));
 }
 
-
-app.use('/', routes);
-
-
-
+app.use(routes);
 
 app.listen(PORT, ()=>{
   console.log("App is running on port ", ${PORT})
