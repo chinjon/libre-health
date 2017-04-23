@@ -20,11 +20,7 @@ app.use(cookieParser());
 
 const PORT = process.env.PORT || 4000;
 
-app.use(require('express-session')({
-    secret: 'keyboard cat',
-    resave: false,
-    saveUninitialized: false
-}));
+app.use(require('express-session')({secret: 'keyboard cat', resave: false, saveUninitialized: false}));
 // Configure passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
@@ -38,16 +34,14 @@ passport.deserializeUser(Account.deserializeUser());
 
 var DBUri = "mongodb://localhost/libre-health-db";
 
-if(process.env.MONGODB_URI) {
-    mongoose.connect(process.env.MONGODB_URI);
+if (process.env.MONGODB_URI) {
+  mongoose.connect(process.env.MONGODB_URI);
 } else {
-    mongoose.connect(DBUri)
-    .then(()=> console.log('connected to DB!'))
-    .catch((err)=> console.log(err));
+  mongoose.connect(DBUri).then(() => console.log('connected to DB!')).catch((err) => console.log(err));
 }
 
 app.use(routes);
 
-app.listen(PORT, ()=>{
-  console.log("App is running on port ", ${PORT})
-})
+app.listen(PORT, () => {
+  console.log(`App is running on port ${PORT}`)
+});

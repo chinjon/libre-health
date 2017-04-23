@@ -2,8 +2,6 @@ const express = require('express');
 const routes = express.Router();
 const auth = require('./controllers/AuthControllers');
 
-
-
 routes.get('/', (req, res)=>{
   res.render('index');
 });
@@ -42,7 +40,7 @@ userController.doRegister = function(req, res) {
 
 app.post('/api/addMeds', function(req, res) {
   // updates user model with new medication
-  // return with updated medication list 
+  // return with updated medication list
 })
 
 
