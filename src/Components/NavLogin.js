@@ -17,13 +17,7 @@ class NavLogin extends React.Component {
           <input className="input" type={this.props.type} placeholder={this.props.placeholder} value={this.props.value} />
           </p>
         </div>
-        <div className="field">
-          <p className="control has-icons-left has-icons-right">
-            <input className="input" type={this.props.type} placeholder={this.props.placeholder} value={this.props.value} />
-            </p>
-          </div>
-        </div>
-
+      </div>
       )
     }
   }
