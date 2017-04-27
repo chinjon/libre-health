@@ -1,17 +1,8 @@
-const mongoose = require("mongoose");
-const passportLocalMongoose = require("passport-local-mongoose");
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
-const Schema = mongoose.Schema;
-
-const User = new Schema({
-  userName: {
-    type: String,
-    required: true,
-    index: {
-      unique: true
-    }
-  },
-  email: {
+const UserSchema = new mongoose.Schema({
+    username: {
     type: String,
     required: true,
     unique: true
@@ -19,14 +10,27 @@ const User = new Schema({
   password: {
     type: String,
     required: true
-  },
-  medications: {
-    type: Array,
-    required: false
   }
 });
 
-// plugin options https://github.com/saintedlama/passport-local-mongoose#options
-User.plugin(passportLocalMongoose);
+UserSchema.pre('save', function saveHook(next){
+    const user = this;
 
-module.exports = mongoose.model('User', User);
+    if(user.isModified('password')){
+        bcrypt.hash(user.password, null, null, function(err, hash){
+            if(err){
+                next();
+            }
+            user.password = hash;
+            next();
+        });
+    }
+});
+
+UserSchema.methods.comparePassword = function(attemptedPassword, callback) {
+    bcrypt.compare(attemptedPassword, this.password, function(err, isMatch){
+        callback(isMatch);
+    })
+}
+
+module.exports = mongoose.model('User', UserSchema);

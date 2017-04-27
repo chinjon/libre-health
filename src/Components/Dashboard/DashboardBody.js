@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import DashboardNav from './DashboardNav';
 import PatientInfo from './PatientInfo';
-import Footer from './Footer';
+import Footer from './../Footer';
 
 import Radium from 'radium';
 

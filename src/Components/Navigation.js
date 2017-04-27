@@ -18,7 +18,7 @@ class Navigation extends Component {
     this.setState({
      [name]: target.value,
     })
-    event.preventDefault()
+    event.preventDefault();
   }
 
   render() {
@@ -31,9 +31,9 @@ class Navigation extends Component {
         </div>
         <form className="nav-center nav-menu">
           <div className="nav-item">
-            <input 
-              className="input" 
-              type="text" 
+            <input
+              className="input"
+              type="text"
               placeholder="username"
               name="username"
               value={this.state.username}
@@ -41,9 +41,9 @@ class Navigation extends Component {
             />
           </div>
           <div className="nav-item">
-            <input 
-              className="input" 
-              type="password" 
+            <input
+              className="input"
+              type="password"
               placeholder="password"
               name="password"
               value={this.state.password}
