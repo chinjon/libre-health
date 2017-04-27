@@ -14,7 +14,7 @@ let styles = {
   }
 }
 
-class DashboardBody extends React.Component {
+class DashboardBody extends Component {
   render() {
     return (
       <div>

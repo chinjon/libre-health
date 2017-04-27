@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-class SignUpForm extends React.Component {
+class SignUpForm extends Component {
   render() {
     return (
       <div className="card">

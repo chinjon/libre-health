@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 
-import NavLogin from './NavLogin';
+// import NavLogin from './NavLogin';
 
-class Navigation extends React.Component {
+class Navigation extends Component {
   constructor(props) {
     super(props);
     this.state = {

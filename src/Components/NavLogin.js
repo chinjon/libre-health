@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-class NavLogin extends React.Component {
+class NavLogin extends Component {
   constructor(props) {
     super(props)
   }

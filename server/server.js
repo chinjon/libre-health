@@ -24,7 +24,7 @@ app.use(require('express-session')({
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Configure passport-local to use account model for authentication
+// Configure passport-local to use User model for authentication
 const User = require('./models/User');
 passport.use(new LocalStrategy(User.authenticate()));
 
