@@ -12,7 +12,7 @@ var MedicationList = [
     }
 ];
 
-class MedsListBody extends React.Component {
+class MedsListBody extends Component {
 
     constructor(props) {
         super(props);
