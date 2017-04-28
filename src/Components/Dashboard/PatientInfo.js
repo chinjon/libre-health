@@ -20,8 +20,8 @@ class PatientInfo extends Component {
                     <div className="column">
                         <article className="media">
                             <div className="media-left">
-                                <figure className="image is-64x64">
-                                    <img src="http://bulma.io/images/placeholders/128x128.png" alt="dummy pic"/></figure>
+                                <figure className="image is-150x150">
+                                    <img src="https://placehold.it/150x150" alt="dummy pic"/></figure>
                             </div>
                             <div className="media-content">
                                 <div className="content">

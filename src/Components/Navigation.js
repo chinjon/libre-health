@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-// import NavLogin from './NavLogin';
+import helpers from './utils/helpers';
 
 class Navigation extends Component {
   constructor(props) {
@@ -17,6 +17,10 @@ class Navigation extends Component {
     const name = target.name;
     this.setState({
      [name]: target.value,
+    });
+
+    helpers.loginUser(this.state.username, this.state.password).then((data) =>{
+      // do log in magic
     })
     event.preventDefault();
   }
