@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-class NavLogin extends React.Component {
+class NavLogin extends Component {
   constructor(props) {
     super(props)
   }
@@ -11,13 +11,13 @@ class NavLogin extends React.Component {
 
   render() {
     return (
-      <div className="nav-item">
-      <div className="field">
+
+      <form className="field">
         <p className="control has-icons-left has-icons-right">
           <input className="input" type={this.props.type} placeholder={this.props.placeholder} value={this.props.value} />
           </p>
-        </div>
-      </div>
+        </form>
+
       )
     }
   }

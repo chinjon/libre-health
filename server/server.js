@@ -1,41 +1,30 @@
 const express = require('express');
+const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-mongoose.Promise = global.Promise;
 const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
-const routes = require('./routes');
+const session = require('express-session');
+const errorhandler = require('errorhandler');
+
 const app = express();
 
-app.use(express.static('./public'));
-
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 
-app.use(require('express-session')({
-    secret: 'keyboard cat',
-    resave: false,
-    saveUninitialized: false
-}));
+// RUNS WHEN YOU USE 'YARN BUILD'
+    // build folder will be created
 
-// Configure passport middleware
-app.use(passport.initialize());
-app.use(passport.session());
+// Serve static assets
+app.use(express.static(path.resolve(__dirname, '..', 'build')));
 
-// Configure passport-local to use account model for authentication
-const User = require('./models/User');
-passport.use(new LocalStrategy(User.authenticate()));
+// Always return the main index.html, so react-router render the route in the client
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'));
+});
 
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
 
-var DBUri = process.env.DATABASEURL || "mongodb://localhost/libre-health-db";
-
-mongoose.connect(DBUri).then(() => console.log('connected to DB!')).catch((err) => console.log(err));
-
-app.use(routes);
 
 app.listen(PORT, () => {
   console.log(`App is running on port ${PORT}`)

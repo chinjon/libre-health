@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import DashboardNav from './DashboardNav';
-import MedsListBody from './MedsListBody';
-import Footer from './Footer';
-import DashboardPatientCard from './DashboardPatientCard';
+import PatientInfo from './PatientInfo';
+import Footer from './../Footer';
 
 import Radium from 'radium';
 
@@ -15,7 +14,7 @@ let styles = {
   }
 }
 
-class DashboardBody extends React.Component {
+class DashboardBody extends Component {
   render() {
     return (
       <div>
@@ -26,11 +25,8 @@ class DashboardBody extends React.Component {
             </div>
             <div className="column is-10">
               <div className="columns is-multiline">
-                <div className="column is-3 is-narrow">
-                  <MedsListBody/>
-                </div>
-                <div className="column is-5 is-narrow">
-                  <DashboardPatientCard/>
+                <div className="column">
+                  <PatientInfo />
                 </div>
               </div>
             </div>
