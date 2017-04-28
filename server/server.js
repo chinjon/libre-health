@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const passport = require('passport');
@@ -11,6 +12,19 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 const PORT = process.env.PORT || 4000;
+
+// RUNS WHEN YOU USE 'YARN BUILD'
+    // build folder will be created
+
+// Serve static assets
+app.use(express.static(path.resolve(__dirname, '..', 'build')));
+
+// Always return the main index.html, so react-router render the route in the client
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'));
+});
+
+
 
 app.listen(PORT, () => {
   console.log(`App is running on port ${PORT}`)
