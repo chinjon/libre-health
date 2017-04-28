@@ -10,8 +10,22 @@ const UserSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true
-  }
+  },
+  medications: [medSchema]
 });
+
+var medSchema = new mongoose.Schema({
+    name: String,
+    description: String,
+    created: {
+      type: Date,
+      default:Date.now
+    }
+});
+
+UserSchema.methods.comparePassword = function comparePassword(password, callback) {
+  bcrypt.compare(password, this.password, callback);
+};
 
 // Pre-save of user to database, hash password if password is modified or new
 UserSchema.pre('save', function(next){
@@ -31,11 +45,11 @@ UserSchema.pre('save', function(next){
         })
 });
 
-UserSchema.methods.comparePassword = function(attemptedPassword, callback) {
-    bcrypt.compare(attemptedPassword, this.password, function(err, isMatch){
-        if (err) {return callback(err);}
-        callback(null, isMatch)
-    })
-}
+// UserSchema.methods.comparePassword = function(attemptedPassword, callback) {
+//     bcrypt.compare(attemptedPassword, this.password, function(err, isMatch){
+//         if (err) {return callback(err);}
+//         callback(null, isMatch)
+//     })
+// }
 
 module.exports = mongoose.model('User', UserSchema);

@@ -12,6 +12,7 @@
     "express": "^4.15.2",
     "express-session": "^1.15.2",
     "foreman": "^2.0.0",
+    "jsonwebtoken": "^7.4.0",
     "mongoose": "^4.9.5",
     "morgan": "^1.8.1",
     "passport": "^0.3.2",
@@ -20,7 +21,8 @@
     "radium": "^0.18.2",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
-    "react-router": "^2.4.1"
+    "react-router": "^2.4.1",
+    "validator": "^7.0.0"
   },
   "devDependencies": {
     "react-scripts": "0.9.5"

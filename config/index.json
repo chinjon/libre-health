@@ -1,0 +1,4 @@
+{
+  "dbUri": "mongodb://localhost/libre-health-db",
+  "jwtSecret": "w111p4y4ncsBiDLKMFlks3dgkl;glldfgk5823n9gn^^cw849pgn^^@7gb"
+}
