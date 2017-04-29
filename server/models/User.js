@@ -10,6 +10,10 @@ const UserSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true
+  },
+  medications: {
+    type: Array,
+    default: []
   }
 });
 
