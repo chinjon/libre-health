@@ -4,18 +4,19 @@ const API_URL = '/api';
 
 const helpers = {
 
-    loginUser: ({username, password})=>{
-     return axios.post(`${API_URL}/user`, {
-// need to refer to this.state.username + this.state.password
-            username,
-            password
+    loginUser: ({username, password}) => {
+        return new Promise((fufill, reject) => {
+            axios
+                .post(`${API_URL}/new-user`)
+                .then((response) => {
+                    if (response) {
+                        fulfill(response)
+                    } else {
+                        reject("rejected")
+                    }
+                })
         })
-        .then(function(response){
-            console.log(response)
-        })
-        .then(function(error){
-            console.log(error)
-        });
+
     }
 }
 
