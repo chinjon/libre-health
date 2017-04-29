@@ -1,5 +1,5 @@
 const passport = require('passport');
-const localStrategy = require('local-strategy');
+const localStrategy = require('local-strategy').Strategy;
 const db = require('./../models');
 
 passport.serializeUser((user, done)=> {
@@ -22,7 +22,7 @@ passport.user(new localStrategy((username, password, done)=>{
         if(!user) {
             return done(null, false, {message: 'Incorrect Credentials'})
         }
-        var psswd = user ? user.password: '';
+        let psswd = user ? user.password: '';
         db.User.validPassword(password, psswd, (err, found) =>{
             console.log('passport', err, user);
             done(err, found ? user : false);

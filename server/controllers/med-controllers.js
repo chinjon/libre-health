@@ -16,19 +16,19 @@ module.exports = function(app) {
 	//adding new medication to list
 	router.post('/api/add/meds/:userId', function(req, res){
 		User.findOneAndUpdate({_id: req.params.userId}, 
-			{ $addToSet: {medications: req.body.newMedication}, 
+			{$addToSet: {medications: req.body.newMedication}}, 
 			{new: true})
 		.then(medications=>res.json(medications)).catch(err=>res.json(err));
 	});
 
 	//updating a dosage on medication from list
-	router.update('/api/update/meds/:userId', function(req, res){
-	 	//later	
-	});
+	// router.put('/api/update/meds/:userId', function(req, res){
+	//  	//later	
+	// });
 
 	router.delete('/api/delete/meds/:userId', function(req, res){
 		User.findOneAndUpdate({_id: req.params.userId}, 
-			{ $pullAll: {medications: [req.body.newMedication]}, 
+			{ $pullAll: {medications: [req.body.newMedication]}}, 
 			{new: true})
 		.then(medications=>res.json(medications)).catch(err=>res.json(err));
 	});

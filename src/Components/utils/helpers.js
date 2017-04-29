@@ -4,11 +4,12 @@ const API_URL = '/api';
 
 const helpers = {
 
-    loginUser: ({username, password}) => {
+    loginUser: (username, password) => {
         return new Promise((resolve, reject) => {
             axios
-                .post(`${API_URL}/new-user`)
+                .post(`${API_URL}/login`, {username, password})
                 .then((response) => {
+                    console.log('.then on login fired');
                     if (response) {
                         resolve(response)
                     } else {

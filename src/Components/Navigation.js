@@ -27,6 +27,7 @@ class Navigation extends Component {
       event.preventDefault();
       helpers.loginUser(this.state.username, this.state.password).then((data) =>{
       // do log in magic
+      console.log(`in Navigation component ${data}`);
     })
   }
 
