@@ -5,11 +5,25 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const session = require('express-session');
 const errorhandler = require('errorhandler');
+const cookieParser = require('cookie-parser');
+const passportConfig = require('./config/passport');
 
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(cookieParser())
+app.set('trust proxy', 1) // trust first proxy
+
+//need sessions to persist state of user
+app.use(session({
+  secret: '3or8h1o2h1o28u12o38j12',
+  resave: false,
+  saveUninitialized: true
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 const PORT = process.env.PORT || 4000;
 
