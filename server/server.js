@@ -24,6 +24,8 @@ app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'));
 });
 
+require("./controllers/auth-controllers.js")(app);
+require("./controllers/med-controllers.js")(app)
 
 app.listen(PORT, () => {
   console.log(`App is running on port ${PORT}`)

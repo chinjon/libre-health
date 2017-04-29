@@ -19,10 +19,15 @@ class Navigation extends Component {
      [name]: target.value,
     });
 
-    helpers.loginUser(this.state.username, this.state.password).then((data) =>{
+
+    event.preventDefault();
+  }
+
+  submitForm(event){
+      event.preventDefault();
+      helpers.loginUser(this.state.username, this.state.password).then((data) =>{
       // do log in magic
     })
-    event.preventDefault();
   }
 
   render() {
@@ -33,7 +38,7 @@ class Navigation extends Component {
             <img src="./assets/img/logo/logo.png" alt="logo"/>
           </a>
         </div>
-        <form className="nav-center nav-menu">
+        <form onSubmit={this.submitForm.bind(this)} className="nav-center nav-menu">
           <div className="nav-item">
             <input
               className="input"
