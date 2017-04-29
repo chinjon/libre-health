@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const passportLocalMongoose = require('passport-local-mongoose');
 
 const UserSchema = new mongoose.Schema({
     username: {
@@ -16,6 +17,8 @@ const UserSchema = new mongoose.Schema({
         default: []
      }
 });
+
+UserSchema.plugin(passportLocalMongoose);
 
 // Pre-save of user to database, hash password if password is modified or new
 UserSchema.pre('save', function(next){

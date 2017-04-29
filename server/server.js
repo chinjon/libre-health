@@ -7,6 +7,7 @@ const session = require('express-session');
 const errorhandler = require('errorhandler');
 const cookieParser = require('cookie-parser');
 const passportConfig = require('./config/passport');
+const LocalStrategy = require('passport-local');
 
 mongoose.Promise = Promise;
 
@@ -26,6 +27,11 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
+// Configure passport-local to use User model for authentication
+const User = require('./models/User');
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 const PORT = process.env.PORT || 4000;
 

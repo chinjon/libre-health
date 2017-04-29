@@ -12,27 +12,43 @@ module.exports = function(app) {
 
     // sign-up new user
     router.post('/api/signup', (req, res)=>{
-        let user = {
+        let userData = {
             username: req.body.username,
             password: req.body.password
         }
-        console.log(`new user in api:`);
-        console.log(JSON.stringify(user));
-        User.findOne({username: user.username}, (err, user)=>{
-            if(!user) {
-                let newUser = new User(user);
-                newUser.save((err, data)=>{
-                    if(err){
-                        console.log(err);
-                        res.status(500).send('User could not be saved');
-                    } else {
-                        res.json(data);
-                    }
-                });
-            }
+        // console.log(`new user in api:`);
+        // console.log(req.body);
 
-            res.status(500).send('User already exists, please use sign-in button');
-        })
+        let newUser = new User(userData);
+        console.log(newUser);
+
+        //THIS IS NOT WORKING --- WHY???
+        newUser.save({validateBeforeSave: true}, function(err, data){
+            if(err){
+                console.log(err);
+                res.status(500).send('User could not be saved');
+            } else {
+                console.log('success')
+                res.json(data);
+            }
+        });
+        // User.findOne({username: userData.username}, (err, user)=>{
+        //     if(!user) {
+        //         let newUser = new User(userData);
+        //         console.log(newUser);
+        //         newUser.save(function(err, data){
+        //             if(err){
+        //                 console.log(err);
+        //                 res.status(500).send('User could not be saved');
+        //             } else {
+        //                 console.log('success')
+        //                 res.json(data);
+        //             }
+        //         });
+        //     } else {
+        //         res.status(501).send('User already exists, please use sign-in button');
+        //     }
+        // }).catch(err=>{if(err) res.json(err)});
     });
 
     router.post('/api/login', passport.authenticate('local'), function(req, res) {
