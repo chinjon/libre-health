@@ -16,7 +16,8 @@ module.exports = function(app) {
             username: req.body.username,
             password: req.body.password
         }
-        console.log(`new user in api: ${user}`);
+        console.log(`new user in api:`);
+        console.log(JSON.stringify(user));
         User.findOne({username: user.username}, (err, user)=>{
             if(!user) {
                 let newUser = new User(user);
@@ -34,11 +35,18 @@ module.exports = function(app) {
         })
     });
 
-    router.post('/api/login',
-        passport.authenticate('local', { successRedirect: '/dashboard',
-                                       failureRedirect: '/api/login',
-                                       failureFlash: true })
-    );
+    router.post('/api/login', passport.authenticate('local'), function(req, res) {
+            console.log("authenticate ran");
+            console.log(req.user);
+            if (err) res.json(err);
+            else res.json(req.user);
+    });
+
+
+    router.get('/loginerror', function(req, res){
+        res.status(500).send('Login Error, please contact network administrator.');
+
+    });
 
     // router.post('/api/login', function(req, res, next){
 

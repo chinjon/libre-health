@@ -1,6 +1,6 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
-const db = require('./../models');
+const User = require('./../models/User');
 
 passport.serializeUser((user, done)=> {
     console.log('serializeUser', user);
@@ -9,23 +9,29 @@ passport.serializeUser((user, done)=> {
 
 passport.deserializeUser((user, done)=>{
     console.log('deserializeUser');
-    db.User.findById(id, (err, user)=>{
+    User.findById(id, (err, user)=>{
         done(null, user);
     });
 });
 
-passport.user(new LocalStrategy((username, password, done)=>{
+passport.use(new LocalStrategy((username, password, done)=>{
     console.log('username', username);
     console.log('password', password);
 
-    db.User.findOne({username: username}).then((user)=>{
+    User.findOne({username}).then((user)=>{
+        console.log('incallsbask');
         if(!user) {
+            console.log('No such user');
             return done(null, false, {message: 'Incorrect Credentials'})
         }
         let psswd = user ? user.password: '';
-        db.User.validPassword(password, psswd, (err, found) =>{
+        User.validPassword(password, psswd, (err, found) =>{
             console.log('passport', err, user);
             done(err, found ? user : false);
         });
+    }).catch(err=> {
+        console.error(err);
+        done(null, false, {message: 'User does not exist'})
     });
+
 }));

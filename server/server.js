@@ -8,6 +8,8 @@ const errorhandler = require('errorhandler');
 const cookieParser = require('cookie-parser');
 const passportConfig = require('./config/passport');
 
+mongoose.Promise = Promise;
+
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -29,6 +31,9 @@ const PORT = process.env.PORT || 4000;
 
 // RUNS WHEN YOU USE 'YARN BUILD'
     // build folder will be created
+var DBUri = process.env.DATABASEURL || "mongodb://localhost/libre-health-db";
+
+mongoose.connect(DBUri).then(() => console.log('connected to DB!')).catch((err) => console.log(err));
 
 // Serve static assets
 app.use(express.static(path.resolve(__dirname, '..', 'build')));

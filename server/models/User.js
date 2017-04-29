@@ -3,18 +3,18 @@ const bcrypt = require('bcrypt');
 
 const UserSchema = new mongoose.Schema({
     username: {
-    type: String,
-    required: true,
-    unique: true
-  },
-  password: {
-    type: String,
-    required: true
-  },
-  medications: {
-    type: Array,
-    default: []
-  }
+        type: String,
+        required: true,
+        unique: true
+    },
+    password: {
+        type: String,
+        required: true
+     },
+    medications: {
+        type: Array,
+        default: []
+     }
 });
 
 // Pre-save of user to database, hash password if password is modified or new
