@@ -1,31 +1,24 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const passportLocalMongoose = require('passport-local-mongoose');
 
 const UserSchema = new mongoose.Schema({
     username: {
-    type: String,
-    required: true,
-    unique: true
-  },
-  password: {
-    type: String,
-    required: true
-  },
-  medications: [medSchema]
+        type: String,
+        required: true,
+        unique: true
+    },
+    password: {
+        type: String,
+        required: true
+     },
+    medications: {
+        type: Array,
+        default: []
+     }
 });
 
-var medSchema = new mongoose.Schema({
-    name: String,
-    description: String,
-    created: {
-      type: Date,
-      default:Date.now
-    }
-});
-
-UserSchema.methods.comparePassword = function comparePassword(password, callback) {
-  bcrypt.compare(password, this.password, callback);
-};
+UserSchema.plugin(passportLocalMongoose);
 
 // Pre-save of user to database, hash password if password is modified or new
 UserSchema.pre('save', function(next){

@@ -4,18 +4,18 @@ const API_URL = '/api';
 
 const helpers = {
 
-    loginUser: ({username, password}) => {
-        return new Promise((fufill, reject) => {
-            axios
-                .post(`${API_URL}/new-user`)
-                .then((response) => {
-                    if (response) {
-                        fulfill(response)
-                    } else {
-                        reject("rejected")
-                    }
-                })
-        })
+    loginUser: (username, password) => {
+        console.log("Hi! Your helper is running");
+        // return new Promise((resolve, reject) => {
+            return axios
+                .post(`${API_URL}/signup`, {username: username, password: password});
+                // .then((response) => {
+                //     console.log('.then on login fired');
+                //     if (response) {
+                //         resolve(response)
+                //     } 
+                // }).catch(err=>{if(err) reject(err)});
+        // })
 
     }
 }
