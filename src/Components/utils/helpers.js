@@ -5,12 +5,12 @@ const API_URL = '/api';
 const helpers = {
 
     loginUser: ({username, password}) => {
-        return new Promise((fufill, reject) => {
+        return new Promise((resolve, reject) => {
             axios
                 .post(`${API_URL}/new-user`)
                 .then((response) => {
                     if (response) {
-                        fulfill(response)
+                        resolve(response)
                     } else {
                         reject("rejected")
                     }
