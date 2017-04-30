@@ -5,21 +5,19 @@ class NavLogin extends Component {
     super(props)
   }
 
-    submit(){
-
-    }
+  submit() {}
 
   render() {
     return (
 
       <form className="field">
         <p className="control has-icons-left has-icons-right">
-          <input className="input" type={this.props.type} placeholder={this.props.placeholder} value={this.props.value} />
-          </p>
-        </form>
+          <input className="input" type={this.props.type} placeholder={this.props.placeholder} value={this.props.value}/>
+        </p>
+      </form>
 
-      )
-    }
+    )
   }
+}
 
-  export default NavLogin;
+export default NavLogin;

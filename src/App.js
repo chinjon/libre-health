@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 // import Navigation from './Components/Navigation';
 import Landing from './Components/Landing';
 // import SignUpForm from './Components/SignUpForm';
@@ -10,7 +10,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Landing />
+        <Landing/>
       </div>
     );
   }

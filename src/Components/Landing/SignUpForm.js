@@ -18,7 +18,7 @@ class SignUpForm extends Component {
               </p>
             </div>
             <div className="field">
-            <label className="label">Password</label>
+              <label className="label">Password</label>
               <p className="control has-icons-left">
                 <input className="input" type="password" placeholder="Password"/>
               </p>
