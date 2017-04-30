@@ -10,7 +10,7 @@ class SignUpForm extends Component {
           </p>
         </header>
         <div className="card-content">
-          <div className="container">
+          <div>
             <div className="field">
               <label className="label">Name</label>
               <p className="control">
@@ -18,11 +18,9 @@ class SignUpForm extends Component {
               </p>
             </div>
             <div className="field">
+            <label className="label">Password</label>
               <p className="control has-icons-left">
                 <input className="input" type="password" placeholder="Password"/>
-                <span className="icon is-small is-left">
-                  <i className="fa fa-lock"></i>
-                </span>
               </p>
             </div>
           </div>
