@@ -9,7 +9,7 @@ class Landing extends Component {
         return (
             <div>
                 <Navigation>
-                                                                        <SignUp />
+                  <SignUp />
                 </Navigation>
                 <section className="hero is-info is-large is-fullheight is-bold">
                     <div className="hero-body">
