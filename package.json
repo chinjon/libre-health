@@ -28,10 +28,6 @@
     "react-scripts": "0.9.5"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "start-dev": "nf start -p 3000"
+    "start": "node ./server/server"
   }
 }
