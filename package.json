@@ -15,23 +15,24 @@
     "jsonwebtoken": "^7.4.0",
     "mongoose": "^4.9.5",
     "morgan": "^1.8.1",
+    "nodemon": "^1.11.0",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^4.0.0",
     "radium": "^0.18.2",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
+    "react-modal": "^1.7.7",
     "react-router": "^2.4.1",
-    "validator": "^7.0.0"
+    "rodal": "^1.5.0",
+    "simple-react-modal": "^0.5.1"
   },
   "devDependencies": {
     "react-scripts": "0.9.5"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "start-dev": "nf start -p 3000"
+    "start": "node ./server/server",
+    "nm": "nodemon ./server/server",
+    "build": "react-scripts build"
   }
 }

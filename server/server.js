@@ -8,6 +8,7 @@ const errorhandler = require('errorhandler');
 const cookieParser = require('cookie-parser');
 const passportConfig = require('./config/passport');
 const LocalStrategy = require('passport-local');
+const mongoose = require('mongoose');
 
 mongoose.Promise = Promise;
 

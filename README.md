@@ -2,8 +2,9 @@
 
 ##### Dev Directions
 
-`yarn start` to run production server
-`yarn run build` to create the bundle.js file
+Before you start the server run `yarn build` to ensure you latest compiled Js to run via the express server.
 
-install `serve` package with `yarn global add serve`
-run `serve -s build` to serve up application
+##### then:
+Run `yarn start` to begin the node server.
+`or`
+Run `yarn nm` to begin the nodemon server.
