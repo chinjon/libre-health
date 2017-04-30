@@ -19,7 +19,6 @@ class Navigation extends Component {
      [name]: target.value,
     });
 
-
     event.preventDefault();
   }
 
