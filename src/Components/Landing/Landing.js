@@ -2,12 +2,15 @@ import React, {Component} from 'react';
 
 import Navigation from './../Navigation';
 import Footer from './../Footer';
+import SignUp from './SignUp';
 
 class Landing extends Component {
     render() {
         return (
             <div>
-                <Navigation/>
+                <Navigation>
+                                                                        <SignUp />
+                </Navigation>
                 <section className="hero is-info is-large is-fullheight is-bold">
                     <div className="hero-body">
                         <div className="container">
