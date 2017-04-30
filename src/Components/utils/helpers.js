@@ -18,6 +18,12 @@ const helpers = {
         // })
 
     }
+
+    addDrugs: (drugName, id)=> {
+        console.log("AddDrugs Helper Called");
+
+
+    }
 }
 
 export default helpers;
