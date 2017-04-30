@@ -76,6 +76,9 @@ class Navigation extends Component {
                 </a>
               </p>
             </div>
+            <div className="nav-item">
+              {this.props.children}
+            </div>
           </div>
         </div>
       </nav>
