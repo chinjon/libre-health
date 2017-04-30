@@ -25,10 +25,6 @@ class SignUpForm extends Component {
             </div>
           </div>
         </div>
-        <footer className="card-footer">
-          <a className="card-footer-item">Submit</a>
-          <a className="card-footer-item">Cancel</a>
-        </footer>
       </div>
     )
   }

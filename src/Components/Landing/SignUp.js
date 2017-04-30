@@ -36,7 +36,7 @@ class SignUp extends Component {
   render() {
     return (
       <div>
-        <button className="button" onClick={this.handleOpenModal}>Trigger Modal</button>
+        <button className="button" onClick={this.handleOpenModal}>Sign Up</button>
         <ReactModal isOpen={this.state.showModal} contentLabel="Minimal Modal Example" style={modalStyle}>
           <div>
             <div class="columns">
