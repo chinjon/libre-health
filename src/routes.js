@@ -8,7 +8,7 @@ const Routes = (props) =>(
   <Router {...props}>
     <Route path="/" component={Landing} />
     <Route path="/Dashboard" component={Dashboard} />
-    // <Route path="/IntakeForm" component={IntakeForm} />
+	{/*<Route path="/IntakeForm" component={IntakeForm} /> */}
   </Router>
 )
 
