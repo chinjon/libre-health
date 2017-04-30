@@ -4,7 +4,7 @@ import Radium from 'radium';
 
 let styles = {
   base: {
-    height: '30px',
+    height: '30px'
   }
 }
 

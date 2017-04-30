@@ -15,16 +15,14 @@ class Navigation extends Component {
   onInputChange = event => {
     const target = event.target;
     const name = target.name;
-    this.setState({
-     [name]: target.value,
-    });
+    this.setState({[name]: target.value});
 
     event.preventDefault();
   }
 
-  submitForm(event){
-      event.preventDefault();
-      helpers.loginUser(this.state.username, this.state.password).then((data) =>{
+  submitForm(event) {
+    event.preventDefault();
+    helpers.loginUser(this.state.username, this.state.password).then((data) => {
       // do log in magic
       console.log(`in Navigation component ${data}`);
     })
@@ -40,24 +38,10 @@ class Navigation extends Component {
         </div>
         <form onSubmit={this.submitForm.bind(this)} className="nav-center nav-menu">
           <div className="nav-item">
-            <input
-              className="input"
-              type="text"
-              placeholder="username"
-              name="username"
-              value={this.state.username}
-              onChange={this.onInputChange}
-            />
+            <input className="input" type="text" placeholder="username" name="username" value={this.state.username} onChange={this.onInputChange}/>
           </div>
           <div className="nav-item">
-            <input
-              className="input"
-              type="password"
-              placeholder="password"
-              name="password"
-              value={this.state.password}
-              onChange={this.onInputChange}
-            />
+            <input className="input" type="password" placeholder="password" name="password" value={this.state.password} onChange={this.onInputChange}/>
           </div>
           <div className="nav-item">
             <button className="button is-info" type="submit">Log In</button>
@@ -75,6 +59,9 @@ class Navigation extends Component {
                   <span>Logout</span>
                 </a>
               </p>
+            </div>
+            <div className="nav-item">
+              {this.props.children}
             </div>
           </div>
         </div>
