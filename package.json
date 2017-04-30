@@ -32,6 +32,7 @@
   },
   "scripts": {
     "start": "node ./server/server",
-    "nm": "nodemon ./server/server"
+    "nm": "nodemon ./server/server",
+    "build": "react-scripts build"
   }
 }
