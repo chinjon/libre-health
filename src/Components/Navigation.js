@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-
+import SignUpForm from './Landing/SignUp'
 import helpers from './utils/helpers';
 
 class Navigation extends Component {
@@ -59,6 +59,7 @@ class Navigation extends Component {
                   <span>Logout</span>
                 </a>
               </p>
+              <SignUpForm />
             </div>
             <div className="nav-item">
               {this.props.children}
