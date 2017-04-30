@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const passport = require('passport');
 const middleware = require('./../config/middleware');
-const User = require('../models/User.js');
+const User = require('./../models/User');
 
 module.exports = function(app) {
 
@@ -15,24 +15,23 @@ module.exports = function(app) {
 
 	//adding new medication to list
 	router.post('/api/add/meds/:userId', function(req, res){
-		User.findOneAndUpdate({_id: req.params.userId}, 
-			{$addToSet: {medications: req.body.newMedication}}, 
+		User.findOneAndUpdate({_id: req.params.userId},
+			{$addToSet: {medications: req.body.newMedication}},
 			{new: true})
 		.then(medications=>res.json(medications)).catch(err=>res.json(err));
 	});
 
 	//updating a dosage on medication from list
 	// router.put('/api/update/meds/:userId', function(req, res){
-	//  	//later	
+	//  	//later
 	// });
 
 	router.delete('/api/delete/meds/:userId', function(req, res){
-		User.findOneAndUpdate({_id: req.params.userId}, 
-			{ $pullAll: {medications: [req.body.newMedication]}}, 
+		User.findOneAndUpdate({_id: req.params.userId},
+			{ $pullAll: {medications: [req.body.newMedication]}},
 			{new: true})
 		.then(medications=>res.json(medications)).catch(err=>res.json(err));
 	});
 
 	app.use('/', router);
 }
-
