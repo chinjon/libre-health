@@ -3,7 +3,6 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const session = require('express-session');
-const mongoose = require('mongoose');
 const errorhandler = require('errorhandler');
 const cookieParser = require('cookie-parser');
 const passportConfig = require('./config/passport');
