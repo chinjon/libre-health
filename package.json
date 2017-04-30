@@ -33,6 +33,7 @@
   "scripts": {
     "start": "node ./server/server",
     "nm": "nodemon ./server/server",
-    "build": "react-scripts build"
+    "build": "react-scripts build",
+    "bw": "react-scripts build -w"
   }
 }
