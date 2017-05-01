@@ -10,6 +10,7 @@ class Navigation extends Component {
       password: ''
     }
     this.onInputChange = this.onInputChange.bind(this);
+    this.submitForm = this.submitForm.bind(this);
   }
 
   onInputChange = event => {
@@ -22,10 +23,8 @@ class Navigation extends Component {
 
   submitForm(event) {
     event.preventDefault();
-    helpers.loginUser(this.state.username, this.state.password).then((data) => {
-      // do log in magic
-      console.log(`in Navigation component ${data}`);
-    })
+    console.log(this.props.submitForm);
+    this.props.submitForm(this.state.username, this.state.password);
   }
 
   render() {
@@ -36,7 +35,7 @@ class Navigation extends Component {
             <img src="./assets/img/logo/logo.png" alt="logo"/>
           </a>
         </div>
-        <form onSubmit={this.submitForm.bind(this)} className="nav-center nav-menu">
+        <form onSubmit={this.submitForm} className="nav-center nav-menu">
           <div className="nav-item">
             <input className="input" type="text" placeholder="username" name="username" value={this.state.username} onChange={this.onInputChange}/>
           </div>
@@ -72,12 +71,3 @@ class Navigation extends Component {
 }
 
 export default Navigation;
-
-// Theory PSEUDO CODE
-// updateName(name){this.setState....} updatePW(pw){this.setState....}
-//
-// submitLogin(){
-//
-//   axios.post('/login', {data:{ this.username, password}})
-//
-// }
