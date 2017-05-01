@@ -40,7 +40,9 @@ class SignUp extends Component {
           <div>
             <div class="columns">
               <div className="column">
-                <SignUpForm/>
+                <SignUpForm>
+                  <button className="button is-danger" onClick={this.handleCloseModal}>Cancel</button>
+                </SignUpForm>
               </div>
             </div>
           </div>

@@ -70,7 +70,8 @@ class SignUpForm extends Component {
                 <button type="submit" className="button is-info">Submit</button>
               </div>
               <div className="column">
-                <button className="button is-danger" onClick={this.handleCloseModal}>Cancel</button>
+              {this.props.children}
+                {/*<button className="button is-danger" onClick={this.handleCloseModal}>Cancel</button> */}
               </div>
             </div>
           </form>

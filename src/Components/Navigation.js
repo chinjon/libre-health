@@ -20,13 +20,13 @@ class Navigation extends Component {
     event.preventDefault();
   }
 
-  // submitForm(event) {
-  //   event.preventDefault();
-  //   helpers.loginUser(this.state.username, this.state.password).then((data) => {
-  //     // do log in magic
-  //     console.log(`in Navigation component ${data}`);
-  //   })
-  // }
+  submitForm(event) {
+    event.preventDefault();
+    helpers.loginUser(this.state.username, this.state.password).then((data) => {
+      // do log in magic
+      console.log(`in Navigation component ${data}`);
+    })
+  }
 
   render() {
     return (
@@ -36,8 +36,8 @@ class Navigation extends Component {
             <img src="./assets/img/logo/logo.png" alt="logo"/>
           </a>
         </div>
-       {/* <form onSubmit={this.submitForm.bind(this)} className="nav-center nav-menu"> */}
-         <form className="nav-center nav-menu">
+        <form onSubmit={this.submitForm.bind(this)} className="nav-center nav-menu">
+         {/*<form className="nav-center nav-menu"> */}
           <div className="nav-item">
             <input className="input" type="text" placeholder="username" name="username" value={this.state.username} onChange={this.onInputChange}/>
           </div>

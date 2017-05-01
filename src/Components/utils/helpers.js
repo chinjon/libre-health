@@ -18,6 +18,11 @@ const helpers = {
         // })
 
     },
+    loginUser: (username, password) =>{
+        console.log("user login helper running");
+        return axios
+            .post(`${API_URL}/login`, {username: username, password: password});
+    }
 
 }
 
