@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import ReactModal from 'react-modal';
 
 import SignUpForm from './SignUpForm'
-// import Radium from 'radium';
 
 const modalStyle = {
   content: {
@@ -42,14 +41,6 @@ class SignUp extends Component {
             <div class="columns">
               <div className="column">
                 <SignUpForm/>
-              </div>
-            </div>
-            <div className="columns has-text-centered">
-              <div className="column">
-                <button className="button is-info">Submit</button>
-              </div>
-              <div className="column">
-                <button className="button is-danger" onClick={this.handleCloseModal}>Cancel</button>
               </div>
             </div>
           </div>

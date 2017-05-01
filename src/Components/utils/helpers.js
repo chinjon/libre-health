@@ -4,7 +4,7 @@ const API_URL = '/api';
 
 const helpers = {
 
-    loginUser: (username, password) => {
+    newUser: (username, password) => {
         console.log("Hi! Your helper is running");
         // return new Promise((resolve, reject) => {
             return axios
@@ -17,7 +17,8 @@ const helpers = {
                 // }).catch(err=>{if(err) reject(err)});
         // })
 
-    }
+    },
+
 }
 
 export default helpers;
