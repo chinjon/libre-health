@@ -24,7 +24,7 @@ class Navigation extends Component {
   submitForm(event) {
     event.preventDefault();
     console.log(this.props.submitForm);
-    this.props.submitForm(this.state.username, this.state.password);
+    this.props.submitLoginForm(this.state.username, this.state.password);
   }
 
   render() {
@@ -58,7 +58,7 @@ class Navigation extends Component {
                   <span>Logout</span>
                 </a>
               </p>
-              <SignUpForm />
+              <SignUpForm signupForm={this.props.submitSignupForm}/>
             </div>
             <div className="nav-item">
               {this.props.children}

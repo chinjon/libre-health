@@ -9,7 +9,7 @@ class Landing extends Component {
     console.log(this.props);
     return (
       <div>
-        <Navigation submitForm={this.props.submitForm}/>
+        <Navigation submitLoginForm={this.props.submitLoginForm} submitSignupForm= {this.props.submitSignupForm}/>
         <section className="hero is-info is-large is-fullheight is-bold">
           <div className="hero-body">
             <div className="container">

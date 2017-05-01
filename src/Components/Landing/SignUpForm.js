@@ -1,6 +1,30 @@
 import React, {Component} from 'react';
 
 class SignUpForm extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: '',
+      password: ''
+    }
+    this.onInputChange = this.onInputChange.bind(this);
+    this.submitForm = this.submitForm.bind(this);
+  }
+
+  onInputChange = event => {
+    const target = event.target;
+    const name = target.name;
+    this.setState({[name]: target.value});
+
+    event.preventDefault();
+  }
+
+  submitForm(event) {
+    event.preventDefault();
+    console.log(this.props.submitForm);
+    this.props.submitSignupForm(this.state.username, this.state.password);
+  }
   render() {
     return (
       <div className="card">
