@@ -5,14 +5,12 @@ import helpers from './../utils/helpers';
 class SignUpForm extends Component {
 
   constructor(props){
-
     super(props);
     this.state = {
       username: '',
       password: ''
     }
     this.onInputChange = this.onInputChange.bind(this);
-
     this.submitForm = this.submitForm.bind(this);
   }
 
@@ -27,12 +25,12 @@ class SignUpForm extends Component {
 
   submitForm(event) {
     event.preventDefault();
-    console.log(this.props.submitForm);
-    this.props.submitSignupForm(this.state.username, this.state.password);
+    this.props.newUser(this.state.username, this.state.password);
   }
 
 
   render() {
+    // console.log(this.props);
     return (
       <div className="card">
         <header className="card-header">

@@ -1,4 +1,4 @@
-exports.authenticated = (req, res, next) => {
+exports.authenticate = (req, res, next) => {
   console.log('is authenticated', req.isAuthenticated());
   if (req.isAuthenticated()) {
     next();

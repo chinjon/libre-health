@@ -13,22 +13,35 @@ const helpers = {
                     if (response) {
                         resolve(response)
                     } 
-                }).catch(err=>{if(err) reject(err)});
+                }).catch(err=>{if(err) {
+                    console.log('.catch on login fired.');
+                    reject(err);}
+                });
         });
 
     },
 
+    loginUser: (username, password) =>{
+        console.log("user login helper running");
+        return new Promise((resolve, reject) => {
+            axios.post(`${API_URL}/login`, {username: username, password: password})
+                .then((response) => {
+                    console.log('.then on signup fired');
+                    if (response) {
+                        resolve(response)
+                    } 
+                }).catch(err=>{if(err) {
+                    console.log('.catch on signup fired'); 
+                    reject(err);}
+                });
+        });
+    },
 
     addDrugs: (drugName, id)=> {
         console.log("AddDrugs Helper Called");
 
 
     },
-    loginUser: (username, password) =>{
-        console.log("user login helper running");
-        return axios
-            .post(`${API_URL}/login`, {username: username, password: password});
-    }
 
 }
 

@@ -17,14 +17,12 @@ class Navigation extends Component {
     const target = event.target;
     const name = target.name;
     this.setState({[name]: target.value});
-
     event.preventDefault();
   }
 
   submitForm(event) {
     event.preventDefault();
-    console.log(this.props.submitForm);
-    this.props.submitLoginForm(this.state.username, this.state.password);
+    this.props.login(this.state.username, this.state.password);
   }
 
   render() {
@@ -58,7 +56,7 @@ class Navigation extends Component {
                   <span>Logout</span>
                 </a>
               </p>
-              <SignUpForm signupForm={this.props.submitSignupForm}/>
+              <SignUpForm newUser={this.props.newUser}/>
             </div>
             <div className="nav-item">
               {this.props.children}

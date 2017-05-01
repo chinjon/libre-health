@@ -6,59 +6,55 @@ class App extends Component {
 
 	constructor(props) {
 		super(props);
-		this.submitLoginForm = this.submitLoginForm.bind(this);
-    this.submitSignupForm = this.submitSignupForm.bind(this);
-		this.state = {
+    //bind this to custom functions
+		this.login = this.login.bind(this);
+    this.newUser = this.newUser.bind(this);
+		//set initial state
+    this.state = {
+      isAuth: false,
 			_id: '',
 			username: '',
 			medications: []
 		}
 	}
 
-  submitSignupForm(username, password) {
+  newUser(username, password) {
     console.log('Signup Form Submission');
 
-    helpers.signupUser(username, password).then((data) => {
-      // do log in magic
+    helpers.newUser(username, password).then((data) => {
       console.log('back from signup helper');
-      console.log(data);
 
-      //this can be simplified
-      const _id = data._id;
-      const username = data.username;
-      const medications = data.medications;
-      this.setState({_id, username, medications});
+      this.setState({isAuth: true, _id: data.id, username: data.username, medications: data.medications});
     });
 
   }
 
-	submitLoginForm(username, password) {
+	login(username, password) {
 		console.log('Login Form Submission');
     	
-    	helpers.loginUser(username, password).then((data) => {
-      		// do log in magic
-      		console.log('back from login helper');
-      		console.log(data);
+  	helpers.loginUser(username, password).then((data) => {
+    		console.log('back from login helper');
 
-      		//this can be simplified
-      		const _id = data._id;
-      		const username = data.username;
-      		const medications = data.medications;
-      		this.setState({_id, username, medications});
-    	});
+        this.setState({isAuth: true, _id: data.id, username: data.username, medications: data.medications});
+  	});
     	
-  	}
+  }
 
-  	render() {
-    	return (
-    		<div>{React.cloneElement(this.props.children, {submitLoginForm: this.submitLoginForm,
-              submitSignupForm: this.submitSignupForm,
-    		 			_id: this.state._id,
-              username: this.state.username, 
-    		 			medications: this.state.medications})}
-    		</div>
-    	);
-  	}
+  render() {
+    //clone element allows us to send props down one level to the children that will be rendered later
+    let parentProps = {
+      isAuth: this.isAuth,
+      newUser: this.newUser, 
+      login: this.login, 
+      _id: this.state._id, 
+      username: this.state.username, 
+      medications: this.state.medications
+    }
+   	return (
+   		<div>{React.cloneElement(this.props.children, parentProps)}</div>
+   	);
+  }
 }
 
 export default App;
+
