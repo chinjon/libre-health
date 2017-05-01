@@ -73,12 +73,3 @@ class Navigation extends Component {
 }
 
 export default Navigation;
-
-// Theory PSEUDO CODE
-// updateName(name){this.setState....} updatePW(pw){this.setState....}
-//
-// submitLogin(){
-//
-//   axios.post('/login', {data:{ this.username, password}})
-//
-// }

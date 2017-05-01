@@ -5,10 +5,10 @@ const User = require('../models/User');
 
 module.exports = function(app) {
 
-  // router.get('/api/authenticate', passport.authenticate('local', {
-  //     successRedirect: '/dashboard',
-  //     failureRedirect: '/'
-  // }));
+  router.get('/api/authenticate', passport.authenticate('local', {
+      successRedirect: '/dashboard',
+      failureRedirect: '/'
+  }));
 
   // sign-up new user
   router.post('/api/signup', (req, res) => {
