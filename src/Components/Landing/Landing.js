@@ -4,10 +4,12 @@ import Navigation from './../Navigation';
 import Footer from './../Footer';
 
 class Landing extends Component {
+
   render() {
+    console.log(this.props);
     return (
       <div>
-        <Navigation/>
+        <Navigation submitForm={this.props.submitForm}/>
         <section className="hero is-info is-large is-fullheight is-bold">
           <div className="hero-body">
             <div className="container">
