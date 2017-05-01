@@ -33,8 +33,7 @@ module.exports = function(app) {
   });
 
   router.post('/api/login', passport.authenticate('local'), function(req, res) {
-    console.log("authenticate ran");
-    console.log(req.user);
+    
     if (err)
       res.json(err);
     else
