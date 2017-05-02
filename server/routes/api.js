@@ -99,7 +99,9 @@ function getMultipleInteractions(drugsList) {
 
         interactionTypeArray.forEach(function(e){
           const innerInteractionTypeArray = e.fullInteractionType;
-        })
+        });
+
+        resolve();
 
         // fs.writeFileSync('interactionsList.json', JSON.stringify(response.data), 'utf-8');
       }).catch(function (err) {
@@ -110,6 +112,7 @@ function getMultipleInteractions(drugsList) {
         if (err)
           reject(err);
     });;
+
   });
 }
 
