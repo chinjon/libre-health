@@ -6,10 +6,10 @@ const User = require('../models/User');
 module.exports = function(app) {
 
   
-router.get('/dashboard', function(req, res, next) {
+router.get('/loginDashboard', function(req, res, next) {
   console.log('going to dashboard'); next(null);
 }, middleware.authenticated, function(req, res) {
-  res.redirect('/dashboard', {
+  res.send('/dashboard', {
     user: req.user
   });
 });
@@ -38,7 +38,7 @@ router.get('/dashboard', function(req, res, next) {
 
   // 
   router.post('/api/login', passport.authenticate('local',{
-    successRedirect: '/dashboard',
+    successRedirect: '/loginDashboard',
     failureRedirect: '/'
   }));
 
