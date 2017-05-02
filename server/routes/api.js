@@ -3,15 +3,15 @@ var fs = require('fs');
 
 function getRxcui(drug) {
 
-  return new Promise((resolve, reject) => {
+  return new Promise(function (resolve, reject) {
 
-    axios.get(`https://rxnav.nlm.nih.gov/REST/drugs.json?name=${drug}`).then(response => {
+    axios.get(`https://rxnav.nlm.nih.gov/REST/drugs.json?name=${drug}`).then(function(response){
       // console.log(response.data.drugGroup.conceptGroup[1].conceptProperties[0].rxcui);
       // resolve(response.data.drugGroup.conceptGroup[1].conceptProperties[0].rxcui);
 
       var conceptGroup = response.data.drugGroup.conceptGroup;
 
-      var SBD = conceptGroup.filter(e => {
+      var SBD = conceptGroup.filter(function(e) {
         return e.tty == 'SBD'
       });
 
@@ -21,11 +21,11 @@ function getRxcui(drug) {
 
       // resolve(dosage.rxcui);
 
-      console.log("RXCUI ", SBD[0].conceptProperties[0].rxcui);
+      // console.log("RXCUI ", SBD[0].conceptProperties[0].rxcui);
 
       resolve(SBD[0].conceptProperties[0].rxcui);
 
-    }).catch((err) => {
+    }).catch(function(err){
       if (err) {
         reject(err)
       }
@@ -37,13 +37,14 @@ function getRxcui(drug) {
 
 function getInteractions(drug) {
 
-  getRxcui(drug).then((rxcui) => {
+  getRxcui(drug).then(function(rxcui) {
 
-    axios.get(`https://rxnav.nlm.nih.gov/REST/interaction/interaction.json?rxcui=${rxcui}&sources=DrugBank`).then(response => {
+    axios.get(`https://rxnav.nlm.nih.gov/REST/interaction/interaction.json?rxcui=${rxcui}&sources=DrugBank`)
+    .then(function(response) {
       // console.log(response.data);
       var pairsArray = response.data.interactionTypeGroup[0].interactionType[0].interactionPair;
 
-      var newArray = pairsArray.map((e) => {
+      var newArray = pairsArray.map(function(e) {
 
         var name = e.interactionConcept[1].sourceConceptItem.name
         var severity = e.severity
@@ -55,7 +56,7 @@ function getInteractions(drug) {
       compareDrugs(newArray);
       fs.writeFileSync('interactionMapped.json', JSON.stringify(newArray), 'utf-8');
 
-    }).catch((err) => {
+    }).catch(function (err) {
       if (err)
         console.log(err)
     });
@@ -77,25 +78,38 @@ function compareDrugs(arr) {
 /// list of drugs option
 function getMultipleInteractions(drugsList) {
 
-  var promiseArray = [];
+  return new Promise(function(resolve, reject){
+    var promiseArray = [];
 
-  drugsList.forEach((drug) => {
-    promiseArray.push(getRxcui(drug));
-  });
-
-  Promise.all(promiseArray).then((data) => {
-
-    fs.writeFileSync('rxcuis.json', JSON.stringify(data), 'utf-8');
-
-    var sources = data.join('+');
-    console.log('Sources: ', sources);
-
-    axios.get(`https://rxnav.nlm.nih.gov/REST/interaction/list.json?rxcuis=${sources}`).then((response) => {
-
-      console.log(response.data);
-
-      fs.writeFileSync('interactionsList.json', JSON.stringify(response.data), 'utf-8');
+    drugsList.forEach(function(drug) {
+      promiseArray.push(getRxcui(drug));
     });
+
+    Promise.all(promiseArray).then(function(data){
+
+      // fs.writeFileSync('rxcuis.json', JSON.stringify(data), 'utf-8');
+
+      var sources = data.join('+');
+      // console.log('Sources: ', sources);
+
+      axios.get(`https://rxnav.nlm.nih.gov/REST/interaction/list.json?rxcuis=${sources}`)
+      .then(function(response) {
+
+        const interactionTypeArray = response.data.fullInteractionTypeGroup;
+
+        interactionTypeArray.forEach(function(e){
+          const innerInteractionTypeArray = e.fullInteractionType;
+        })
+
+        // fs.writeFileSync('interactionsList.json', JSON.stringify(response.data), 'utf-8');
+      }).catch(function (err) {
+        if (err)
+          reject(err);
+      });
+    }).catch(function (err) {
+        if (err)
+          reject(err);
+    });;
   });
 }
 
