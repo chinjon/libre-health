@@ -40,7 +40,7 @@ class SignUp extends Component {
           <div>
             <div class="columns">
               <div className="column">
-                <SignUpForm>
+                <SignUpForm newUser={this.props.newUser}>
                   <button className="button is-danger" onClick={this.handleCloseModal}>Cancel</button>
                 </SignUpForm>
               </div>

@@ -75,36 +75,28 @@ function compareDrugs(arr) {
 // getInteractions(drugOne);
 
 /// list of drugs option
+function getMultipleInteractions(drugsList) {
 
-const drugs = process.argv.slice(2);
+  var promiseArray = [];
 
-var promiseArray = [];
+  drugsList.forEach((drug) => {
+    promiseArray.push(getRxcui(drug));
+  });
 
-drugs.forEach((drug) => {
-  promiseArray.push(getRxcui(drug));
-});
+  Promise.all(promiseArray).then((data) => {
 
-Promise.all(promiseArray).then((data) => {
+    fs.writeFileSync('rxcuis.json', JSON.stringify(data), 'utf-8');
 
-  fs.writeFileSync('rxcuis.json', JSON.stringify(data), 'utf-8');
+    var sources = data.join('+');
+    console.log('Sources: ', sources);
 
-  var sources = data.join('+');
-  console.log('Sources: ', sources);
+    axios.get(`https://rxnav.nlm.nih.gov/REST/interaction/list.json?rxcuis=${sources}`).then((response) => {
 
-  axios.get(`https://rxnav.nlm.nih.gov/REST/interaction/list.json?rxcuis=${sources}`).then((response) => {
+      console.log(response.data);
 
-    console.log(response.data);
+      fs.writeFileSync('interactionsList.json', JSON.stringify(response.data), 'utf-8');
+    });
+  });
+}
 
-    fs.writeFileSync('interactionsList.json', JSON.stringify(response.data), 'utf-8');
-  })
-});
-
-const express = require('express');
-
-const router = new express.Router();
-
-router.get('/dashboard', (req, res) => {
-  res.status(200).json({message: "You're authorized to see this secret message."});
-});
-
-module.exports = router;
+module.exports = {getRxcui, getMultipleInteractions};

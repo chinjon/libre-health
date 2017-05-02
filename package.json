@@ -29,7 +29,7 @@
     "react-scripts": "0.9.5"
   },
   "scripts": {
-    "start": "node ./server/server",
+    "s": "node ./server/server",
     "nm": "nodemon ./server/server",
     "build": "react-scripts build",
     "bw": "react-scripts build -w"

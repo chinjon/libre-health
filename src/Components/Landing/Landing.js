@@ -6,10 +6,11 @@ import Footer from './../Footer';
 class Landing extends Component {
 
   render() {
-    console.log(this.props);
+    //Landing page receives props from app, which will be the user
+    //and the form handling functions
     return (
       <div>
-        <Navigation submitForm={this.props.submitForm}/>
+        <Navigation newUser={this.props.newUser} login={this.props.login}/>
         <section className="hero is-info is-large is-fullheight is-bold">
           <div className="hero-body">
             <div className="container">
