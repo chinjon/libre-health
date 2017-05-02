@@ -14,6 +14,14 @@ class SignUpForm extends Component {
     this.submitForm = this.submitForm.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    //check to see if this.props.isAuth is false, display some sort of error???
+    if (nextProps.isAuth) {
+      this.setState({username: '', password: ''});
+      this.props.closeModal();
+    }
+  }
+
   onInputChange = event =>{
     const target = event.target;
     const name = target.name;
@@ -26,6 +34,7 @@ class SignUpForm extends Component {
   submitForm(event) {
     event.preventDefault();
     this.props.newUser(this.state.username, this.state.password);
+
   }
 
 
