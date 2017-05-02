@@ -13,6 +13,12 @@ class Navigation extends Component {
     this.submitForm = this.submitForm.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+
+    //check to see if this.props.isAuth is true, then do something to only render logout button
+    //and perhaps display a new component that will link the dashboard?
+  }
+
   onInputChange = event => {
     const target = event.target;
     const name = target.name;
@@ -23,6 +29,10 @@ class Navigation extends Component {
   submitForm(event) {
     event.preventDefault();
     this.props.login(this.state.username, this.state.password);
+    //maybe the following should be inside componentWillReceiveProps???
+    if(this.props.isAuth) {
+      this.setState({username: '', password: ''});
+    }
   }
 
   render() {
@@ -56,7 +66,7 @@ class Navigation extends Component {
                   <span>Logout</span>
                 </a>
               </p>
-              <SignUpForm newUser={this.props.newUser}/>
+              <SignUpForm newUser={this.props.newUser} isAuth={this.props.isAuth}/>
             </div>
             <div className="nav-item">
               {this.props.children}
