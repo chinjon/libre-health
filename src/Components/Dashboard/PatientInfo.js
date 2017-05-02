@@ -13,7 +13,6 @@ const styles = {
 
 class PatientInfo extends Component {
     render() {
-        console.log(this.props.user);
         return (
             <div className="box" style={styles.base}>
 

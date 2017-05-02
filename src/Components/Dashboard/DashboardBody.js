@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { browserHistory } from 'react-router';
 
 import DashboardNav from './DashboardNav';
 import PatientInfo from './PatientInfo';
@@ -16,6 +17,15 @@ let styles = {
 }
 
 class DashboardBody extends Component {
+
+  componentWillMount() {
+    //check for isAuth and call a redirect??? or do this further down the tree?
+    if(!this.props.isAuth) {
+      console.log('this.props', this.props);
+      browserHistory.push('/');
+    }
+  }
+
   render() {
     return (
       <div>

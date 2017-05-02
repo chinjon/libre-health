@@ -54,11 +54,12 @@ class App extends Component {
     	
   	helpers.loginUser(username, password).then((res) => {
   		console.log('back from login helper');
+      console.log(res);
 
       const user = {
-        _id: res.id,
-        username: res.username,
-        medications: res.medications
+        _id: res.data._id,
+        username: res.data.username,
+        medications: res.data.medications
       }
       this.setState({isAuth: true, user: user});
   	}).catch(err=>{if(err)console.log(err)});
