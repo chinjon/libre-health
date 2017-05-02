@@ -18,14 +18,14 @@ let styles = {
 
 class DashboardBody extends Component {
 
-  componentWillReceiveProps(nextProps) {
+  componentWillMount() {
     //check for isAuth and call a redirect??? or do this further down the tree?
-    if(!nextProps.isAuth) {
-
+    if(!this.props.isAuth) {
+      console.log('this.props', this.props);
       browserHistory.push('/');
     }
   }
-  
+
   render() {
     return (
       <div>
