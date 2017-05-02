@@ -4,7 +4,7 @@ import Navigation from './../Navigation';
 import Footer from './../Footer';
 
 class Landing extends Component {
- 
+
   render() {
     //Landing page receives props from app, which will be the user
     //and the form handling functions
