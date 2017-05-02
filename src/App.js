@@ -52,13 +52,13 @@ class App extends Component {
 	login(username, password) {
 		console.log('Login Form Submission');
     	
-  	helpers.loginUser(username, password).then((data) => {
+  	helpers.loginUser(username, password).then((res) => {
   		console.log('back from login helper');
 
       const user = {
-        _id: data.id,
-        username: data.username,
-        medications: data.medications
+        _id: res.id,
+        username: res.username,
+        medications: res.medications
       }
       this.setState({isAuth: true, user: user});
   	}).catch(err=>{if(err)console.log(err)});

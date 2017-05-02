@@ -5,7 +5,7 @@ const User = require('../models/User');
 
 module.exports = function(app) {
 
-  
+
 router.get('/loginDashboard', function(req, res, next) {
   console.log('going to dashboard'); next(null);
 }, middleware.authenticated, function(req, res) {
@@ -36,11 +36,18 @@ router.get('/loginDashboard', function(req, res, next) {
     });
   });
 
-  // 
-  router.post('/api/login', passport.authenticate('local',{
-    successRedirect: '/loginDashboard',
-    failureRedirect: '/'
-  }));
+
+  //
+  router.post('/api/login', passport.authenticate('local'), function(req, res) {
+    console.log(req);
+    if (req.user) {
+      res.json(req.user)
+
+    } else {
+      res.status(req.statusCode).send(req.statusMessage);
+    }
+
+  });
 
   router.get('/loginerror', function(req, res) {
     res.status(500).send('Login Error, please contact network administrator.');
