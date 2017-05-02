@@ -24,6 +24,11 @@ class SignUp extends Component {
     this.handleCloseModal = this.handleCloseModal.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+
+    //check to see if this.props.isAuth is true, then do something ???? Not sure what here
+  }
+
   handleOpenModal() {
     this.setState({showModal: true});
   }
@@ -40,7 +45,7 @@ class SignUp extends Component {
           <div>
             <div class="columns">
               <div className="column">
-                <SignUpForm newUser={this.props.newUser}>
+                <SignUpForm newUser={this.props.newUser} closeModal={this.handleCloseModal} isAuth={this.props.isAuth}>
                   <button className="button is-danger" onClick={this.handleCloseModal}>Cancel</button>
                 </SignUpForm>
               </div>

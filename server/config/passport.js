@@ -26,7 +26,7 @@ passport.use(new LocalStrategy((username, password, done) => {
     let psswd = user
       ? user.password
       : '';
-    User.comparePassword(password, psswd, (err, found) => {
+    user.comparePassword(password, psswd, (err, found) => {
       console.log('passport', err, user);
       done(err, found
         ? user

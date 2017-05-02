@@ -5,12 +5,16 @@ import Footer from './../Footer';
 
 class Landing extends Component {
 
+  componentWillReceiveProps(nextProps) {
+    //check for isAuth and call a redirect??? or do this further down the tree?
+  }
+ 
   render() {
     //Landing page receives props from app, which will be the user
     //and the form handling functions
     return (
       <div>
-        <Navigation newUser={this.props.newUser} login={this.props.login}/>
+        <Navigation newUser={this.props.newUser} login={this.props.login} isAuth={this.props.isAuth}/>
         <section className="hero is-info is-large is-fullheight is-bold">
           <div className="hero-body">
             <div className="container">

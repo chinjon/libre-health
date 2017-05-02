@@ -32,11 +32,16 @@ module.exports = function(app) {
     });
   });
 
-  router.post('/api/login', passport.authenticate("local", {
-    successRedirect: "/dashboard",
-    failureRedirect: "/"
-  }), function(request, response){
-  // -------------
+  //
+  router.post('/api/login', passport.authenticate('local'), function(req, res) {
+    console.log(req);
+    if (req.user) {
+      res.json(req.user)
+
+    } else {
+      res.status(req.statusCode).send(req.statusMessage);
+    }
+
   });
 
   router.get('/loginerror', function(req, res) {
