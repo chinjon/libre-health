@@ -4,16 +4,7 @@ const middleware = require('./../config/middleware');
 const User = require('../models/User');
 
 module.exports = function(app) {
-
-
-router.get('/loginDashboard', function(req, res, next) {
-  console.log('going to dashboard'); next(null);
-}, middleware.authenticated, function(req, res) {
-  res.send('/dashboard', {
-    user: req.user
-  });
-});
-
+  
   // sign-up new user
   router.post('/api/signup', (req, res) => {
     let userData = {
