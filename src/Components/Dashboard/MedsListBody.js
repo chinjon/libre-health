@@ -22,7 +22,10 @@ class MedsListBody extends Component {
     handleSubmit(e) {
         console.log(this.input.value);
         e.preventDefault();
+        this.props.addMedications(this.input.value, this.props.userId);
     }
+
+
     render() {
         return (
                 <nav className="panel">
@@ -31,17 +34,17 @@ class MedsListBody extends Component {
                     </p>
                     <div className="panel-block">
                         <div className="control has-icons-left">
-                            <div className="field has-addons">
+                            <form onSubmit={this.handleSubmit} className="field has-addons">
                                 <p className="control">
                                     <input className="input is-small" ref={(input) => this.input = input} type="text" placeholder="Add medication"/>
                                 </p>
                                 <p className="control">
                                     <a className="button is-small">Add</a>
                                 </p>
-                            </div>
+                            </form>
                         </div>
                     </div>
-                    <MedicationBlock MedicationList={MedicationList} />
+                    <MedicationBlock MedicationList={this.props.medications} />
                 </nav>
 
         )
@@ -52,8 +55,8 @@ class MedsListBody extends Component {
 const MedicationBlock = ({MedicationList}) => {
         return(
             <div>
-            {MedicationList.map((e) =>
-                <a className="panel-block">
+            {MedicationList.map((e, i) =>
+                <a key={i} className="panel-block">
                     <span className="panel-icon">
                         <i className="fa fa-plus-square"></i>
                     </span>

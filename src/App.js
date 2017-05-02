@@ -12,9 +12,23 @@ class App extends Component {
 		//set initial state
     this.state = {
       isAuth: false,
-			_id: '',
-			username: '',
-			medications: []
+			user: {
+        _id: 'f4k3#45#',
+        name: 'Johnny Q. Public',
+        medications: [{
+          name: 'Prednisone',
+          rxcui: '1303137'
+        }, {
+          name: 'Sudafed',
+          rxcui: '1049529'
+        }, {
+          name: 'Cymbalta',
+          rxcui: '596932'
+        }, {
+          name: 'Oxycodone',
+          rxcui: '1049601'
+        }]
+      }
 		}
 	}
 
@@ -24,8 +38,14 @@ class App extends Component {
     helpers.newUser(username, password).then((data) => {
       console.log('back from signup helper');
 
-      this.setState({isAuth: true, _id: data.id, username: data.username, medications: data.medications});
-    });
+      const user = {
+        _id: data.id,
+        username: data.username,
+        medications: data.medications
+      }
+
+      this.setState({isAuth: true, user: user});
+    }).catch(err=>{if(err)console.log(err)});
 
   }
 
@@ -33,22 +53,38 @@ class App extends Component {
 		console.log('Login Form Submission');
     	
   	helpers.loginUser(username, password).then((data) => {
-    		console.log('back from login helper');
+  		console.log('back from login helper');
 
-        this.setState({isAuth: true, _id: data.id, username: data.username, medications: data.medications});
-  	});
+      const user = {
+        _id: data.id,
+        username: data.username,
+        medications: data.medications
+      }
+      this.setState({isAuth: true, user: user});
+  	}).catch(err=>{if(err)console.log(err)});
     	
+  }
+
+  addMedication(name, id) {
+    console.log('Add Medication Form Submission');
+    helpers.addMeds(name, id).then(data=>{
+      const user = {
+        _id: data.id,
+        username: data.username,
+        medications: data.medications
+      }
+      this.setState({user: user});
+    }).catch(err=>{if(err)console.log(err)});
   }
 
   render() {
     //clone element allows us to send props down one level to the children that will be rendered later
     let parentProps = {
-      isAuth: this.isAuth,
+      isAuth: this.state.isAuth,
       newUser: this.newUser, 
-      login: this.login, 
-      _id: this.state._id, 
-      username: this.state.username, 
-      medications: this.state.medications
+      login: this.login,
+      addMedication: this.addMedication, 
+      user: this.state.user
     }
    	return (
    		<div>{React.cloneElement(this.props.children, parentProps)}</div>

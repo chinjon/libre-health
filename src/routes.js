@@ -1,7 +1,8 @@
 import React from 'react';
-import {Router, Route, Redirect} from 'react-router';
+import {Router, Route} from 'react-router';
 
-import App, {userLoggedIn} from './App';
+import App from './App';
+
 import Landing from './Components/Landing/Landing';
 import Dashboard from './Components/Dashboard/DashboardBody';
 

@@ -13,6 +13,7 @@ const styles = {
 
 class PatientInfo extends Component {
     render() {
+        console.log(this.props.user);
         return (
             <div className="box" style={styles.base}>
 
@@ -53,10 +54,10 @@ class PatientInfo extends Component {
                         </article>
                     </div>
                     <div className="column">
-                        <MedsListBody/>
+                        <MedsListBody userId={this.props.user._id} medications={this.props.user.medications} addMedications={this.props.addMedications}/>
                     </div>
                     <div className="column">
-                        <MedsInteract/>
+                        <MedsInteract medications={this.props.user.medications}/>
                     </div>
 
                 </div>
