@@ -38,7 +38,7 @@ module.exports = function(app) {
     if (err)
       res.json(err);
     else
-      res.json('data');
+      res.json(req.user);
     }
   );
 
