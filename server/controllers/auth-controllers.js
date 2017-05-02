@@ -32,15 +32,12 @@ module.exports = function(app) {
     });
   });
 
-  // 
-  router.post('/api/login', passport.authenticate('local'), function(req, res) {
-    console.log('route is okay!');
-    if (err)
-      res.json(err);
-    else
-      res.json('data');
-    }
-  );
+  router.post('/api/login', passport.authenticate("local", {
+    successRedirect: "/dashboard",
+    failureRedirect: "/"
+  }), function(request, response){
+  // -------------
+  });
 
   router.get('/loginerror', function(req, res) {
     res.status(500).send('Login Error, please contact network administrator.');
