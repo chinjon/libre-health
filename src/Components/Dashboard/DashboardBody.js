@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+
 import DashboardNav from './DashboardNav';
 import PatientInfo from './PatientInfo';
 import Footer from './../Footer';
@@ -21,12 +22,12 @@ class DashboardBody extends Component {
         <div className="container">
           <div className="columns" style={styles.base}>
             <div className="column is-2">
-              <DashboardNav/>
+              <DashboardNav user={this.props.user}/>
             </div>
             <div className="column is-10">
               <div className="columns is-multiline">
                 <div className="column">
-                  <PatientInfo />
+                  <PatientInfo user={this.props.user} addMedication={this.props.addMedication}/>
                 </div>
               </div>
             </div>

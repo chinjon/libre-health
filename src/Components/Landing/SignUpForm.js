@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import helpers from './../utils/helpers';
 
 class SignUpForm extends Component {
+
   constructor(props){
     super(props);
     this.state = {
@@ -10,6 +11,7 @@ class SignUpForm extends Component {
       password: ''
     }
     this.onInputChange = this.onInputChange.bind(this);
+    this.submitForm = this.submitForm.bind(this);
   }
 
   onInputChange = event =>{
@@ -23,13 +25,12 @@ class SignUpForm extends Component {
 
   submitForm(event) {
     event.preventDefault();
-    helpers.newUser(this.state.username, this.state.password).then((data) => {
-      // do log in magic
-      console.log(`in Navigation component ${data}`);
-    })
+    this.props.newUser(this.state.username, this.state.password);
   }
 
+
   render() {
+    // console.log(this.props);
     return (
       <div className="card">
         <header className="card-header">
@@ -38,7 +39,7 @@ class SignUpForm extends Component {
           </p>
         </header>
         <div className="card-content">
-          <form onSubmit={this.submitForm.bind(this)}>
+          <form onSubmit={this.submitForm}>
             <div className="field">
               <label className="label">Name</label>
               <p className="control">

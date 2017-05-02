@@ -1,5 +1,5 @@
 const passport = require('passport');
-const LocalStrategy = require('passport-local');
+const LocalStrategy = require('passport-local').Strategy;
 const User = require('./../models/User');
 
 passport.serializeUser((user, done) => {
@@ -9,17 +9,16 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser((user, done) => {
   console.log('deserializeUser');
-  User.findById(id, (err, user) => {
+  User.findById(user._id, (err, user) => {
     done(null, user);
   });
 });
 
 passport.use(new LocalStrategy((username, password, done) => {
-  console.log('username', username);
-  console.log('password', password);
+  console.log("passport localstrategy called");
 
   User.findOne({username}).then((user) => {
-    console.log('incallsbask');
+    console.log('incallback');
     if (!user) {
       console.log('No such user');
       return done(null, false, {message: 'Incorrect Credentials'})
@@ -27,7 +26,7 @@ passport.use(new LocalStrategy((username, password, done) => {
     let psswd = user
       ? user.password
       : '';
-    User.validPassword(password, psswd, (err, found) => {
+    User.comparePassword(password, psswd, (err, found) => {
       console.log('passport', err, user);
       done(err, found
         ? user

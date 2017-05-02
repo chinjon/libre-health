@@ -32,13 +32,13 @@ module.exports = function(app) {
     });
   });
 
+  // 
   router.post('/api/login', passport.authenticate('local'), function(req, res) {
-    console.log("authenticate ran");
-    console.log(req.user);
+    console.log('route is okay!');
     if (err)
       res.json(err);
     else
-      res.json(req.user);
+      res.json('data');
     }
   );
 

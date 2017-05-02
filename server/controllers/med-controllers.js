@@ -16,9 +16,9 @@ module.exports = function(app) {
 	//adding new medication to list
 	router.post('/api/add/meds/:userId', function(req, res){
 		User.findOneAndUpdate({_id: req.params.userId},
-			{$addToSet: {medications: req.body.newMedication}},
+			{$addToSet: {medications: req.body.medication}},
 			{new: true})
-		.then(medications=>res.json(medications)).catch(err=>res.json(err));
+		.then(data=>res.json(data)).catch(err=>res.json(err));
 	});
 
 	//updating a dosage on medication from list

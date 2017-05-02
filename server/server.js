@@ -5,7 +5,6 @@ const passport = require('passport');
 const session = require('express-session');
 const errorhandler = require('errorhandler');
 const cookieParser = require('cookie-parser');
-const passportConfig = require('./config/passport');
 const LocalStrategy = require('passport-local');
 const mongoose = require('mongoose');
 
@@ -25,14 +24,6 @@ app.use(session({
   saveUninitialized: true
 }));
 
-app.use(passport.initialize());
-app.use(passport.session());
-// Configure passport-local to use User model for authentication
-const User = require('./models/User');
-passport.use(new LocalStrategy(User.authenticate()));
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
-
 const PORT = process.env.PORT || 4000;
 
 // RUNS WHEN YOU USE 'YARN BUILD'
@@ -40,6 +31,17 @@ const PORT = process.env.PORT || 4000;
 var DBUri = process.env.DATABASEURL || "mongodb://localhost/libre-health-db";
 
 mongoose.connect(DBUri).then(() => console.log('connected to DB!')).catch((err) => console.log(err));
+
+
+// Configure passport-local to use User model for authentication
+// const User = require('./models/User');
+const passportConfig = require('./config/passport');
+// passport.use(new LocalStrategy(User.authenticate()));
+// passport.serializeUser(User.serializeUser());
+// passport.deserializeUser(User.deserializeUser());
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Serve static assets
 app.use(express.static(path.resolve(__dirname, '..', 'build')));
