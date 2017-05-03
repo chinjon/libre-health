@@ -12,7 +12,7 @@ class DashboardNav extends Component {
     return (
       <aside className="menu">
         <p className="menu-label">
-          General
+          <PatientCard />
         </p>
         <ul className="menu-list">
           <li>
@@ -57,5 +57,29 @@ class DashboardNav extends Component {
     )
   }
 }
+
+class PatientCard extends Component {
+  render(){
+    return(
+      <article className="media">
+  <figure className="media-left">
+    <p className="image is-64x64">
+      <img src="http://bulma.io/images/placeholders/128x128.png" />
+    </p>
+  </figure>
+  <div className="media-content">
+    <div className="content">
+      <p>
+        <strong>John Smith</strong>
+        <br />
+      </p>
+    </div>
+  </div>
+</article>
+    )
+  }
+}
+
+
 
 export default DashboardNav;
