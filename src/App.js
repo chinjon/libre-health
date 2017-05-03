@@ -66,9 +66,9 @@ class App extends Component {
     	
   }
 
-  addMedication(name, id) {
+  addMedication(medication, id) {
     console.log('Add Medication Form Submission');
-    helpers.addMeds(name, id)
+    helpers.addMeds(medication, id)
     .then(({data:{user}})=> this.setState({user}))
     .catch(err=>{if(err)console.log(err)});
   }

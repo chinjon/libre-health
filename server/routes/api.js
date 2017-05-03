@@ -1,6 +1,6 @@
 var axios = require('axios');
 
-function getRxcui(drug) {
+function getMedsList(drug) {
 
   return new Promise(function (resolve, reject) {
 
@@ -103,4 +103,4 @@ function getMultipleInteractions(drugsList) {
   });
 }
 
-module.exports = {getRxcui: getRxcui, getMultipleInteractions: getMultipleInteractions};
+module.exports = {getMedsList: getMedsList, getMultipleInteractions: getMultipleInteractions};
