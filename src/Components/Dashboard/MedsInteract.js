@@ -1,6 +1,36 @@
 import React, {Component} from 'react';
+import helpers from './../utils/helpers';
 
 class MedsInteract extends Component {
+
+    constructor(props){
+        super(props);
+        this.state = {
+            interactions: {}
+        }
+
+    }
+
+    componentWillMount(){
+        if(this.props.medications.length > 1) {
+            let medList = this.props.medications.map(e=>e.name);
+            helpers.checkInteractions(medList).then(data=>{
+                console.log(data)
+                this.setState({interactions: data});
+            })
+        }
+    }
+
+    componentWillReceiveProps(nextProps){
+        if(nextProps.medications.length > 1) {
+            let medList = nextProps.medications.map(e=>e.name);
+            helpers.checkInteractions(medList).then(data=>{
+                console.log(data)
+                this.setState({interactions: data});
+            })
+        }
+    }
+
     render(){
         // this.props.medications will be used to call the interactions api
         return (
@@ -20,5 +50,6 @@ class MedsInteract extends Component {
         )
     }
 }
+
 
 export default MedsInteract;

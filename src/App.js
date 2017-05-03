@@ -36,13 +36,12 @@ class App extends Component {
   newUser(username, password) {
     console.log('Signup Form Submission');
 
-    helpers.newUser(username, password).then((data) => {
+    helpers.newUser(username, password).then((res) => {
       console.log('back from signup helper');
-
       const user = {
-        _id: data._id,
-        username: data.username,
-        medications: data.medications
+        _id: res.data._id,
+        username: res.data.username,
+        medications: res.data.medications
       }
 
       this.setState({isAuth: true, user: user});
