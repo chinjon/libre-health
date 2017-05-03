@@ -5,18 +5,6 @@ import helpers from './../utils/helpers';
 import MedsListSearchForm from './MedsListSearchForm';
 import MedsListDropDown from './MedsListDropDown';
 
-var MedicationList = [
-    {
-        name: "Medication #1"
-    },
-    {
-        name: "Medication #2"
-    },
-    {
-        name: "Medication #3"
-    }
-];
-
 class MedsListBody extends Component {
 
     constructor(props) {
@@ -44,7 +32,7 @@ class MedsListBody extends Component {
     render() {
         //conditionally render search form or drop-down
         let form = null;
-        if (listReceived) form = <MedsListSearchForm getMedList={this.getMedList}/>
+        if (this.state.listReceived) form = <MedsListSearchForm getMedList={this.getMedList}/>
         else form = <MedsListDropDown addMedication={this.props.addMedication} medsList={this.state.medsList}/>
 
         return (

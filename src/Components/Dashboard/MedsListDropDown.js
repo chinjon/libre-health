@@ -18,7 +18,7 @@ class MedsListDropDown extends Component {
     handleSubmit(e) {
     	e.preventDefault();
     	if(this.state.value !== 'select'){
-    		this.props.addMedication(this.props.medsList[value]);
+    		this.props.addMedication(this.props.medsList[this.state.value]);
     	}
     }
 
@@ -55,4 +55,4 @@ class MedsListDropDown extends Component {
     }
 }
 
-export default MedsListSearchForm;
+export default MedsListDropDown;
