@@ -1,17 +1,27 @@
 import React, {Component} from 'react';
+import Radium from 'radium';
+
+let styles = {
+  base: {
+  	overflow: 'auto',
+  	'text-overflow': 'ellipsis',
+    'max-width': '200px',
+  }
+}
 
 class MedsListDropDown extends Component {
 
 	constructor(props){
 		super(props);
 		this.handleSubmit = this.handleSubmit.bind(this);
-		this.renderMedsList = this.renderMedsList.bind(this);
+		this.handleChange = this.handleChange.bind(this);
 		this.state = {
 			value: 'select'
 		}
 	}
 
-    onInputChange(event) {
+    handleChange(event) {
+    	console.log(event);
         this.setState({value: event.target.value});
     }
 
@@ -24,11 +34,9 @@ class MedsListDropDown extends Component {
 
     renderMedsList(){
     	return (
-    		<select value={this.state.value} onChange={this.onInputChange}>
-    			<option value='select'>Select From DropDown</option>
-    			{this.props.medsList.map((med, i)=>
-    				<option key={i} value={i}>{med.name}</option>
-    			)}
+    		<select value={this.state.value} onChange={this.handleChange}>
+    			<option value='select' styles={styles.base}>Select From DropDown</option>
+    			{this.props.medsList.map((med, i)=><option key={i} value={i} styles={styles.base}>{med.name}</option>)}
     		</select>
     	)
     	
@@ -38,11 +46,11 @@ class MedsListDropDown extends Component {
 
     	return (
 
-        	<form onSubmit={this.handleSubmit} className="field has-addons has-addons-centered">
+        	<form onSubmit={this.handleSubmit} className="field has-addons has-addons-centered" >
 			    <p className="control">
 				    <span className="select is-small">
 	      				
-				        {this.renderMedsList}
+				        {this.renderMedsList()}
 				   
 			        </span>
 			    </p>
@@ -55,4 +63,4 @@ class MedsListDropDown extends Component {
     }
 }
 
-export default MedsListDropDown;
+export default Radium(MedsListDropDown);

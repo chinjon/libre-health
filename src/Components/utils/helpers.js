@@ -47,11 +47,11 @@ const helpers = {
   },
 
   getMedsList: drugName => {
-    console.log("getMeds helper Called");
+    console.log("getMedsList helper Called");
     return new Promise((resolve, reject) => {
       interactions.getMedsList(drugName).then(medsList => {
         
-        console.log('.then on getMeds fired');
+        console.log('.then on getMedsList fired');
         resolve(medsList);
 
       }).catch(err => {

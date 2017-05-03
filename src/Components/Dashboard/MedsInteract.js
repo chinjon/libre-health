@@ -6,7 +6,8 @@ class MedsInteract extends Component {
     constructor(props){
         super(props);
         this.state = {
-            interactions: {}
+            interactions: {},
+            isLoading: true
         }
 
     }
@@ -16,7 +17,7 @@ class MedsInteract extends Component {
             let medList = this.props.medications.map(e=>e.rxcui);
             helpers.checkInteractions(medList).then(data=>{
                 console.log(data)
-                this.setState({interactions: data});
+                this.setState({interactions: data, isLoading: false});
             })
         }
     }
@@ -30,6 +31,8 @@ class MedsInteract extends Component {
             })
         }
     }
+
+
 
     render(){
         // this.props.medications will be used to call the interactions api

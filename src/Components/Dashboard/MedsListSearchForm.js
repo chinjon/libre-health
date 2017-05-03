@@ -22,7 +22,7 @@ class MedsListSearchForm extends Component {
 
     handleSubmit(e) {
     	e.preventDefault();
-    	this.props.getMedList(this.medication);
+    	this.props.getMedsList(this.state.medication);
     }
 
     render() {
@@ -31,10 +31,10 @@ class MedsListSearchForm extends Component {
 
 			<form onSubmit={this.handleSubmit} className="field has-addons has-addons-centered">
 			    <p className="control">
-			        <input className="input is-small" value={this.state.medication} onChange={this.onInputChange} type="text" name='medication' placeholder="Add medication"/>
+			        <input className="input is-small" value={this.state.medication} onChange={this.onInputChange} type="text" name='medication' placeholder="Search Medications..."/>
 			    </p>
 			    <p className="control">
-			        <button type='submit' className="button is-small"><i class="fa fa-search" aria-hidden="true"></i></button>
+			        <button type='submit' className="button is-small"><i className="fa fa-search" aria-hidden="true"></i></button>
 			    </p>
 			</form>
 

@@ -14,6 +14,7 @@ function getMedsList(drug) {
 
       conceptGroup.forEach(function(e){
         var medsList = e.conceptProperties;
+
         if(medsList) {
           medsList.forEach(function(e){
             medsArray.push({rxcui: e.rxcui, name: e.name})

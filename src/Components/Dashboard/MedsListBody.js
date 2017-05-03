@@ -9,7 +9,7 @@ class MedsListBody extends Component {
 
     constructor(props) {
         super(props);
-        this.getMedList = this.getMedList.bind(this);
+        this.getMedsList = this.getMedsList.bind(this);
         this.state = {
             medsList: [],
             listReceived: false
@@ -22,7 +22,7 @@ class MedsListBody extends Component {
         }
     }
 
-    getMedList(med){
+    getMedsList(med){
         helpers.getMedsList(med)
         .then(medsList=> this.setState({medsList: medsList, listReceived: true}))
         .catch(err=>{if(err){console.log(err)}});
@@ -32,7 +32,7 @@ class MedsListBody extends Component {
     render() {
         //conditionally render search form or drop-down
         let form = null;
-        if (this.state.listReceived) form = <MedsListSearchForm getMedList={this.getMedList}/>
+        if (!this.state.listReceived) form = <MedsListSearchForm getMedsList={this.getMedsList}/>
         else form = <MedsListDropDown addMedication={this.props.addMedication} medsList={this.state.medsList}/>
 
         return (
