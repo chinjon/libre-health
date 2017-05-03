@@ -37,7 +37,7 @@ class MedsListBody extends Component {
     getMedList(med){
         helpers.getMedsList(med)
         .then(medsList=> this.setState({medsList: medsList, listReceived: true}))
-        .catch(err=>if(err){console.log(err)});
+        .catch(err=>{if(err){console.log(err)}});
         //we need to think through error handling
     }
 
