@@ -99,15 +99,16 @@ function getMultipleInteractions(drugsList) {
 
         var interactionTypeArray = response.data.fullInteractionTypeGroup;
 
+        var interactionPairs = [];
         interactionTypeArray.forEach(function(e){
           var innerInteractionTypeArray = e.fullInteractionType;
           innerInteractionTypeArray.forEach(function(e){
             console.log('pair', e.interactionPair);
-            resolve(e.interactionPair);
+            interactionPairs.push(e.interactionPair);
           })
         });
 
-
+        resolve(interactionPairs);
         // fs.writeFileSync('interactionsList.json', JSON.stringify(response.data), 'utf-8');
       }).catch(function (err) {
         if (err)
