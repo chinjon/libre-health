@@ -33,7 +33,7 @@ class MedsListBody extends Component {
         //conditionally render search form or drop-down
         let form = null;
         if (!this.state.listReceived) form = <MedsListSearchForm getMedsList={this.getMedsList}/>
-        else form = <MedsListDropDown addMedication={this.props.addMedication} medsList={this.state.medsList}/>
+        else form = <MedsListDropDown userId={this.props.userId} addMedication={this.props.addMedication} medsList={this.state.medsList}/>
 
         return (
                 <nav className="panel">

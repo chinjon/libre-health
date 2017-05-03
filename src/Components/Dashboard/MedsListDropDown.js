@@ -5,7 +5,7 @@ const styles = {
   base: {
   	overflow: 'auto',
   	textOverflow: 'ellipsis',
-    width: '200px',
+    width: '210px',
   }
 }
 
@@ -21,14 +21,15 @@ class MedsListDropDown extends Component {
 	}
 
     handleChange(event) {
-    	console.log(event);
+    	//value will be an index of the props.medlist array
         this.setState({value: event.target.value});
     }
 
     handleSubmit(e) {
     	e.preventDefault();
+    	//only call the function when an actual item is selected
     	if(this.state.value !== 'select'){
-    		this.props.addMedication(this.props.medsList[this.state.value]);
+    		this.props.addMedication(this.props.medsList[this.state.value], this.props.userId);
     	}
     }
 

@@ -17,12 +17,14 @@ function getMedsList(drug) {
 
         if(medsList) {
           medsList.forEach(function(e){
-            var length = 140;
+            var length = 50; //we should consider increasing this and making the search form larger
             var name = e.name.substring(0,length);
             medsArray.push({rxcui: e.rxcui, name: name})
           });
         }
       });
+
+      medsArray.sort(function(a, b) { return a - b;});
 
       resolve(medsArray);
 
