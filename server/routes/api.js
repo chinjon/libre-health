@@ -65,14 +65,14 @@ function getMultipleInteractions(drugsList) {
             var drug2 = pair[i].interactionConcept[1].minConceptItem.name;
             //initialize array if this key does not exist on obj
             if(!obj[drug1]) {
-              obj[drug1] = [];
+              obj[drug1] = [{drugName: drug1}];
             }
             if(!obj[drug2]) {
-              obj[drug2] = [];
+              obj[drug2] = [{drugName: drug2}];
             }
             
             function duplicateInteraction(arr, drug2) {
-              for(var j=0; j < arr.length; j++) {
+              for(var j=1; j < arr.length; j++) {
                 if(arr[j].interactionName == drug2 && arr[j].severity == pair[i].severity) {
                   return true;
                 }
