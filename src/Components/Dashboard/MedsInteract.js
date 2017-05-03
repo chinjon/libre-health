@@ -13,7 +13,7 @@ class MedsInteract extends Component {
 
     componentWillMount(){
         if(this.props.medications.length > 1) {
-            let medList = this.props.medications.map(e=>e.name);
+            let medList = this.props.medications.map(e=>e.rxcui);
             helpers.checkInteractions(medList).then(data=>{
                 console.log(data)
                 this.setState({interactions: data});
