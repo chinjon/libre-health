@@ -1,7 +1,40 @@
 import React, {Component} from 'react';
+import helpers from './../utils/helpers';
 
 class MedsInteract extends Component {
-    render() {
+
+    constructor(props){
+        super(props);
+        this.state = {
+            interactions: {},
+            isLoading: true
+        }
+
+    }
+
+    componentWillMount(){
+        if(this.props.medications.length > 1) {
+            let medList = this.props.medications.map(e=>e.rxcui);
+            helpers.checkInteractions(medList).then(data=>{
+                console.log(data)
+                this.setState({interactions: data, isLoading: false});
+            })
+        }
+    }
+
+    componentWillReceiveProps(nextProps){
+        if(nextProps.medications.length > 1) {
+            let medList = nextProps.medications.map(e=>e.rxcui);
+            helpers.checkInteractions(medList).then(data=>{
+                console.log(data)
+                this.setState({interactions: data});
+            })
+        }
+    }
+
+
+
+    render(){
         // this.props.medications will be used to call the interactions api
         return (
             <div className="box has-text-centered">
@@ -55,6 +88,7 @@ class MedsInteract extends Component {
     }
 }
 
+
 const medsTab = ({interactionList}) => {
     return (
         <div className="tabs is-medium">
@@ -104,3 +138,4 @@ const MedicationBlock = ({MedicationList}) => {
 }
 
 export default MedsInteract;
+

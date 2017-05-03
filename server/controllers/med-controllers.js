@@ -18,7 +18,7 @@ module.exports = function(app) {
 		User.findOneAndUpdate({_id: req.params.userId},
 			{$addToSet: {medications: req.body.medication}},
 			{new: true})
-		.then(data=>res.json(data)).catch(err=>res.json(err));
+		.then(user=>res.json({user})).catch(err=>res.json(err));
 	});
 
 	//updating a dosage on medication from list
