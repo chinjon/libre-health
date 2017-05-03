@@ -34,6 +34,8 @@ class MedsListBody extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
+        //before calling addMedication, we will call our helper to get a list returned to us
+        //this list will include all the medications for the user to choose which they are taking
         this.props.addMedication(this.state.medication, this.props.userId);
     }
 
