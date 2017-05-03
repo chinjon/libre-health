@@ -17,14 +17,14 @@ function getMedsList(drug) {
 
         if(medsList) {
           medsList.forEach(function(e){
-            var length = 50; //we should consider increasing this and making the search form larger
+            var length = 60; //we should consider increasing this and making the search form larger
             var name = e.name.substring(0,length);
             medsArray.push({rxcui: e.rxcui, name: name})
           });
         }
       });
 
-      medsArray.sort(function(a, b) { return a - b;});
+      medsArray.sort(function(a, b) { return a.name - b.name;});
 
       resolve(medsArray);
 
@@ -79,7 +79,7 @@ function getMultipleInteractions(drugsList) {
             
             function duplicateInteraction(arr, drug2) {
               for(var j=1; j < arr.length; j++) {
-                if(arr[j].interactionName == drug2 && arr[j].severity == pair[i].severity) {
+                if(arr[j].interactionName == drug2) && arr[j].severity == pair[i].severity) {
                   return true;
                 }
               }
