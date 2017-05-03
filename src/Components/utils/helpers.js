@@ -75,7 +75,23 @@ const helpers = {
         }
       })
     });
-  }
+  },
+
+  checkInteractions: drugList => {
+    return new Promise((resolve, reject)=>{
+
+      interactions.getMultipleInteractions(drugList).then(data=>{
+        console.log('.then on getMultipleInteractions fired.');
+        resolve(data);
+      }).catch(err=>{
+        if(err){
+          console.log('.catch on getMultipleInteractions fired.');
+          reject(err);
+        }
+      });
+
+    });
+  } 
 
 }
 
