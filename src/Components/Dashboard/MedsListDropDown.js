@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import Radium from 'radium';
 
-let styles = {
+const styles = {
   base: {
   	overflow: 'auto',
-  	'text-overflow': 'ellipsis',
-    'max-width': '200px',
+  	textOverflow: 'ellipsis',
+    width: '200px',
   }
 }
 
@@ -34,9 +34,9 @@ class MedsListDropDown extends Component {
 
     renderMedsList(){
     	return (
-    		<select value={this.state.value} onChange={this.handleChange}>
-    			<option value='select' styles={styles.base}>Select From DropDown</option>
-    			{this.props.medsList.map((med, i)=><option key={i} value={i} styles={styles.base}>{med.name}</option>)}
+    		<select value={this.state.value} onChange={this.handleChange} style={styles.base}>
+    			<option value='select'>Select From DropDown</option>
+    			{this.props.medsList.map((med, i)=><option key={i} value={i}>{med.name}</option>)}
     		</select>
     	)
     	

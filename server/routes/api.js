@@ -17,7 +17,9 @@ function getMedsList(drug) {
 
         if(medsList) {
           medsList.forEach(function(e){
-            medsArray.push({rxcui: e.rxcui, name: e.name})
+            var length = 140;
+            var name = e.name.substring(0,length);
+            medsArray.push({rxcui: e.rxcui, name: name})
           });
         }
       });
