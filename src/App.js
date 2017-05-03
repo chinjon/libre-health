@@ -9,6 +9,7 @@ class App extends Component {
     //bind this to custom functions
 		this.login = this.login.bind(this);
     this.newUser = this.newUser.bind(this);
+    this.addMedication = this.addMedication.bind(this);
 		//set initial state
     this.state = {
       isAuth: false,
@@ -39,7 +40,7 @@ class App extends Component {
       console.log('back from signup helper');
 
       const user = {
-        _id: data.id,
+        _id: data._id,
         username: data.username,
         medications: data.medications
       }
@@ -68,14 +69,9 @@ class App extends Component {
 
   addMedication(name, id) {
     console.log('Add Medication Form Submission');
-    helpers.addMeds(name, id).then(data=>{
-      const user = {
-        _id: data.id,
-        username: data.username,
-        medications: data.medications
-      }
-      this.setState({user: user});
-    }).catch(err=>{if(err)console.log(err)});
+    helpers.addMeds(name, id)
+    .then(({data:{user}})=> this.setState({user}))
+    .catch(err=>{if(err)console.log(err)});
   }
 
   render() {
