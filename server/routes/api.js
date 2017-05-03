@@ -63,17 +63,18 @@ function getMultipleInteractions(drugsList) {
           })
         });
 
-        var interactionList = interactionPairs.reduce(function(obj, pair){
+        //reduce data into an object
+        var interactionObj = interactionPairs.reduce(function(obj, pair){
         
           for (var i=0; i<pair.length; i++) {
             var drug1 = pair[i].interactionConcept[0].minConceptItem.name;
             var drug2 = pair[i].interactionConcept[1].minConceptItem.name;
             //initialize array if this key does not exist on obj
             if(!obj[drug1]) {
-              obj[drug1] = [{drugName: drug1}];
+              obj[drug1] = [];
             }
             if(!obj[drug2]) {
-              obj[drug2] = [{drugName: drug2}];
+              obj[drug2] = [];
             }
             
             function duplicateInteraction(arr, drug2) {
@@ -97,6 +98,12 @@ function getMultipleInteractions(drugsList) {
           return obj;
 
         }, {});
+        //convert into an array
+        var keys = Object.keys(interactionObj);
+
+        var interactionList = keys.map(function(drug) {
+          return {drugName: drug, interactions: interactionObj[drug]}
+        });
 
         resolve(interactionList);
 
