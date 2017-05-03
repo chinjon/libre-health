@@ -97,13 +97,16 @@ function getMultipleInteractions(drugsList) {
 
       axios.get(queryUrl).then(function(response) {
 
-        const interactionTypeArray = response.data.fullInteractionTypeGroup;
+        var interactionTypeArray = response.data.fullInteractionTypeGroup;
 
         interactionTypeArray.forEach(function(e){
-          const innerInteractionTypeArray = e.fullInteractionType;
+          var innerInteractionTypeArray = e.fullInteractionType;
+          innerInteractionTypeArray.forEach(function(e){
+            console.log('pair', e.interactionPair);
+            resolve(e.interactionPair);
+          })
         });
 
-        resolve();
 
         // fs.writeFileSync('interactionsList.json', JSON.stringify(response.data), 'utf-8');
       }).catch(function (err) {
