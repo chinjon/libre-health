@@ -17,12 +17,23 @@ class MedsListBody extends Component {
     constructor(props) {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.state = {
+          medication: ''
+        }
     }
 
+    onInputChange = event =>{
+        const target = event.target;
+        const name = target.name;
+        this.setState({
+          [name]: target.value
+        });
+        event.preventDefault();
+      }
+
     handleSubmit(e) {
-        console.log(this.input.value);
         e.preventDefault();
-        this.props.addMedications(this.input.value, this.props.userId);
+        this.props.addMedication(this.state.medication, this.props.userId);
     }
 
 
@@ -36,10 +47,10 @@ class MedsListBody extends Component {
                         <div className="control has-icons-left">
                             <form onSubmit={this.handleSubmit} className="field has-addons">
                                 <p className="control">
-                                    <input className="input is-small" ref={(input) => this.input = input} type="text" placeholder="Add medication"/>
+                                    <input className="input is-small" value={this.state.medication} onChange={this.onInputChange} type="text" name='medication' placeholder="Add medication"/>
                                 </p>
                                 <p className="control">
-                                    <a className="button is-small">Add</a>
+                                    <button type='submit' className="button is-small">Add</button>
                                 </p>
                             </form>
                         </div>
