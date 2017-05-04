@@ -14,21 +14,21 @@ class App extends Component {
     this.state = {
       isAuth: false,
 			user: {
-        _id: 'f4k3#45#',
-        name: 'Johnny Q. Public',
-        medications: [{
-          name: 'Prednisone',
-          rxcui: '1303137'
-        }, {
-          name: 'Sudafed',
-          rxcui: '1049529'
-        }, {
-          name: 'Cymbalta',
-          rxcui: '596932'
-        }, {
-          name: 'Oxycodone',
-          rxcui: '1049601'
-        }]
+        // _id: 'f4k3#45#',
+        // name: 'Johnny Q. Public',
+        // medications: [{
+        //   name: 'Prednisone',
+        //   rxcui: '1303137'
+        // }, {
+        //   name: 'Sudafed',
+        //   rxcui: '1049529'
+        // }, {
+        //   name: 'Cymbalta',
+        //   rxcui: '596932'
+        // }, {
+        //   name: 'Oxycodone',
+        //   rxcui: '1049601'
+        // }]
       }
 		}
 	}
