@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import MedsListBody from './MedsListBody';
-import TestMedsInteract from './TestMedsInteract';
+import MedsInteract from './MedsInteract';
 
 import Radium from 'radium';
 
