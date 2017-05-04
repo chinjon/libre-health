@@ -28,7 +28,7 @@ class TestMedsInteract extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.medications.length != this.props.medications.length && nextProps.medications > 1) {
+    if (nextProps.medications.length != this.props.medications.length && nextProps.medications.length > 1) {
       let medList = nextProps.medications.map(e => e.rxcui);
       helpers.checkInteractions(medList).then(data => {
         let drugNames = data.map(e=>e.drugName);
