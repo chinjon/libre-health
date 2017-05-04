@@ -21,7 +21,6 @@ class DashboardBody extends Component {
   componentWillMount() {
     //check for isAuth and call a redirect??? or do this further down the tree?
     if(!this.props.isAuth) {
-      console.log('this.props', this.props);
       browserHistory.push('/');
     }
   }
@@ -37,7 +36,7 @@ class DashboardBody extends Component {
             <div className="column is-10">
               <div className="columns is-multiline">
                 <div className="column">
-                  <PatientInfo user={this.props.user} addMedication={this.props.addMedication}/>
+                  <PatientInfo user={this.props.user} addMedication={this.props.addMedication} deleteMedication={this.props.deleteMedication}/>
                 </div>
               </div>
             </div>

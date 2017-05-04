@@ -65,7 +65,6 @@ const helpers = {
     });
   },
 
-
   addMeds: (medication, id) => {
     console.log('addMeds helper called');
     return new Promise((resolve, reject)=> {
@@ -84,6 +83,27 @@ const helpers = {
 
       
     });
+  },
+
+  deleteMeds: (medication, id)=> {
+    console.log('deleteMeds helper called');
+    return new Promise((resolve, reject)=> {
+
+      axios.delete(`${API_URL}/delete/meds/${id}`, {medication: medication}).then(response => {
+        console.log('.then on delete deletemeds fired');
+        if (response) {
+          resolve(response)
+        }
+      }).catch(err => {
+        if (err) {
+          console.log('.catch on delete deleteMeds fired');
+          reject(err);
+        }
+      });
+
+      
+    });
+
   },
 
   checkInteractions: drugList => {
