@@ -6,7 +6,7 @@ const API_URL = '/api';
 const helpers = {
 
   newUser: (username, password) => {
-    console.log("Hi! Your helper is running");
+    console.log("signup helper is running");
     return new Promise((resolve, reject) => {
       axios.post(`${API_URL}/signup`, {
         username: username,
@@ -18,7 +18,7 @@ const helpers = {
         }
       }).catch(err => {
         if (err) {
-          console.log('.catch on login fired.');
+          console.log('.catch on signup fired.');
           reject(err);
         }
       });
@@ -33,51 +33,61 @@ const helpers = {
         username: username,
         password: password
       }).then(response => {
-        console.log('.then on signup fired');
+        console.log('.then on login fired');
         if (response) {
           resolve(response)
         }
       }).catch(err => {
         if (err) {
-          console.log('.catch on signup fired');
+          console.log('.catch on login fired');
           reject(err);
         }
       });
     });
   },
 
-  addMeds: (drugName, id) => {
-    console.log("AddDrugs Helper Called");
+  getMedsList: drugName => {
+    console.log("getMedsList helper Called");
     return new Promise((resolve, reject) => {
-
-      interactions.getRxcui(drugName).then(rxcui => {
-        const medication = {
-          name: drugName,
-          rxcui: rxcui
-        }
-
-        axios.post(`${API_URL}/add/meds/${id}`, {medication: medication}).then(response => {
-          console.log('.then on posting addMeds fired');
-          if (response) {
-            resolve(response)
-          }
-        }).catch(err => {
-          if (err) {
-            console.log('.catch on posting addMeds fired');
-            reject(err);
-          }
-        });
+      interactions.getMedsList(drugName).then(medsList => {
+        
+        console.log('.then on getMedsList fired');
+        resolve(medsList);
 
       }).catch(err => {
+        //handle error
         if (err) {
-          console.log('.catch on getRxcui fired');
+          console.log('.catch on getMeds fired');
           reject(err);
         }
       })
+
+    });
+  },
+
+
+  addMeds: (medication, id) => {
+    console.log('addMeds helper called');
+    return new Promise((resolve, reject)=> {
+
+      axios.post(`${API_URL}/add/meds/${id}`, {medication: medication}).then(response => {
+        console.log('.then on posting addMeds fired');
+        if (response) {
+          resolve(response)
+        }
+      }).catch(err => {
+        if (err) {
+          console.log('.catch on posting addMeds fired');
+          reject(err);
+        }
+      });
+
+      
     });
   },
 
   checkInteractions: drugList => {
+    console.log('checkInteractions helper called');
     return new Promise((resolve, reject)=>{
 
       interactions.getMultipleInteractions(drugList).then(data=>{

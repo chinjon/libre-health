@@ -1,44 +1,40 @@
 import React, {Component} from 'react';
 
+import helpers from './../utils/helpers';
 
-var MedicationList = [
-    {
-        name: "Medication #1"
-    },
-    {
-        name: "Medication #2"
-    },
-    {
-        name: "Medication #3"
-    }
-];
+import MedsListSearchForm from './MedsListSearchForm';
+import MedsListDropDown from './MedsListDropDown';
 
 class MedsListBody extends Component {
 
     constructor(props) {
         super(props);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.getMedsList = this.getMedsList.bind(this);
         this.state = {
-          medication: ''
+            medsList: [],
+            listReceived: false
         }
     }
 
-    onInputChange = event =>{
-        const target = event.target;
-        const name = target.name;
-        this.setState({
-          [name]: target.value
-        });
-        event.preventDefault();
-      }
-
-    handleSubmit(e) {
-        e.preventDefault();
-        this.props.addMedication(this.state.medication, this.props.userId);
+    componentWillReceiveProps(nextProps){
+        if(nextProps.medications.length > this.props.medications.length) {
+            this.setState({medsList: [], listReceived: false});
+        }
     }
 
+    getMedsList(med){
+        helpers.getMedsList(med)
+        .then(medsList=> this.setState({medsList: medsList, listReceived: true}))
+        .catch(err=>{if(err){console.log(err)}});
+        //we need to think through error handling
+    }
 
     render() {
+        //conditionally render search form or drop-down
+        let form = null;
+        if (!this.state.listReceived) form = <MedsListSearchForm getMedsList={this.getMedsList}/>
+        else form = <MedsListDropDown userId={this.props.userId} addMedication={this.props.addMedication} medsList={this.state.medsList}/>
+
         return (
                 <nav className="panel">
                     <p className="panel-heading has-text-centered">
@@ -46,14 +42,7 @@ class MedsListBody extends Component {
                     </p>
                     <div className="panel-block">
                         <div className="control has-icons-left">
-                            <form onSubmit={this.handleSubmit} className="field has-addons">
-                                <p className="control">
-                                    <input className="input is-small" value={this.state.medication} onChange={this.onInputChange} type="text" name='medication' placeholder="Add medication"/>
-                                </p>
-                                <p className="control">
-                                    <button type='submit' className="button is-small">Add</button>
-                                </p>
-                            </form>
+                            {form}
                         </div>
                     </div>
                     <MedicationBlock MedicationList={this.props.medications} />
