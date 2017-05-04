@@ -1,22 +1,21 @@
 import React, {Component} from 'react';
 import Radium from 'radium';
 
-// const style ={
-//   base: {
-//     backgroundColor:
-//   }
-// }
+const style ={
+  base: {
+  }
+}
 
 class DashboardNav extends Component {
   render() {
     return (
-      <aside className="menu">
+      <aside className="menu" >
         <p className="menu-label">
           <PatientCard />
         </p>
         <ul className="menu-list">
           <li>
-            <a>Dashboard</a>
+            <a className="is-active">Dashboard</a>
           </li>
           <li>
             <a>Account Settings</a>
