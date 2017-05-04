@@ -58,14 +58,6 @@ class Navigation extends Component {
         <div className="nav-right nav-menu">
           <div className="nav-item">
             <div className="field is-grouped">
-              <p className="control">
-                <a className="button is-primary">
-                  <span className="icon">
-                    <i className="fa fa-sign-out"></i>
-                  </span>
-                  <span>Logout</span>
-                </a>
-              </p>
               <SignUpForm newUser={this.props.newUser} isAuth={this.props.isAuth}/>
             </div>
             <div className="nav-item">

@@ -71,6 +71,14 @@ class PatientCard extends Component {
       <p>
         <strong>John Smith</strong>
         <br />
+        <p className="control">
+                <a className="button is-primary">
+                  <span className="icon">
+                    <i className="fa fa-sign-out"></i>
+                  </span>
+                  <span>Logout</span>
+                </a>
+              </p>
       </p>
     </div>
   </div>
