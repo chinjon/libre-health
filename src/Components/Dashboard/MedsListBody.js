@@ -4,24 +4,30 @@ import helpers from './../utils/helpers';
 
 import MedsListSearchForm from './MedsListSearchForm';
 import MedsListDropDown from './MedsListDropDown';
+import MedsListDeleteButton from './MedsListDeleteButton';
 
 class MedsListBody extends Component {
 
     constructor(props) {
         super(props);
         this.getMedsList = this.getMedsList.bind(this);
-        this.handleClick = this.handleClick.bind(this);
         this.state = {
             medsList: [],
-            listReceived: false
+            listReceived: false,
+            medications: []
         }
+    }
+
+    componentWillMount() {
+        this.setState({medications: this.props.medications});
     }
 
     componentWillReceiveProps(nextProps){
         if(nextProps.medications.length > this.props.medications.length
             || nextProps.medications.length < this.props.medications.length) {
-            this.setState({medsList: [], listReceived: false});
+            this.setState({medsList: [], listReceived: false, medications: this.props.medications});
         }
+        
     }
 
     getMedsList(med){
@@ -31,23 +37,14 @@ class MedsListBody extends Component {
         //we need to think through error handling
     }
 
-    handleClick(event){
-        console.log(event.target);
-
-    }
-
-    renderMedsList(medsList) {
+    renderMedications(medications) {
         return(
             <div>
-            {medsList.map((e, i) =>
+            {medications.map((med, i, meds) =>
                 <span className='field'>
                     <a key={i} className="panel-block">
-                        {e.name}
-                        <a id={e.rxcui} value={e.rxcui} className="button is-danger is-outlined" onClick={this.handleClick}>
-                            <span className="icon is-small">
-                                <i className="fa fa-times"></i>
-                            </span>
-                        </a>
+                        {med.name}
+                        <MedsListDeleteButton medication={meds[i]} userId={this.props.userId} deleteMedication={this.props.deleteMedication}/>
                     </a>
                 </span>                
             )}
@@ -71,7 +68,7 @@ class MedsListBody extends Component {
                             {form}
                         </div>
                     </div>
-                    {this.renderMedsList(this.props.medications)}
+                    {this.renderMedications(this.state.medications)}
                 </nav>
 
         )
