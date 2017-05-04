@@ -47,8 +47,7 @@ class MedsListSearchForm extends Component {
 						</form>
 					</p>
 				</div>
-
-		)
+			)
     }
 }
 

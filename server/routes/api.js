@@ -88,11 +88,13 @@ function getMultipleInteractions(drugsList) {
             return false;
           }
 
-          if (!duplicateInteraction(obj[drug1], drug2)) {
+          //make sure we don't have a duplicate entry and only include interactions that are explicitly defined
+          //or includes the word 'severity'
+          if (!duplicateInteraction(obj[drug1], drug2) && (pair[i].severity !== 'N/A' || pair[i].description.includes('severity'))) {
             obj[drug1].push({interactionName: drug2, severity: pair[i].severity, description: pair[i].description});
           }
 
-          if (!duplicateInteraction(obj[drug2], drug1)) {
+          if (!duplicateInteraction(obj[drug2], drug1) && (pair[i].severity !== 'N/A' || pair[i].description.includes('severity'))) {
             obj[drug2].push({interactionName: drug1, severity: pair[i].severity, description: pair[i].description});
           }
 
