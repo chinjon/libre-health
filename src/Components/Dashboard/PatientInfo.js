@@ -21,7 +21,7 @@ class PatientInfo extends Component {
                         <MedsListBody userId={this.props.user._id} medications={this.props.user.medications} addMedication={this.props.addMedication} deleteMedication={this.props.deleteMedication}/>
                     </div>
                     <div className="column">
-                        <TestMedsInteract medications={this.props.user.medications}/>
+                        <MedsInteract medications={this.props.user.medications}/>
                     </div>
 
                 </div>
