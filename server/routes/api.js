@@ -65,8 +65,14 @@ function getMultipleInteractions(drugsList) {
         })
       });
 
-      //reduce data into an object
-      var interactionObj = interactionPairs.reduce(function(obj, pair) {
+            function duplicateInteraction(arr, drug2) {
+              for(var j=1; j < arr.length; j++) {
+                if(arr[j].interactionName == drug2 && arr[j].severity == pair[i].severity) {
+                  return true;
+                }
+              }
+              return false;
+            }
 
         for (var i = 0; i < pair.length; i++) {
           var drug1 = pair[i].interactionConcept[0].minConceptItem.name;
