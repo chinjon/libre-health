@@ -10,26 +10,11 @@ class App extends Component {
 		this.login = this.login.bind(this);
     this.newUser = this.newUser.bind(this);
     this.addMedication = this.addMedication.bind(this);
+    this.deleteMedication = this.deleteMedication.bind(this);
 		//set initial state
     this.state = {
       isAuth: false,
-			user: {
-        // _id: 'f4k3#45#',
-        // name: 'Johnny Q. Public',
-        // medications: [{
-        //   name: 'Prednisone',
-        //   rxcui: '1303137'
-        // }, {
-        //   name: 'Sudafed',
-        //   rxcui: '1049529'
-        // }, {
-        //   name: 'Cymbalta',
-        //   rxcui: '596932'
-        // }, {
-        //   name: 'Oxycodone',
-        //   rxcui: '1049601'
-        // }]
-      }
+			user: {}
 		}
 	}
 
@@ -73,13 +58,21 @@ class App extends Component {
     .catch(err=>{if(err)console.log(err)});
   }
 
+  deleteMedication(medication, id) {
+    console.log('Delete Medication Called');
+    helpers.deleteMeds(medication, id)
+    .then(({data:{user}})=> this.setState({user}))
+    .catch(err=>{if(err)console.log(err)});
+  }
+
   render() {
     //clone element allows us to send props down one level to the children that will be rendered later
     let parentProps = {
       isAuth: this.state.isAuth,
       newUser: this.newUser, 
       login: this.login,
-      addMedication: this.addMedication, 
+      addMedication: this.addMedication,
+      deleteMedication: this.deleteMedication, 
       user: this.state.user
     }
    	return (
