@@ -52,7 +52,9 @@ class TestMedsInteract extends Component {
         <h5 className="title is-5">Medication Interactions</h5>
        <Tabs>
         <MedicationBlock MedicationList={this.props.medications} />
+
         
+        <MedInteractPanels MedicationList={this.props.medications} />
        </Tabs>
       </div>
     )
@@ -167,7 +169,7 @@ const MedInteractPanels = ({MedicationList}) =>{
         <div>
             {MedicationList.map((e,i)=>{
                 <TabPanel>
-                    {e.name}
+                    {i}
                 </TabPanel>
             })}
         </div>
