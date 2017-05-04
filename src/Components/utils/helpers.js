@@ -89,9 +89,10 @@ const helpers = {
     console.log('deleteMeds helper called');
     return new Promise((resolve, reject)=> {
 
-      axios.delete(`${API_URL}/delete/meds/${id}`, {medication: medication}).then(response => {
+      axios.put(`${API_URL}/delete/meds/${id}`, {medication: medication}).then(response => {
         console.log('.then on delete deletemeds fired');
         if (response) {
+          console.log(response);
           resolve(response)
         }
       }).catch(err => {

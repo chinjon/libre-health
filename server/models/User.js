@@ -13,10 +13,7 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  medications: {
-    type: Array,
-    default: []
-  }
+  medications: Array
 });
 
 UserSchema.plugin(passportLocalMongoose);

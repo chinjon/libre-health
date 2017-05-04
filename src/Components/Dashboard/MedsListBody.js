@@ -23,9 +23,8 @@ class MedsListBody extends Component {
     }
 
     componentWillReceiveProps(nextProps){
-        if(nextProps.medications.length > this.props.medications.length
-            || nextProps.medications.length < this.props.medications.length) {
-            this.setState({medsList: [], listReceived: false, medications: this.props.medications});
+        if(nextProps.medications.length != this.props.medications.length) {
+            this.setState({medsList: [], listReceived: false, medications: nextProps.medications});
         }
         
     }
@@ -40,11 +39,11 @@ class MedsListBody extends Component {
     renderMedications(medications) {
         return(
             <div>
-            {medications.map((med, i, meds) =>
+            {medications.map((med, i) =>
                 <span className='field'>
                     <a key={i} className="panel-block">
                         {med.name}
-                        <MedsListDeleteButton medication={meds[i]} userId={this.props.userId} deleteMedication={this.props.deleteMedication}/>
+                        <MedsListDeleteButton medication={med.rxcui} userId={this.props.userId} deleteMedication={this.props.deleteMedication}/>
                     </a>
                 </span>                
             )}

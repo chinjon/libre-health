@@ -26,9 +26,9 @@ module.exports = function(app) {
 	//  	//later
 	// });
 
-	router.delete('/api/delete/meds/:userId', function(req, res){
+	router.put('/api/delete/meds/:userId', function(req, res){
 		User.findOneAndUpdate({_id: req.params.userId},
-			{ $pullAll: {medications: [req.body.medication]}},
+			{$pull: {'medications': {'rxcui': req.body.medication}}},
 			{new: true})
 		.then(user=>res.json({user})).catch(err=>res.json(err));
 	});
