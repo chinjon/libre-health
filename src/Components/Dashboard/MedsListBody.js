@@ -11,6 +11,7 @@ class MedsListBody extends Component {
     constructor(props) {
         super(props);
         this.getMedsList = this.getMedsList.bind(this);
+        this.userReturn = this.userReturn.bind(this);
         this.state = {
             medsList: [],
             listReceived: false,
@@ -36,14 +37,20 @@ class MedsListBody extends Component {
         //we need to think through error handling
     }
 
+    userReturn() {
+        this.setState({medsList: [], listReceived: false});
+    }
+
     renderMedications(medications) {
         return(
             <div>
             {medications.map((med, i) =>
                 <span className='field'>
                     <a key={i} className="panel-block">
-                        {med.name}
+                        {med.name}&nbsp;
+                        
                         <MedsListDeleteButton medication={med.rxcui} userId={this.props.userId} deleteMedication={this.props.deleteMedication}/>
+                        
                     </a>
                 </span>                
             )}
@@ -55,18 +62,14 @@ class MedsListBody extends Component {
         //conditionally render search form or drop-down
         let form = null;
         if (!this.state.listReceived) form = <MedsListSearchForm getMedsList={this.getMedsList}/>
-        else form = <MedsListDropDown userId={this.props.userId} addMedication={this.props.addMedication} medsList={this.state.medsList}/>
+        else form = <MedsListDropDown userId={this.props.userId} userReturn={this.userReturn} addMedication={this.props.addMedication} medsList={this.state.medsList}/>
 
         return (
                 <nav className="panel">
                     <p className="panel-heading has-text-centered">
                         Medications
                     </p>
-                    <div className="panel-block">
-                        <div className="control has-icons-left">
-                            {form}
-                        </div>
-                    </div>
+                    {form}
                     {this.renderMedications(this.state.medications)}
                 </nav>
 

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import MedsListBody from './MedsListBody';
-import MedsInteract from './MedsInteract';
+import TestMedsInteract from './TestMedsInteract';
 
 import Radium from 'radium';
 
@@ -15,7 +15,6 @@ class PatientInfo extends Component {
     render() {
         return (
             <div className="box" style={styles.base}>
-
                 <div className="columns">
                     <div className="column">
                         <article className="media">
@@ -56,7 +55,7 @@ class PatientInfo extends Component {
                         <MedsListBody userId={this.props.user._id} medications={this.props.user.medications} addMedication={this.props.addMedication} deleteMedication={this.props.deleteMedication}/>
                     </div>
                     <div className="column">
-                        <MedsInteract medications={this.props.user.medications}/>
+                        <TestMedsInteract medications={this.props.user.medications}/>
                     </div>
 
                 </div>
