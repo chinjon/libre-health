@@ -41,31 +41,31 @@ function getMedsList(drug) {
 function getMultipleInteractions(drugsList) {
 
   return new Promise(function(resolve, reject){
-  
+
       var sources = drugsList.join('+');
 
       var queryUrl = 'https://rxnav.nlm.nih.gov/REST/interaction/list.json?rxcuis=' + sources;
 
       axios.get(queryUrl).then(function(response) {
 
-        //parsing the data and reducing it 
+        //parsing the data and reducing it
         var interactionTypeArray = response.data.fullInteractionTypeGroup;
 
         var interactionPairs = [];
 
         interactionTypeArray.forEach(function(e){
-        
+
           var innerInteractionTypeArray = e.fullInteractionType;
-        
+
           innerInteractionTypeArray.forEach(function(e){
-            
+
             interactionPairs.push(e.interactionPair);
           })
         });
 
         //reduce data into an object
         var interactionObj = interactionPairs.reduce(function(obj, pair){
-        
+
           for (var i=0; i<pair.length; i++) {
             var drug1 = pair[i].interactionConcept[0].minConceptItem.name;
             var drug2 = pair[i].interactionConcept[1].minConceptItem.name;
@@ -76,7 +76,7 @@ function getMultipleInteractions(drugsList) {
             if(!obj[drug2]) {
               obj[drug2] = [];
             }
-            
+
             function duplicateInteraction(arr, drug2) {
               for(var j=1; j < arr.length; j++) {
                 if(arr[j].interactionName == drug2 && arr[j].severity == pair[i].severity) {
