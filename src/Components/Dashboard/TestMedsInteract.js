@@ -7,9 +7,9 @@ class TestMedsInteract extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      interactions: {},
-      medsList: [],
-      isLoading: true
+      interactionArray: [],
+      drugNames: [],
+
     }
 
   }
@@ -18,47 +18,49 @@ class TestMedsInteract extends Component {
     if (this.props.medications.length > 1) {
       let medList = this.props.medications.map(e => e.rxcui);
       helpers.checkInteractions(medList).then(data => {
-        console.log(data)
-        this.setState({interactions: data, isLoading: false});
+        let drugNames = data.map(e=>e.drugName);
+        console.log(drugNames)
+        let interactions = data.map(e=>e.interactions);
+        console.log(interactions);
+        this.setState({drugNames: drugNames, interactionArray:interactions});
       })
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.medications.length > 1) {
+    if (nextProps.medications.length != this.props.medications.length && nextProps.medications > 1) {
       let medList = nextProps.medications.map(e => e.rxcui);
       helpers.checkInteractions(medList).then(data => {
-        console.log(data)
-        this.setState({interactions: data});
+        let drugNames = data.map(e=>e.drugName);
+        console.log(drugNames);
+        let interactions = data.map(e=>e.interactions);
+        console.log(interactions);
+        this.setState({drugNames: drugNames, interactionArray: interactions});
       })
     }
 
-     if(nextProps.medications.length > this.props.medications.length) {
-            this.setState({medsList: [], listReceived: false});
-        }
   }
 
-   getMedsList(med){
-        helpers.getMedsList(med)
-        .then(medsList=> this.setState({medsList: medsList, listReceived: true}))
-        .catch(err=>{if(err){console.log(err)}});
-        //we need to think through error handling
-    }
+  renderTabPanels(arr){
+    if(arr.length)
+      return arr.map(interaction=><p>{interaction.description}</p>)
+    else return <p>No known interactions</p>
+  }
 
     renderMedsPanel() {
       return (
         <Tabs>
           <TabList>
-            {this.props.medications.map((e, i) => 
-                <Tab>
-                    {e.name}
-                </Tab>
+            {this.state.drugNames.map((drugName, i) => 
+              <Tab>
+                  {drugName}
+              </Tab>
             )}
           </TabList>
-            {this.props.medications.map((e,i) =>
-                  <TabPanel>
-                      {e.rxcui}
-                  </TabPanel>
+            {this.state.interactionArray.map((arr,i) =>
+              <TabPanel>
+                  {this.renderTabPanels(arr)}
+              </TabPanel>
             )}
          </Tabs>
        )
