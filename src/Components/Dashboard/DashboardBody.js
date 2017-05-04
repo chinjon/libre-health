@@ -13,6 +13,13 @@ let styles = {
     margin: '1rem',
     border: 'black solid 1px',
     width: '100%'
+  },
+  footer: {
+    bottom: 0,
+    left: 0,
+    right: 0,
+    position: 'absolute',
+    marginTop: '3rem'
   }
 }
 
@@ -42,7 +49,7 @@ class DashboardBody extends Component {
             </div>
           </div>
         </div>
-        <Footer/>
+        <Footer style={styles.footer}/>
       </div>
     )
   }

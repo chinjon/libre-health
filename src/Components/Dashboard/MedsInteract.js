@@ -144,4 +144,53 @@ class MedsInteract extends Component {
 // }
 // }
 
+const medsTab = ({interactionList}) => {
+    return (
+        <div className="tabs is-medium">
+            <ul>
+                {interactionList.map((e, i) =>
+                    <li><a>{e.name}</a></li>
+                )}
+            </ul>
+        </div>
+    )
+}
+
+const MedsTable = ({interactionResults}) =>{
+    return (
+        <div className="media">
+                    <table className="table is-bordered is-striped is-narrow">
+                        <thead>
+                            <tr>
+                                <th>Medication</th>
+                                <th>Severity</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {interactionResults.map((e, i) =>
+                                <tr>
+                                <td>{e.name}</td>
+                                <td>{e.message}</td>
+                            </tr>
+                            )}
+                        </tbody>
+                    </table>
+                </div>
+    )
+}
+
+const MedicationBlock = ({MedicationList}) => {
+    return (
+        <div>
+            {MedicationList.map((e, i) => <a key={i} className="panel-block">
+                <span className="panel-icon">
+                    <i className="fa fa-plus-square"></i>
+                </span>
+                {e.name}
+            </a>)}
+        </div>
+    )
+}
+
 export default MedsInteract;
+
