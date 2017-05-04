@@ -65,62 +65,61 @@ function getMultipleInteractions(drugsList) {
         })
       });
 
-            function duplicateInteraction(arr, drug2) {
-              for(var j=1; j < arr.length; j++) {
-                if(arr[j].interactionName == drug2 && arr[j].severity == pair[i].severity) {
-                  return true;
-                }
-              }
-              return false;
-            }
-
-        for (var i = 0; i < pair.length; i++) {
-          var drug1 = pair[i].interactionConcept[0].minConceptItem.name;
-          var drug2 = pair[i].interactionConcept[1].minConceptItem.name;
-          //initialize array if this key does not exist on obj
-          if (!obj[drug1]) {
-            obj[drug1] = [];
+      function duplicateInteraction(arr, drug2) {
+        for (var j = 1; j < arr.length; j++) {
+          if (arr[j].interactionName == drug2 && arr[j].severity == pair[i].severity) {
+            return true;
           }
-          if (!obj[drug2]) {
-            obj[drug2] = [];
-          }
-
-          function duplicateInteraction(arr, drug2) {
-            for (var j = 1; j < arr.length; j++) {
-              if (arr[j].interactionName == drug2 && arr[j].severity == pair[i].severity)
-              {return true;}
-            }
-            return false;
-          }
-
-          if (!duplicateInteraction(obj[drug1], drug2)) {
-            obj[drug1].push({interactionName: drug2, severity: pair[i].severity, description: pair[i].description});
-          }
-
-          if (!duplicateInteraction(obj[drug2], drug1)) {
-            obj[drug2].push({interactionName: drug1, severity: pair[i].severity, description: pair[i].description});
-          }
-
         }
-        return obj;
-
-      }, {});
-      //convert into an array
-      var keys = Object.keys(interactionObj);
-
-      var interactionList = keys.map(function(drug) {
-        return {drugName: drug, interactions: interactionObj[drug]}
-      });
-
-      resolve(interactionList);
-
-    }).catch(function(err) {
-      if (err)
-        reject(err);
+        return false;
       }
-    );
 
-  });
+      for (var i = 0; i < pair.length; i++) {
+        var drug1 = pair[i].interactionConcept[0].minConceptItem.name;
+        var drug2 = pair[i].interactionConcept[1].minConceptItem.name;
+        //initialize array if this key does not exist on obj
+        if (!obj[drug1]) {
+          obj[drug1] = [];
+        }
+        if (!obj[drug2]) {
+          obj[drug2] = [];
+        }
+
+        function duplicateInteraction(arr, drug2) {
+          for (var j = 1; j < arr.length; j++) {
+            if (arr[j].interactionName == drug2 && arr[j].severity == pair[i].severity) {
+              return true;
+            }
+          }
+          return false;
+        }
+
+        if (!duplicateInteraction(obj[drug1], drug2)) {
+          obj[drug1].push({interactionName: drug2, severity: pair[i].severity, description: pair[i].description});
+        }
+
+        if (!duplicateInteraction(obj[drug2], drug1)) {
+          obj[drug2].push({interactionName: drug1, severity: pair[i].severity, description: pair[i].description});
+        }
+
+      }
+      return obj;
+
+    }, {});
+    //convert into an array
+    var keys = Object.keys(interactionObj);
+
+    var interactionList = keys.map(function(drug) {
+      return {drugName: drug, interactions: interactionObj[drug]}
+    });
+
+    resolve(interactionList);
+
+  }).catch(function(err) {
+    if (err)
+      reject(err);
+    }
+  );
 }
 
 module.exports = {
