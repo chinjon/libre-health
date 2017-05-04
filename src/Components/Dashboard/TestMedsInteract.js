@@ -45,17 +45,31 @@ class TestMedsInteract extends Component {
         //we need to think through error handling
     }
 
+    renderMedsPanel() {
+      return (
+        <Tabs>
+          <TabList>
+            {this.props.medications.map((e, i) => 
+                <Tab>
+                    {e.name}
+                </Tab>
+            )}
+          </TabList>
+            {this.props.medications.map((e,i) =>
+                  <TabPanel>
+                      {e.rxcui}
+                  </TabPanel>
+            )}
+         </Tabs>
+       )
+    }
+
   render() {
     // this.props.medications will be used to call the interactions api
     return (
       <div className="box has-text-centered">
         <h5 className="title is-5">Medication Interactions</h5>
-       <Tabs>
-        <MedicationBlock MedicationList={this.props.medications} />
-
-        
-        <MedInteractPanels MedicationList={this.props.medications} />
-       </Tabs>
+        {this.renderMedsPanel()}
       </div>
     )
   }
