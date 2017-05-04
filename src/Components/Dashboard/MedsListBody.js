@@ -4,6 +4,7 @@ import helpers from './../utils/helpers';
 
 import MedsListSearchForm from './MedsListSearchForm';
 import MedsListDropDown from './MedsListDropDown';
+import MedsListDeleteButton from './MedsListDeleteButton';
 
 class MedsListBody extends Component {
 
@@ -12,14 +13,20 @@ class MedsListBody extends Component {
         this.getMedsList = this.getMedsList.bind(this);
         this.state = {
             medsList: [],
-            listReceived: false
+            listReceived: false,
+            medications: []
         }
     }
 
+    componentWillMount() {
+        this.setState({medications: this.props.medications});
+    }
+
     componentWillReceiveProps(nextProps){
-        if(nextProps.medications.length > this.props.medications.length) {
-            this.setState({medsList: [], listReceived: false});
+        if(nextProps.medications.length != this.props.medications.length) {
+            this.setState({medsList: [], listReceived: false, medications: nextProps.medications});
         }
+        
     }
 
     getMedsList(med){
@@ -27,6 +34,21 @@ class MedsListBody extends Component {
         .then(medsList=> this.setState({medsList: medsList, listReceived: true}))
         .catch(err=>{if(err){console.log(err)}});
         //we need to think through error handling
+    }
+
+    renderMedications(medications) {
+        return(
+            <div>
+            {medications.map((med, i) =>
+                <span className='field'>
+                    <a key={i} className="panel-block">
+                        {med.name}
+                        <MedsListDeleteButton medication={med.rxcui} userId={this.props.userId} deleteMedication={this.props.deleteMedication}/>
+                    </a>
+                </span>                
+            )}
+            </div>
+        )
     }
 
     render() {
@@ -45,28 +67,11 @@ class MedsListBody extends Component {
                             {form}
                         </div>
                     </div>
-                    <MedicationBlock MedicationList={this.props.medications} />
+                    {this.renderMedications(this.state.medications)}
                 </nav>
 
         )
     }
 }
-
-
-const MedicationBlock = ({MedicationList}) => {
-        return(
-            <div>
-            {MedicationList.map((e, i) =>
-                <a key={i} className="panel-block">
-                    <span className="panel-icon">
-                        <i className="fa fa-plus-square"></i>
-                    </span>
-                    {e.name}
-                </a>
-            )}
-            </div>
-        )
-}
-
 
 export default MedsListBody;

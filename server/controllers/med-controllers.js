@@ -26,11 +26,11 @@ module.exports = function(app) {
 	//  	//later
 	// });
 
-	router.delete('/api/delete/meds/:userId', function(req, res){
+	router.put('/api/delete/meds/:userId', function(req, res){
 		User.findOneAndUpdate({_id: req.params.userId},
-			{ $pullAll: {medications: [req.body.newMedication]}},
+			{$pull: {'medications': {'rxcui': req.body.medication}}},
 			{new: true})
-		.then(medications=>res.json(medications)).catch(err=>res.json(err));
+		.then(user=>res.json({user})).catch(err=>res.json(err));
 	});
 
 	app.use('/', router);

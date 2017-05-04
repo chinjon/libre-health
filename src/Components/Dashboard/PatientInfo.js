@@ -53,7 +53,7 @@ class PatientInfo extends Component {
                         </article>
                     </div>
                     <div className="column">
-                        <MedsListBody userId={this.props.user._id} medications={this.props.user.medications} addMedication={this.props.addMedication}/>
+                        <MedsListBody userId={this.props.user._id} medications={this.props.user.medications} addMedication={this.props.addMedication} deleteMedication={this.props.deleteMedication}/>
                     </div>
                     <div className="column">
                         <MedsInteract medications={this.props.user.medications}/>
