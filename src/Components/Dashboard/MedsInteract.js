@@ -46,7 +46,7 @@ class MedsInteract extends Component {
   }
 
   renderTabList(arr) {
-    if(this.state.drugNames.length) 
+    if(this.state.drugNames.length)
       return this.state.drugNames.map((drugName, i) => <Tab key={i}>{drugName}</Tab>)
     else return <div className='panel-block has-text-centered'><p>Not enough data to compute interactions. Please enter more medications.</p></div>
   }
@@ -58,37 +58,99 @@ class MedsInteract extends Component {
     else return <p className='panel-block'>No known interactions</p>
   }
 
-  //function to render the table overall
-  renderMedsPanel() {
-    return (
-      <Tabs>
-        <TabList>
-          {this.renderTabList()}
-        </TabList>
-          {this.state.interactionArray.map((arr, i) =>
-            <TabPanel key={i}>
-              <div className='panel'>
-                {this.renderTabPanels(arr)}
-              </div>
-            </TabPanel>
-          )}
-       </Tabs>
-     )
-  }
+    renderMedsPanel() {
+      return (
+        <Tabs>
+          <TabList>
+            {this.state.drugNames.map((drugName, i) =>
+              <Tab>
+                  {drugName}
+              </Tab>
+            )}
+          </TabList>
+            {this.state.interactionArray.map((arr,i) =>
+              <TabPanel>
+                  {this.renderTabPanels(arr)}
+              </TabPanel>
+            )}
+         </Tabs>
+       )
+    }
 
   render() {
     return (
       <div className="box">
         <div className='panel'>
           <p className="panel-heading has-text-centered">
-             <h5 className="title is-5">Medication Interactions</h5>           
+             <h5 className="title is-5">Medication Interactions</h5>
           </p>
-        
+
         {this.renderMedsPanel()}
         </div>
       </div>
     )
   }
 }
+
+
+const medsTab = ({interactionList}) => {
+    return (
+        <div className="tabs is-medium">
+            <ul>
+                {interactionList.map((e, i) =>
+                    <li><a>{e.name}</a></li>
+                )}
+            </ul>
+        </div>
+    )
+}
+
+const MedsTable = ({interactionResults}) =>{
+    return (
+        <div className="media">
+                    <table className="table is-bordered is-striped is-narrow">
+                        <thead>
+                            <tr>
+                                <th>Medication</th>
+                                <th>Severity</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {interactionResults.map((e, i) =>
+                                <tr>
+                                <td>{e.name}</td>
+                                <td>{e.message}</td>
+                            </tr>
+                            )}
+                        </tbody>
+                    </table>
+                </div>
+    )
+}
+
+const MedicationBlock = ({MedicationList}) => {
+  return (
+    <TabList>
+      {MedicationList.map((e, i) =>
+        <Tab>
+          {e.name}
+        </Tab>
+      )}
+    </TabList>
+  )
+}
+
+const MedInteractPanels = ({MedicationList}) =>{
+  return(
+    <div>
+      {MedicationList.map((e,i)=>{
+        <TabPanel>
+          {i}
+        </TabPanel>
+      })}
+    </div>
+  )
+}
+
 
 export default MedsInteract;

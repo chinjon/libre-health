@@ -3,6 +3,9 @@ import Radium from 'radium';
 
 const style ={
   base: {
+    backgroundColor: '#232B2D',
+    color: "#fff",
+    padding: '3rem'
   }
 }
 
@@ -18,7 +21,7 @@ class DashboardNav extends Component {
 
   render() {
     return (
-      <aside className="menu" >
+      <aside className="menu">
         <p className="menu-label">
           <PatientCard handleLogout={this.handleLogout} />
         </p>
@@ -81,7 +84,7 @@ class PatientCard extends Component {
               <strong>John Smith</strong>
               <br />
               <p className="control">
-                <a className="button is-primary" onClick={this.props.handleLogout}>
+                <a className="button is-danger is-outlined" onClick={this.props.handleLogout}>
                   <span className="icon">
                     <i className="fa fa-sign-out"></i>
                   </span>
