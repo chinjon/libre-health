@@ -43,16 +43,18 @@ class MedsListBody extends Component {
 
     renderMedications(medications) {
         return(
-            <div>
+            <div className='panel'>
             {medications.map((med, i) =>
-                <span className='field'>
-                    <a key={i} className="panel-block">
-                        {med.name}&nbsp;
-                        
-                        <MedsListDeleteButton medication={med.rxcui} userId={this.props.userId} deleteMedication={this.props.deleteMedication}/>
-                        
-                    </a>
-                </span>                
+                <a key={i} className="panel-block">
+
+                    <p className = 'control'>
+                        <span className='is-pulled-left'>{med.name}</span>
+                   
+                        <p className='is-pulled-right'>
+                            <MedsListDeleteButton medication={med.rxcui} userId={this.props.userId} deleteMedication={this.props.deleteMedication}/>
+                        </p>
+                    </p>
+                </a>
             )}
             </div>
         )

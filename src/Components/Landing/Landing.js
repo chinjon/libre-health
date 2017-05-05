@@ -1,14 +1,17 @@
 import React, {Component} from 'react';
 import { browserHistory } from 'react-router';
+import { DefaultPlayer as Video } from 'react-html5video';
 
 import Navigation from './../Navigation';
 import Footer from './../Footer';
 
+import thisSrcWebm from './../../../public/assets/video/WEBM/Healthy-Life.webm'
+import thisSrcMp4 from './../../../public/assets/video/MP4/Healthy-Life.mp4'
+import thisSrcJpeg from './../../../public/assets/video/Snapshots/Healthy-Life.jpg'
+
 class Landing extends Component {
 
   componentWillReceiveProps(nextProps) {
-    debugger;
-    console.log(nextProps);
     //check for isAuth and call a redirect??? or do this further down the tree?
     if(nextProps.isAuth) {
 
@@ -23,29 +26,41 @@ class Landing extends Component {
   //     browserHistory.push('/Dashboard');
   //   }
   // }
- 
+
   render() {
     //Landing page receives props from app, which will be the user
     //and the form handling functions
-    // if(this.props.isAuth) {
-    //   return null;
-    // }
+
     return (
       <div>
         <Navigation newUser={this.props.newUser} login={this.props.login} isAuth={this.props.isAuth}/>
-        <section className="hero is-info is-large is-fullheight is-bold">
+        {/* <section className="hero is-info is-large is-fullheight is-bold">
           <div className="hero-body">
-            <div className="container">
-              <div className="columns">
+            <div className="container"> */}
+              <div className="homepage-hero-module">
+                <div className="video-container">
+                  <h1 className="title is-1 has-text-centered landing-text">
+                    Libre Health
+                  </h1>
+                  <div className="filter"></div>
+                  <Video autoPlay loop
+                    poster={thisSrcJpeg}
+                    className="fillWidth">
+                    <source src={thisSrcMp4} type="video/mp4"/>
+                    <source src={thisSrcWebm} type="video/webm"/>
+                  </Video>
+                </div>
+              </div>
+              {/* <div className="columns">
                 <div className="column is-half is-offset-one-quarter">
                   <h1 className="title is-1 has-text-centered">
                     Libre Health
                   </h1>
                 </div>
-              </div>
-            </div>
+              </div> */}
+            {/* </div>
           </div>
-        </section>
+        </section> */}
         <Footer/>
       </div>
     )
@@ -53,3 +68,14 @@ class Landing extends Component {
 }
 
 export default Landing;
+
+
+{/* <div class="homepage-hero-module">
+  <div class="video-container">
+    <div class="filter"></div>
+    <video autoplay loop class="fillWidth">
+      <source src="%PUBLIC_URL%/assets/video/MP4/Healthy-Life.mp4" type="video/mp4" />Your browser does not support the video tag. I suggest you upgrade your browser.
+      <source src="%PUBLIC_URL%/assets/video/WEBM/Healthy-Life.webm" type="video/webm" />Your browser does not support the video tag. I suggest you upgrade your browser.
+    </video>
+  </div>
+</div> */}
