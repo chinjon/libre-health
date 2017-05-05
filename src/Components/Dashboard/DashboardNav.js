@@ -1,21 +1,17 @@
 import React, {Component} from 'react';
 import Radium from 'radium';
 
-const style ={
-  base: {
-    backgroundColor: '#232B2D',
-    color: "#fff",
-    padding: '3rem'
-  }
+const style = {
+  base: {}
 }
 
 class DashboardNav extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.handleLogout = this.handleLogout.bind(this);
   }
 
-  handleLogout(e){
+  handleLogout(e) {
     this.props.logout();
   }
 
@@ -23,7 +19,7 @@ class DashboardNav extends Component {
     return (
       <aside className="menu">
         <p className="menu-label">
-          <PatientCard handleLogout={this.handleLogout} />
+          <PatientCard handleLogout={this.handleLogout}/>
         </p>
         <ul className="menu-list">
           <li>
@@ -70,31 +66,31 @@ class DashboardNav extends Component {
 }
 
 class PatientCard extends Component {
-  render(){
-    return(
+  render() {
+    return (
       <article className="media">
-  <figure className="media-left">
-    <p className="image is-64x64">
-      <img src="http://bulma.io/images/placeholders/128x128.png" />
-    </p>
-  </figure>
-  <div className="media-content">
-    <div className="content">
-      <p>
-        <strong>John Smith</strong>
-        <br />
-        <p className="control">
-                <a className="button is-danger is-outlined">
+        <figure className="media-left">
+          <p className="image is-64x64">
+            <img src="http://bulma.io/images/placeholders/128x128.png"/>
+          </p>
+        </figure>
+        <div className="media-content">
+          <div className="content">
+            <p>
+              <strong>John Smith</strong>
+              <br/>
+              <p className="control">
+                <a className="button is-primary">
                   <span className="icon">
                     <i className="fa fa-sign-out"></i>
                   </span>
                   <span>Logout</span>
                 </a>
               </p>
-      </p>
-    </div>
-  </div>
-</article>
+            </p>
+          </div>
+        </div>
+      </article>
     )
   }
 }
