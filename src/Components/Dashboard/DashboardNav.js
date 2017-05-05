@@ -71,16 +71,16 @@ class PatientCard extends Component {
       <article className="media">
         <figure className="media-left">
           <p className="image is-64x64">
-            <img src="http://bulma.io/images/placeholders/128x128.png"/>
+            <img src="http://bulma.io/images/placeholders/128x128.png" />
           </p>
         </figure>
         <div className="media-content">
           <div className="content">
             <p>
               <strong>John Smith</strong>
-              <br/>
+              <br />
               <p className="control">
-                <a className="button is-primary">
+                <a className="button is-danger is-outlined" onClick={this.props.handleLogout}>
                   <span className="icon">
                     <i className="fa fa-sign-out"></i>
                   </span>
