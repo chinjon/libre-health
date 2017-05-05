@@ -65,11 +65,10 @@ class App extends Component {
 
       //setstate
       this.setState({isAuth: true, user: user});
-    }).catch(err=>this.setState({
-      notification: {
-        title: 'Duplicate Username', 
-        message: 'Please choose another username. Try using your email address.', 
-        level: 'warning'}}));
+    }).catch(err=>{
+      console.error(err);
+      this.setState({notification: {title: 'Duplicate Username', message: 'Please choose another username. Try using your email address.', level: 'warning'}})
+    });
   }
 
 	login(username, password) {
@@ -103,7 +102,7 @@ class App extends Component {
 
       //setstate
       this.setState({isAuth: false, user: {}});
-    }).catch(err=>{if(err)console.log(err)});
+    }).catch(err=>{if(err)console.error(err)});
   }
 
   addMedication(medication, id) {
