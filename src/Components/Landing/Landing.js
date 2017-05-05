@@ -32,17 +32,17 @@ class Landing extends Component {
     //and the form handling functions
 
     return (
-      <div>
+      <div className="overColor">
         <Navigation newUser={this.props.newUser} login={this.props.login} isAuth={this.props.isAuth}/>
         {/* <section className="hero is-info is-large is-fullheight is-bold">
           <div className="hero-body">
             <div className="container"> */}
-              <div className="homepage-hero-module">
-                <div className="video-container">
-                  <h1 className="title is-1 has-text-centered landing-text">
+              <div className="homepage-hero-module overColor">
+                <div className="overColor video-container">
+                  <h1 className="overColor title is-1 has-text-centered landing-text">
                     Libre Health
                   </h1>
-                  <div className="filter"></div>
+                  <div className="filter overColor"></div>
                   <Video autoPlay loop
                     poster={thisSrcJpeg}
                     className="fillWidth">
