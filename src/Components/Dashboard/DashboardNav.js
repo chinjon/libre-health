@@ -7,11 +7,20 @@ const style ={
 }
 
 class DashboardNav extends Component {
+  constructor(props){
+    super(props);
+    this.handleLogout = this.handleLogout.bind(this);
+  }
+
+  handleLogout(e){
+    this.props.logout();
+  }
+
   render() {
     return (
       <aside className="menu" >
         <p className="menu-label">
-          <PatientCard />
+          <PatientCard handleLogout={this.handleLogout} />
         </p>
         <ul className="menu-list">
           <li>
@@ -61,24 +70,30 @@ class PatientCard extends Component {
   render(){
     return(
       <article className="media">
-  <figure className="media-left">
-    <p className="image is-64x64">
-      <img src="http://bulma.io/images/placeholders/128x128.png" />
-    </p>
-  </figure>
-  <div className="media-content">
-    <div className="content">
-      <p>
-        <strong>John Smith</strong>
-        <br />
-      </p>
-    </div>
-  </div>
-</article>
+        <figure className="media-left">
+          <p className="image is-64x64">
+            <img src="http://bulma.io/images/placeholders/128x128.png" />
+          </p>
+        </figure>
+        <div className="media-content">
+          <div className="content">
+            <p>
+              <strong>John Smith</strong>
+              <br />
+              <p className="control">
+                <a className="button is-primary" onClick={this.props.handleLogout}>
+                  <span className="icon">
+                    <i className="fa fa-sign-out"></i>
+                  </span>
+                  <span>Logout</span>
+                </a>
+              </p>
+            </p>
+          </div>
+        </div>
+      </article>
     )
   }
 }
-
-
 
 export default DashboardNav;

@@ -1,15 +1,5 @@
 import React, {Component} from 'react';
-import Radium from 'radium';
 
-const styles = {
-  base: {
-    width: '100%',
-  },
-  button: {
-  	width: '40px',
-  	textAlign: 'center'
-  }
-}
 
 class MedsListDropDown extends Component {
 
@@ -45,7 +35,7 @@ class MedsListDropDown extends Component {
 
     renderMedsList(){
     	return (
-    		<select value={this.state.value} onChange={this.handleChange}>
+    		<select name='medication' value={this.state.value} onChange={this.handleChange}>
     			<option value='select' className='is-unselectable'>Select From DropDown</option>
     			<option value='back'>Go Back To Search<br/></option>
     			{this.props.medsList.map((med, i)=><option key={i} value={i}>{med.name}</option>)}
@@ -58,23 +48,23 @@ class MedsListDropDown extends Component {
 
     	return (
     		<div className="panel-block">
-	    		<p className='control'>
-	        	<form onSubmit={this.handleSubmit} className="field has-addons has-addons-centered is-fullwidth" >
-				    <p className="control">
-					    <span className="select">
-		      				
-					        {this.renderMedsList()}
-					   
-				        </span>
-				    </p>
-				    <p className="control">
-				        <button type='submit' className="button" style={styles.button}>{this.state.button}</button>
-				    </p>
-						</form>
-					</p>
-				</div>
-			)
+    	      <form className='control' onSubmit={this.handleSubmit}>
+			    <div className="field is-grouped">
+                  <p className='control is-expanded'>
+    			    <span className="select is-fullwidth">
+          				
+    			        {this.renderMedsList()}
+    			   
+    		        </span>
+                  </p>
+    			   <p className="control">
+    			      <button type='submit' className="button">{this.state.button}</button>
+    			   </p>
+                </div>
+			   </form>
+			</div>
+		)
     }
 }
 
-export default Radium(MedsListDropDown);
+export default MedsListDropDown;

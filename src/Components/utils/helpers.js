@@ -46,6 +46,21 @@ const helpers = {
     });
   },
 
+  logoutUser: ()=>{
+    console.log('user logout helper running');
+    return new Promise((resolve, reject)=>{
+      axios.get(`${API_URL}/logout`).then(response=>{
+        console.log('.then on logout fired');
+        resolve('Logged Out');
+      }).catch(err => {
+        if (err) {
+          console.log('.catch on login fired');
+          reject(err);
+        }
+      });
+    })
+  },
+
   getMedsList: drugName => {
     console.log("getMedsList helper Called");
     return new Promise((resolve, reject) => {

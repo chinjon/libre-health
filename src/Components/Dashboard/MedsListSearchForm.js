@@ -36,18 +36,18 @@ class MedsListSearchForm extends Component {
 
     	return (
     		<div className="panel-block">
-	    		<p className='control'>
-						<form onSubmit={this.handleSubmit} className="field has-addons has-addons-centered" style={styles.base}>
-						    <p className="control">
-						        <input className="input is-fullwidth" value={this.state.medication} onChange={this.onInputChange} type="text" name='medication' placeholder="Search Medications..."/>
-						    </p>
-						    <p className="control">
-						        <button type='submit' className="button"><i className="fa fa-search" aria-hidden="true"></i></button>
-						    </p>
-						</form>
-					</p>
-				</div>
-			)
+				<form onSubmit={this.handleSubmit} style={styles.base}>
+                    <div className="field is-grouped">
+    				    <p className="control is-expanded">
+    				        <input className="input" value={this.state.medication} onChange={this.onInputChange} type="text" name='medication' placeholder="Search Medications..."/>
+    				    </p>
+    				    <p className="control">
+    				        <button type='submit' className="button"><i className="fa fa-search" aria-hidden="true"></i></button>
+    				    </p>
+                    </div>
+				</form>
+			</div>
+		)
     }
 }
 

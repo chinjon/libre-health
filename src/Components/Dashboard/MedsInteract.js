@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Tab, Tabs, TabList, TabPanel} from 'react-tabs'
 import helpers from './../utils/helpers';
 
 class MedsInteract extends Component {
@@ -6,191 +7,88 @@ class MedsInteract extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      interactions: {},
-      isLoading: true
+      interactionArray: [],
+      drugNames: [],
     }
-
   }
 
   componentWillMount() {
+    //verify there are more than one medication before checking interactions
     if (this.props.medications.length > 1) {
+      //map medications to an array of rxcuis to call helper
       let medList = this.props.medications.map(e => e.rxcui);
+      //call helper
       helpers.checkInteractions(medList).then(data => {
-        console.log(data)
-        this.setState({interactions: data, isLoading: false});
+        //data is an array of objects, split into to arrays for setting state to better render table
+        let drugNames = data.map(e=>e.drugName);
+        let interactions = data.map(e=>e.interactions);
+        this.setState({drugNames: drugNames, interactionArray:interactions});
       })
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.medications.length > 1) {
+    //check that there is a new medication or one was removed and that there is more than one medication
+    if (nextProps.medications.length != this.props.medications.length && nextProps.medications.length > 1) {
+      //map medications to an array of rxcuis to call helper
       let medList = nextProps.medications.map(e => e.rxcui);
+      //call helper function
       helpers.checkInteractions(medList).then(data => {
-        console.log(data)
-        this.setState({interactions: data});
+        // data is an array of objects, split into two arrays for setting state to better render table
+        let drugNames = data.map(e=>e.drugName);
+        let interactions = data.map(e=>e.interactions);
+        this.setState({drugNames: drugNames, interactionArray: interactions});
       })
+    } else if (nextProps.medications.length <= 1) {
+      this.setState({drugNames: [], interactionArray: []});
     }
+
+  }
+
+  renderTabList(arr) {
+    if(this.state.drugNames.length) 
+      return this.state.drugNames.map((drugName, i) => <Tab key={i}>{drugName}</Tab>)
+    else return <div className='panel-block has-text-centered'><p>Not enough data to compute interactions. Please enter more medications.</p></div>
+  }
+
+  //function to render interactions into table
+  renderTabPanels(arr){
+    if(arr.length)
+      return arr.map(interaction=><p className='panel-block'>{interaction.description}</p>)
+    else return <p className='panel-block'>No known interactions</p>
+  }
+
+  //function to render the table overall
+  renderMedsPanel() {
+    return (
+      <Tabs>
+        <TabList>
+          {this.renderTabList()}
+        </TabList>
+          {this.state.interactionArray.map((arr, i) =>
+            <TabPanel key={i}>
+              <div className='panel'>
+                {this.renderTabPanels(arr)}
+              </div>
+            </TabPanel>
+          )}
+       </Tabs>
+     )
   }
 
   render() {
-    // this.props.medications will be used to call the interactions api
     return (
-      <div className="box has-text-centered">
-        <h5 className="title is-5">Medication Interactions</h5>
-        <div className="tabs is-medium">
-          <ul>
-            <li class="is-active">
-              <a>Tylenol</a>
-            </li>
-            <li>
-              <a>Xanax</a>
-            </li>
-            <li>
-              <a>Cocaine</a>
-            </li>
-            <li>
-              <a>Allergy Med</a>
-            </li>
-          </ul>
-        </div>
-        <div className="media">
-          <table className="table is-bordered is-striped is-narrow">
-            <thead>
-              <tr>
-                <th>Medication</th>
-                <th>Severity</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className="is-selected">
-                <td>Tylenol</td>
-                <td>
-                  <span class="tag is-medium is-warning">Warning</span>
-                </td>
-              </tr>
-              <tr>
-                <td>Tylenol</td>
-                <td>Crazy Bad</td>
-              </tr>
-              <tr>
-                <td>Tylenol</td>
-                <td>Crazy Bad</td>
-              </tr>
-              <tr>
-                <td>Tylenol</td>
-                <td>Crazy Bad</td>
-              </tr>
-            </tbody>
-          </table>
+      <div className="box">
+        <div className='panel'>
+          <p className="panel-heading has-text-centered">
+             <h5 className="title is-5">Medication Interactions</h5>           
+          </p>
+        
+        {this.renderMedsPanel()}
         </div>
       </div>
     )
   }
 }
 
-// render() {
-// // this.props.medications will be used to call the interactions api
-// return (
-//   <div className="box has-text-centered">
-//     <h5 className="title is-5">Medication Interactions</h5>
-//     <div className="tabs is-medium">
-//       <ul>
-//         <li class="is-active">
-//           <a>Tylenol</a>
-//         </li>
-//         <li>
-//           <a>Xanax</a>
-//         </li>
-//         <li>
-//           <a>Cocaine</a>
-//         </li>
-//         <li>
-//           <a>Allergy Med</a>
-//         </li>
-//       </ul>
-//     </div>
-//     <div className="media">
-//       <table className="table is-bordered is-striped is-narrow">
-//         <thead>
-//           <tr>
-//             <th>Medication</th>
-//             <th>Severity</th>
-//           </tr>
-//         </thead>
-//         <tbody>
-//           <tr className="is-selected">
-//             <td>Tylenol</td>
-//             <td>
-//               <span class="tag is-medium is-warning">Warning</span>
-//             </td>
-//           </tr>
-//           <tr>
-//             <td>Tylenol</td>
-//             <td>Crazy Bad</td>
-//           </tr>
-//           <tr>
-//             <td>Tylenol</td>
-//             <td>Crazy Bad</td>
-//           </tr>
-//           <tr>
-//             <td>Tylenol</td>
-//             <td>Crazy Bad</td>
-//           </tr>
-//         </tbody>
-//       </table>
-//     </div>
-//   </div>
-// )
-// }
-// }
-
-const medsTab = ({interactionList}) => {
-    return (
-        <div className="tabs is-medium">
-            <ul>
-                {interactionList.map((e, i) =>
-                    <li><a>{e.name}</a></li>
-                )}
-            </ul>
-        </div>
-    )
-}
-
-const MedsTable = ({interactionResults}) =>{
-    return (
-        <div className="media">
-                    <table className="table is-bordered is-striped is-narrow">
-                        <thead>
-                            <tr>
-                                <th>Medication</th>
-                                <th>Severity</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {interactionResults.map((e, i) =>
-                                <tr>
-                                <td>{e.name}</td>
-                                <td>{e.message}</td>
-                            </tr>
-                            )}
-                        </tbody>
-                    </table>
-                </div>
-    )
-}
-
-const MedicationBlock = ({MedicationList}) => {
-    return (
-        <div>
-            {MedicationList.map((e, i) => <a key={i} className="panel-block">
-                <span className="panel-icon">
-                    <i className="fa fa-plus-square"></i>
-                </span>
-                {e.name}
-            </a>)}
-        </div>
-    )
-}
-
 export default MedsInteract;
-

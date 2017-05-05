@@ -40,8 +40,9 @@ module.exports = function(app) {
 
   });
 
-  router.get('/loginerror', function(req, res) {
-    res.status(500).send('Login Error, please contact network administrator.');
+  router.get('/api/logout', function(req, res) {
+    req.logout();
+    res.send('logged out');
   });
 
   app.use('/', router);

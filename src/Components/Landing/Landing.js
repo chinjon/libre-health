@@ -7,8 +7,6 @@ import Footer from './../Footer';
 class Landing extends Component {
 
   componentWillReceiveProps(nextProps) {
-    debugger;
-    console.log(nextProps);
     //check for isAuth and call a redirect??? or do this further down the tree?
     if(nextProps.isAuth) {
 
@@ -16,20 +14,10 @@ class Landing extends Component {
     }
   }
 
-  // componentDidUpdate(){
-  //   debugger;
-  //   console.log('landing',this.props)
-  //   if(this.props.isAuth){
-  //     browserHistory.push('/Dashboard');
-  //   }
-  // }
- 
   render() {
     //Landing page receives props from app, which will be the user
     //and the form handling functions
-    // if(this.props.isAuth) {
-    //   return null;
-    // }
+
     return (
       <div>
         <Navigation newUser={this.props.newUser} login={this.props.login} isAuth={this.props.isAuth}/>
