@@ -22,6 +22,18 @@ class App extends Component {
       }
 		}
 	}
+
+  componentWillMount() {
+    //check if user and auth stored in session storage
+    const isAuth = JSON.parse(sessionStorage.getItem('isAuth'));
+    const user = JSON.parse(sessionStorage.getItem('user'));
+
+    //only set state if we have both values in sessionstorate
+    if(isAuth && user) {
+      this.setState({isAuth: isAuth, user: user});
+    }
+
+  }
   //the following functions are promise based, the logs are set for future development in handling errors
   newUser(username, password) {
     console.log('Signup Form Submission');
@@ -34,6 +46,11 @@ class App extends Component {
         username: res.data.username,
         medications: res.data.medications
       }
+      //store user in session storage
+      sessionStorage.setItem('isAuth', 'true');
+      sessionStorage.setItem('user', JSON.stringify(user));
+
+      //setstate
       this.setState({isAuth: true, user: user});
     }).catch(err=>{if(err)console.log(err)});
 
@@ -49,6 +66,11 @@ class App extends Component {
         username: res.data.username,
         medications: res.data.medications
       }
+      //store user in session storage
+      sessionStorage.setItem('isAuth', 'true');
+      sessionStorage.setItem('user', JSON.stringify(user));
+
+      //setstate
       this.setState({isAuth: true, user: user});
   	}).catch(err=>{if(err)console.log(err)});
   }
@@ -56,6 +78,11 @@ class App extends Component {
   logout() {
     console.log('Logout User Clicked');
     helpers.logoutUser().then(()=>{
+      //take user out of session storage
+      sessionStorage.setItem('isAuth', 'false');
+      sessionStorage.setItem('user', 'null');
+
+      //setstate
       this.setState({isAuth: false, user: {}});
     }).catch(err=>{if(err)console.log(err)});
   }
