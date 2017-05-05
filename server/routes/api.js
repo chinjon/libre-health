@@ -32,6 +32,10 @@ function getMedsList(drug) {
         return a.name - b.name;
       });
 
+      if(!medsArray.length) {
+        reject("Invalid Search Term");
+      }
+
       resolve(medsArray);
 
     }).catch(function(err) {

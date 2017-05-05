@@ -67,7 +67,7 @@ class App extends Component {
       this.setState({isAuth: true, user: user});
     }).catch(err=>{
       console.error(err);
-      this.setState({notification: {title: 'Duplicate Username', message: 'Please choose another username. Try using your email address.', level: 'warning'}})
+      this.setState({notification: {title: err.title, message: err.message, level: 'warning'}})
     });
   }
 
@@ -95,13 +95,12 @@ class App extends Component {
 
   logout() {
     console.log('Logout User Clicked');
-    helpers.logoutUser().then(()=>{
+    helpers.logoutUser().then(res=>{
       //take user out of session storage
       sessionStorage.setItem('isAuth', 'false');
       sessionStorage.setItem('user', 'null');
-
       //setstate
-      this.setState({isAuth: false, user: {}});
+      this.setState({isAuth: false, user: {}, notification: {title: res.title, message: res.message, level: 'success'}});
     }).catch(err=>{if(err)console.error(err)});
   }
 

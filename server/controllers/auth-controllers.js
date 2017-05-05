@@ -15,13 +15,15 @@ module.exports = function(app) {
     // console.log(req.body);
 
     let newUser = new User(userData);
-    console.log(typeof newUser);
+
     newUser.save(function(err, data) {
-      if (err) {
-        console.log(err);
-        res.status(500).send('User could not be saved');
+      if (err.message.includes('duplicate')) {
+        res.status(500).send({title: 'Duplicate Username', message: 'Please choose another username. Try using your email address.'});
+      } else if (err.errors.password) {
+        res.status(500).send({title: 'Insecure Password', message: err.errors.password.message});
+      } else if (err.errors.username) {
+        res.status(500).send({title: 'Invalid Username', message: err.errors.username.message});
       } else {
-        console.log('success')
         res.json(data);
       }
     });
@@ -30,19 +32,16 @@ module.exports = function(app) {
 
   //
   router.post('/api/login', passport.authenticate('local'), function(req, res) {
-    console.log(req);
     if (req.user) {
       res.json(req.user)
-
     } else {
-      res.status(req.statusCode).send(req.statusMessage);
+      res.status(req.statusCode).send({message:req.statusMessage});
     }
 
   });
 
   router.get('/api/logout', function(req, res) {
     req.logout();
-    res.send('logged out');
   });
 
   app.use('/', router);
