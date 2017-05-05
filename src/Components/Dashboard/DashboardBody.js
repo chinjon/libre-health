@@ -9,8 +9,8 @@ import Radium from 'radium';
 
 let styles = {
   base: {
-    padding: '1rem',
     margin: '1rem',
+    padding: 0,
     border: 'black solid 1px',
     width: '100%'
   },
