@@ -4,7 +4,7 @@ import Radium from 'radium';
 
 let styles = {
   base: {
-    height: '30px'
+    height: '10px'
   }
 }
 
@@ -15,7 +15,7 @@ class Footer extends Component {
         <div className="container">
           <div className="content has-text-centered">
             <p>
-              <a href="#">Libre Health</a>
+              <a href="#">Copyright 2017 Libre Health</a>
             </p>
           </div>
         </div>
