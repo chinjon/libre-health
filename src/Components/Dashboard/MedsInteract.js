@@ -39,15 +39,23 @@ class MedsInteract extends Component {
         let interactions = data.map(e=>e.interactions);
         this.setState({drugNames: drugNames, interactionArray: interactions});
       })
+    } else if (nextProps.medications.length <= 1) {
+      this.setState({drugNames: [], interactionArray: []});
     }
 
+  }
+
+  renderTabList(arr) {
+    if(this.state.drugNames.length) 
+      return this.state.drugNames.map((drugName, i) => <Tab key={i}>{drugName}</Tab>)
+    else return <div className='panel-block has-text-centered'><p>Not enough data to compute interactions. Please enter more medications.</p></div>
   }
 
   //function to render interactions into table
   renderTabPanels(arr){
     if(arr.length)
-      return arr.map(interaction=><p>{interaction.description}</p>)
-    else return <p>No known interactions</p>
+      return arr.map(interaction=><p className='panel-block'>{interaction.description}</p>)
+    else return <p className='panel-block'>No known interactions</p>
   }
 
   //function to render the table overall
@@ -55,15 +63,13 @@ class MedsInteract extends Component {
     return (
       <Tabs>
         <TabList>
-          {this.state.drugNames.map((drugName, i) => 
-            <Tab>
-                {drugName}
-            </Tab>
-          )}
+          {this.renderTabList()}
         </TabList>
-          {this.state.interactionArray.map((arr,i) =>
-            <TabPanel>
+          {this.state.interactionArray.map((arr, i) =>
+            <TabPanel key={i}>
+              <div className='panel'>
                 {this.renderTabPanels(arr)}
+              </div>
             </TabPanel>
           )}
        </Tabs>
@@ -73,8 +79,13 @@ class MedsInteract extends Component {
   render() {
     return (
       <div className="box">
-        <h5 className="title is-5">Medication Interactions</h5>
+        <div className='panel'>
+          <p className="panel-heading has-text-centered">
+             <h5 className="title is-5">Medication Interactions</h5>           
+          </p>
+        
         {this.renderMedsPanel()}
+        </div>
       </div>
     )
   }

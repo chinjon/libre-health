@@ -15,14 +15,14 @@ class MedsListDeleteButton extends Component {
 
 	render() {
 		return (
-			<form className='is-pulled-right' onSubmit={this.handleSubmit}>
-			  <input type='hidden' name='medication' value={this.props.medication}/>
-			  <button type='submit' className="button is-danger is-outlined">
-			      <span className="icon is-small">
-			          <i className="fa fa-times"></i>
-			      </span>
-			  </button>
-			</form>
+				<form onSubmit={this.handleSubmit}>
+				  <input type='hidden' name='medication' value={this.props.medication}/>
+				  <button type='submit' className="button is-danger is-outlined">
+				      <span className="icon is-small">
+				          <i className="fa fa-times"></i>
+				      </span>
+				  </button>
+				</form>
 		)
 	}
 }

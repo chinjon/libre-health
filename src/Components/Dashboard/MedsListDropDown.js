@@ -1,15 +1,5 @@
 import React, {Component} from 'react';
-import Radium from 'radium';
 
-const styles = {
-  base: {
-    width: '100%',
-  },
-  button: {
-  	width: '40px',
-  	textAlign: 'center'
-  }
-}
 
 class MedsListDropDown extends Component {
 
@@ -58,8 +48,8 @@ class MedsListDropDown extends Component {
 
     	return (
     		<div className="panel-block">
-    	      <form onSubmit={this.handleSubmit}>
-			    <div className="field has-addons has-text-centered">
+    	      <form className='control' onSubmit={this.handleSubmit}>
+			    <div className="field is-grouped">
                   <p className='control is-expanded'>
     			    <span className="select is-fullwidth">
           				
@@ -68,7 +58,7 @@ class MedsListDropDown extends Component {
     		        </span>
                   </p>
     			   <p className="control">
-    			      <button type='submit' className="button" style={styles.button}>{this.state.button}</button>
+    			      <button type='submit' className="button">{this.state.button}</button>
     			   </p>
                 </div>
 			   </form>
@@ -77,4 +67,4 @@ class MedsListDropDown extends Component {
     }
 }
 
-export default Radium(MedsListDropDown);
+export default MedsListDropDown;

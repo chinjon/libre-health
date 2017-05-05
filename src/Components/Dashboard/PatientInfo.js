@@ -17,10 +17,13 @@ class PatientInfo extends Component {
             <div className="box" style={styles.base}>
                 <div className="columns">
                     
-                    <div className="column">
+                    <div className="column is-fullwidth">
                         <MedsListBody userId={this.props.user._id} medications={this.props.user.medications} addMedication={this.props.addMedication} deleteMedication={this.props.deleteMedication}/>
                     </div>
-                    <div className="column">
+
+                </div>
+                <div className='columns'>
+                    <div className="column is-fullwidth">
                         <MedsInteract medications={this.props.user.medications}/>
                     </div>
 
