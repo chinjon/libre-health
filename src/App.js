@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import NotificationSystem from 'react-notification-system';
 
 import helpers from './Components/utils/helpers';
 
