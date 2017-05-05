@@ -17,7 +17,7 @@ function getMedsList(drug) {
 
         if (medsList) {
           medsList.forEach(function(e) {
-            var length = 60; //we should consider increasing this and making the search form larger
+            var length = 100; //we should consider increasing this and making the search form larger
             var name = e.name.substring(0, length);
             medsArray.push({rxcui: e.rxcui, name: name})
           });
