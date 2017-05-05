@@ -70,28 +70,28 @@ class PatientCard extends Component {
   render(){
     return(
       <article className="media">
-        <figure className="media-left">
-          <p className="image is-64x64">
-            <img src="http://bulma.io/images/placeholders/128x128.png" />
-          </p>
-        </figure>
-        <div className="media-content">
-          <div className="content">
-            <p>
-              <strong>John Smith</strong>
-              <br />
-              <p className="control">
-                <a className="button is-primary" onClick={this.props.handleLogout}>
+  <figure className="media-left">
+    <p className="image is-64x64">
+      <img src="http://bulma.io/images/placeholders/128x128.png" />
+    </p>
+  </figure>
+  <div className="media-content">
+    <div className="content">
+      <p>
+        <strong>John Smith</strong>
+        <br />
+        <p className="control">
+                <a className="button is-primary">
                   <span className="icon">
                     <i className="fa fa-sign-out"></i>
                   </span>
                   <span>Logout</span>
                 </a>
               </p>
-            </p>
-          </div>
-        </div>
-      </article>
+      </p>
+    </div>
+  </div>
+</article>
     )
   }
 }
