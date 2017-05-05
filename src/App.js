@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Notifications from './Components/NotificationSystem';
 
 import helpers from './Components/utils/helpers';
 
@@ -19,6 +20,11 @@ class App extends Component {
         _id: '',
         username: '',
         medications: []
+      },
+      notification: {
+        title: null,
+        message: null,
+        level: null
       }
 		}
 	}
@@ -32,15 +38,22 @@ class App extends Component {
     if(isAuth && user) {
       this.setState({isAuth: isAuth, user: user});
     }
-
   }
+
+  componentDidUpdate(prevProps, prevState) {
+    //keep notifications from refiring on every update to state
+    if(prevState.notification.title) {
+      this.setState({notification: {title: null, message: null, level: null}});
+    }
+  }
+
   //the following functions are promise based, the logs are set for future development in handling errors
   newUser(username, password) {
     console.log('Signup Form Submission');
 
     helpers.newUser(username, password).then((res) => {
       console.log('back from signup helper');
-      
+
       const user = {
         _id: res.data._id,
         username: res.data.username,
@@ -52,14 +65,16 @@ class App extends Component {
 
       //setstate
       this.setState({isAuth: true, user: user});
-    }).catch(err=>{if(err)console.log(err)});
-
+    }).catch(err=>{
+      console.error(err);
+      this.setState({notification: {title: 'Duplicate Username', message: 'Please choose another username. Try using your email address.', level: 'warning'}})
+    });
   }
 
 	login(username, password) {
 		console.log('Login Form Submission');
-    	
-  	helpers.loginUser(username, password).then((res) => {
+
+  	helpers.loginUser(username, password).then(res=> {
   		console.log('back from login helper');
       const user = {
         _id: res.data._id,
@@ -72,7 +87,10 @@ class App extends Component {
 
       //setstate
       this.setState({isAuth: true, user: user});
-  	}).catch(err=>{if(err)console.log(err)});
+  	}).catch(err => {
+      console.error(err);
+      this.setState({notification: {title: 'Invalid Username/Password', message: 'No username with this password was found. Please try again.', level: 'error'}})
+    });
   }
 
   logout() {
@@ -84,36 +102,46 @@ class App extends Component {
 
       //setstate
       this.setState({isAuth: false, user: {}});
-    }).catch(err=>{if(err)console.log(err)});
+    }).catch(err=>{if(err)console.error(err)});
   }
 
   addMedication(medication, id) {
     console.log('Add Medication Form Submission');
     helpers.addMeds(medication, id)
     .then(({data:{user}})=> this.setState({user}))
-    .catch(err=>{if(err)console.log(err)});
+    .catch(err=>{
+      console.error(err);
+      this.setState({notification: {title: 'Invalid Search Term', message: 'Please Check the Spelling of Your Search Term and Try Again', level: 'warning'}})
+    });
   }
 
   deleteMedication(medication, id) {
     console.log('Delete Medication Called');
     helpers.deleteMeds(medication, id)
     .then(({data:{user}})=> this.setState({user}))
-    .catch(err=>{if(err)console.log(err)});
+    .catch(err=> this.setState({
+      notification: {
+        title: 'Could Not Delete',
+        message: 'Something Went Wrong, Please Check Your Internet Connection and Try Again',
+        level: 'error'}}));
   }
 
   render() {
     //clone element allows us to send props down one level to the children that will be rendered later
     let parentProps = {
       isAuth: this.state.isAuth,
-      newUser: this.newUser, 
+      newUser: this.newUser,
       login: this.login,
       logout: this.logout,
       addMedication: this.addMedication,
-      deleteMedication: this.deleteMedication, 
+      deleteMedication: this.deleteMedication,
       user: this.state.user
     }
    	return (
-   		<div>{React.cloneElement(this.props.children, parentProps)}</div>
+   		<div>
+        <Notifications notification={this.state.notification}/>
+        {React.cloneElement(this.props.children, parentProps)}
+      </div>
    	);
   }
 }

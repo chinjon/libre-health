@@ -5,6 +5,7 @@ import helpers from './../utils/helpers';
 import MedsListSearchForm from './MedsListSearchForm';
 import MedsListDropDown from './MedsListDropDown';
 import MedsListDeleteButton from './MedsListDeleteButton';
+import Notifications from './../NotificationSystem';
 
 class MedsListBody extends Component {
 
@@ -15,7 +16,12 @@ class MedsListBody extends Component {
         this.state = {
             medsList: [],
             listReceived: false,
-            medications: []
+            medications: [],
+            notification: {
+                title: null,
+                message: null,
+                level: null
+            }
         }
     }
 
@@ -27,14 +33,22 @@ class MedsListBody extends Component {
         if(nextProps.medications.length != this.props.medications.length) {
             this.setState({medsList: [], listReceived: false, medications: nextProps.medications});
         }
-        
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        //keep notifications from refiring on every update to state
+        if(prevState.notification.title) {
+          this.setState({notification: {title: null, message: null, level: null}});
+        }
     }
 
     getMedsList(med){
         helpers.getMedsList(med)
         .then(medsList=> this.setState({medsList: medsList, listReceived: true}))
-        .catch(err=>{if(err){console.log(err)}});
-        //we need to think through error handling
+        .catch(err=>{
+          console.error(err);
+          this.setState({notification: {title: 'Invalid Search Term', message: 'Please Check the Spelling of Your Search Term and Try Again', level: 'warning'}})
+        });
     }
 
     userReturn() {
@@ -68,6 +82,7 @@ class MedsListBody extends Component {
 
         return (
                 <nav className="panel">
+                    <Notifications notification={this.state.notification}/>
                     <p className="panel-heading has-text-centered">
                         Medications
                     </p>
