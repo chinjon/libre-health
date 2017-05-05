@@ -19,7 +19,7 @@ const helpers = {
       }).catch(err => {
         if (err) {
           console.log('.catch on signup fired.');
-          reject(err);
+          reject(err.response.data);
         }
       });
     });
@@ -48,10 +48,11 @@ const helpers = {
 
   logoutUser: ()=>{
     console.log('user logout helper running');
+    
     return new Promise((resolve, reject)=>{
-      axios.get(`${API_URL}/logout`).then(response=>{
+      axios.get(`${API_URL}/logout`).then(res=>{
         console.log('.then on logout fired');
-        resolve('Logged Out');
+        resolve({title: 'Success!', message: 'You have been logged out of the dashboard. See you on your next visit!'});
       }).catch(err => {
         if (err) {
           console.log('.catch on login fired');
@@ -107,7 +108,6 @@ const helpers = {
       axios.put(`${API_URL}/delete/meds/${id}`, {medication: medication}).then(response => {
         console.log('.then on delete deletemeds fired');
         if (response) {
-          console.log(response);
           resolve(response)
         }
       }).catch(err => {
