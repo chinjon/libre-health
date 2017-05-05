@@ -32,13 +32,20 @@ class DashboardBody extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps){
+   //check for isAuth and call a redirect??? or do this further down the tree?
+    if(!nextProps.isAuth) {
+      browserHistory.push('/');
+    }
+  }
+
   render() {
     return (
       <div>
         <div className="container">
           <div className="columns" style={styles.base}>
             <div className="column is-2">
-              <DashboardNav user={this.props.user}/>
+              <DashboardNav user={this.props.user} logout={this.props.logout}/>
             </div>
             <div className="column is-10">
               <div className="columns is-multiline">
