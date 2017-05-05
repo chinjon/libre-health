@@ -47,7 +47,7 @@ class MedsListBody extends Component {
             {medications.map((med, i) =>
                 <span className='field'>
                     <a key={i} className="panel-block">
-                        {med.name}&nbsp;
+                        <p>{med.name}</p>
                         
                         <MedsListDeleteButton medication={med.rxcui} userId={this.props.userId} deleteMedication={this.props.deleteMedication}/>
                         
