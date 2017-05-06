@@ -33,5 +33,5 @@ module.exports = function(app) {
 		.then(user=>res.json({user})).catch(err=>res.json(err));
 	});
 
-	app.use('/', router);
+	app.use('/%PUBLIC_URL%', router);
 }

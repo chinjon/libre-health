@@ -44,6 +44,6 @@ router.get('/api/logout', function(req, res) {
   req.logout();
 });
 
-app.use('/', router);
+app.use('/%PUBLIC_URL%', router);
 
 }
