@@ -17,18 +17,20 @@ module.exports = function(app) {
     let newUser = new User(userData);
 
     newUser.save(function(err, data) {
-      if (err.message.includes('duplicate')) {
-        res.status(500).send({title: 'Duplicate Username', message: 'Please choose another username. Try using your email address.'});
-      } else if (err.errors.password) {
-        res.status(500).send({title: 'Insecure Password', message: err.errors.password.message});
-      } else if (err.errors.username) {
-        res.status(500).send({title: 'Invalid Username', message: err.errors.username.message});
+      console.log(err);
+      if (err) {
+        if (err.message.includes('duplicate')) {
+          res.status(500).send({title: 'Duplicate Username', message: 'Please choose another username. Try using your email address.'});
+        } else if (err.errors.password) {
+          res.status(500).send({title: 'Insecure Password', message: err.errors.password.message});
+        } else if (err.errors.username) {
+          res.status(500).send({title: 'Invalid Username', message: err.errors.username.message});
+        }
       } else {
         res.json(data);
       }
     });
   });
-
 
   //
   router.post('/login', passport.authenticate('local'), function(req, res) {

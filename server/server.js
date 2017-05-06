@@ -32,7 +32,6 @@ var DBUri = process.env.DATABASEURL || "mongodb://localhost/libre-health-db";
 
 mongoose.connect(DBUri).then(() => console.log('connected to DB!')).catch((err) => console.log(err));
 
-
 // Configure passport-local to use User model for authentication
 // const User = require('./models/User');
 const passportConfig = require('./config/passport');
@@ -52,8 +51,8 @@ require("./controllers/med-controllers.js")(app);
 
 // Always return the main index.html, so react-router render the route in the client
 app.get('*', function (req, res) {
-   res.sendFile(path.join(__dirname, '..', 'build', 'index.html'));
- });
+  res.sendFile(path.join(__dirname, '..', 'build', 'index.html'));
+});
 
 app.listen(PORT, () => {
   console.log(`App is running on port ${PORT}`)

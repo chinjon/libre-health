@@ -34,7 +34,6 @@ class SignUpForm extends Component {
   submitForm(event) {
     event.preventDefault();
     this.props.newUser(this.state.username, this.state.password);
-
   }
 
 
@@ -52,9 +51,9 @@ class SignUpForm extends Component {
             <div className="field">
               <label className="label">Name</label>
               <p className="control">
-                <input 
-                  className="input" 
-                  type="text" 
+                <input
+                  className="input"
+                  type="text"
                   placeholder="Text input"
                   name="username"
                   value={this.state.username}
@@ -65,9 +64,9 @@ class SignUpForm extends Component {
             <div className="field">
               <label className="label">Password</label>
               <p className="control has-icons-left">
-                <input 
-                  className="input" 
-                  type="password" 
+                <input
+                  className="input"
+                  type="password"
                   placeholder="Password"
                   name="password"
                   value={this.state.password}
