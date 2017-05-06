@@ -37,6 +37,7 @@
     "nm": "nodemon ./server/server.js",
     "build": "react-scripts build",
     "bs": "react-scripts build && node ./server/server",
-    "bw": "react-scripts build -w"
+    "bw": "react-scripts build -w",
+    "start": "react-scripts start"
   }
 }
