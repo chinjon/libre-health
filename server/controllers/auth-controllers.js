@@ -17,33 +17,33 @@ module.exports = function(app) {
     let newUser = new User(userData);
 
     newUser.save(function(err, data) {
-      if (err.message.includes('duplicate')) {
-        res.status(500).send({title: 'Duplicate Username', message: 'Please choose another username. Try using your email address.'});
-      } else if (err.errors.password) {
-        res.status(500).send({title: 'Insecure Password', message: err.errors.password.message});
-      } else if (err.errors.username) {
-        res.status(500).send({title: 'Invalid Username', message: err.errors.username.message});
+      console.log(err);
+      if (err) {
+        if (err.message.includes('duplicate')) {
+          res.status(500).send({title: 'Duplicate Username', message: 'Please choose another username. Try using your email address.'});
+        } else if (err.errors.password) {
+          res.status(500).send({title: 'Insecure Password', message: err.errors.password.message});
+        } else if (err.errors.username) {
+          res.status(500).send({title: 'Invalid Username', message: err.errors.username.message});
+        }
       } else {
         res.json(data);
       }
-    });
-  });
+  });});
 
+//
+router.post('/api/login', passport.authenticate('local'), function(req, res) {
+  if (req.user) {
+    res.json(req.user)
+  } else {
+    res.status(req.statusCode).send({message: req.statusMessage});
+  }
+});
 
-  //
-  router.post('/api/login', passport.authenticate('local'), function(req, res) {
-    if (req.user) {
-      res.json(req.user)
-    } else {
-      res.status(req.statusCode).send({message:req.statusMessage});
-    }
+router.get('/api/logout', function(req, res) {
+  req.logout();
+});
 
-  });
-
-  router.get('/api/logout', function(req, res) {
-    req.logout();
-  });
-
-  app.use('/', router);
+app.use('/', router);
 
 }
