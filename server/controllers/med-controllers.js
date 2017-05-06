@@ -5,7 +5,7 @@ const User = require('./../models/User');
 
 module.exports = function(app) {
 
-	router.get('/api/meds/:userId', function(req, res){
+	router.get('/meds/:userId', function(req, res){
 
 		// res.json(db.User.find({_id: req.params.userId}, 'medications').fetch());
 		User.find({_id: req.params.userId}, 'medications').then(medications=>{
@@ -14,7 +14,7 @@ module.exports = function(app) {
 	});
 
 	//adding new medication to list
-	router.post('/api/add/meds/:userId', function(req, res){
+	router.post('/add/meds/:userId', function(req, res){
 		User.findOneAndUpdate({_id: req.params.userId},
 			{$addToSet: {medications: req.body.medication}},
 			{new: true})
@@ -26,12 +26,12 @@ module.exports = function(app) {
 	//  	//later
 	// });
 
-	router.put('/api/delete/meds/:userId', function(req, res){
+	router.put('/delete/meds/:userId', function(req, res){
 		User.findOneAndUpdate({_id: req.params.userId},
 			{$pull: {'medications': {'rxcui': req.body.medication}}},
 			{new: true})
 		.then(user=>res.json({user})).catch(err=>res.json(err));
 	});
 
-	app.use('/', router);
+	app.use('/api', router);
 }
