@@ -44,12 +44,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Serve static assets
-app.use(express.static(path.resolve(__dirname, '..', 'public')));
-app.use(express.static("public"));
+
 // Always return the main index.html, so react-router render the route in the client
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'));
 });
+app.use(express.static(path.resolve(__dirname, '..', 'build')));
 
 require("./controllers/auth-controllers.js")(app);
 require("./controllers/med-controllers.js")(app)
