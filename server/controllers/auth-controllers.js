@@ -6,7 +6,7 @@ const User = require('../models/User');
 module.exports = function(app) {
 
   // sign-up new user
-  router.post('/api/signup', (req, res) => {
+  router.post('/signup', (req, res) => {
     let userData = {
       username: req.body.username,
       password: req.body.password
@@ -31,7 +31,7 @@ module.exports = function(app) {
 
 
   //
-  router.post('/api/login', passport.authenticate('local'), function(req, res) {
+  router.post('/login', passport.authenticate('local'), function(req, res) {
     if (req.user) {
       res.json(req.user)
     } else {
@@ -40,10 +40,10 @@ module.exports = function(app) {
 
   });
 
-  router.get('/api/logout', function(req, res) {
+  router.get('/logout', function(req, res) {
     req.logout();
   });
 
-  app.use('/', router);
+  app.use('/api', router);
 
 }
