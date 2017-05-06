@@ -53,7 +53,9 @@
   color: #fff;
 }
 
-.overColor {
+.overlay {
+  position: absolute;
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)) !important;
   background-size: cover;
+  top: 50%;
 }
