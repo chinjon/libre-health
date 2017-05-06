@@ -49,7 +49,7 @@ app.use(express.static(path.resolve(__dirname, '..', 'build')));
 
 // Always return the main index.html, so react-router render the route in the client
 app.get('*', function (req, res) {
-   res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'));
+   res.sendFile(path.join(__dirname, '..', 'build', 'index.html'));
  });
 
 require("./controllers/auth-controllers.js")(app);
