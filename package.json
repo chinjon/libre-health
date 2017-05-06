@@ -39,5 +39,6 @@
     "bs": "react-scripts build && node ./server/server",
     "bw": "react-scripts build -w",
     "start": "react-scripts start"
-  }
+  },
+  "proxy": "http://localhost:4000/"
 }
