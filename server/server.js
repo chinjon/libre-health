@@ -32,7 +32,6 @@ var DBUri = process.env.DATABASEURL || "mongodb://localhost/libre-health-db";
 
 mongoose.connect(DBUri).then(() => console.log('connected to DB!')).catch((err) => console.log(err));
 
-
 // Configure passport-local to use User model for authentication
 // const User = require('./models/User');
 const passportConfig = require('./config/passport');
