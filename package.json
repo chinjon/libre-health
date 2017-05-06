@@ -27,17 +27,12 @@
     "react-modal": "^1.7.7",
     "react-notification-system": "^0.2.14",
     "react-router": "^2.4.1",
-    "react-tabs": "^0.8.3"
-  },
-  "devDependencies": {
+    "react-tabs": "^0.8.3",
     "react-scripts": "0.9.5"
   },
   "scripts": {
-    "s": "node ./server/server",
-    "nm": "nodemon ./server/server.js",
     "build": "react-scripts build",
     "bs": "react-scripts build && node ./server/server",
-    "bw": "react-scripts build -w",
     "start": "react-scripts start"
   }
 }
