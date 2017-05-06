@@ -33,6 +33,7 @@
   "scripts": {
     "build": "react-scripts build",
     "bs": "react-scripts build && node ./server/server",
-    "start": "react-scripts start"
+    "start": "react-scripts start",
+    "postinstall": "react-scripts build"
   }
 }

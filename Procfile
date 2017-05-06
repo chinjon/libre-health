@@ -1,1 +1,1 @@
-web: react-scripts build && react-scripts start
+web: react-scripts start
