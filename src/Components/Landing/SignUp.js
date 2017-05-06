@@ -43,7 +43,7 @@ class SignUp extends Component {
         <button className="button" onClick={this.handleOpenModal}>Sign Up</button>
         <ReactModal isOpen={this.state.showModal} contentLabel="Minimal Modal Example" style={modalStyle}>
           <div>
-            <div class="columns">
+            <div className="columns">
               <div className="column">
                 <SignUpForm newUser={this.props.newUser} closeModal={this.handleCloseModal} isAuth={this.props.isAuth}>
                   <button className="button is-danger" onClick={this.handleCloseModal}>Cancel</button>
