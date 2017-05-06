@@ -47,9 +47,9 @@ app.use(express.static("public"));
 app.use(express.static(path.resolve(__dirname, '..', 'build')));
 
 // Always return the main index.html, so react-router render the route in the client
-app.get('/*', function (req, res) {
-   res.sendFile(path.join(__dirname, 'build', 'index.html'));
- });
+app.get('*', function (req, res) {
+  res.sendFile(path.join(__dirname, '..', 'build', 'index.html'));
+});
 
 require("./controllers/auth-controllers.js")(app);
 require("./controllers/med-controllers.js")(app)
