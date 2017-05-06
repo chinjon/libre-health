@@ -51,7 +51,7 @@ require("./controllers/auth-controllers.js")(app);
 require("./controllers/med-controllers.js")(app);
 
 // Always return the main index.html, so react-router render the route in the client
-app.get('*', function (req, res) {
+app.get('/', function (req, res) {
    res.sendFile(path.join(__dirname, '..', 'build', 'index.html'));
  });
 
