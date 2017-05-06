@@ -2,6 +2,9 @@
   "name": "libre-health",
   "version": "0.1.0",
   "private": true,
+   "engines": {
+    "node": "7.8.0"
+  },
   "dependencies": {
     "axios": "^0.16.1",
     "babel-preset-react": "^6.24.1",
