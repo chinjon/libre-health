@@ -44,7 +44,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Serve static assets
+app.use(express.static("public"));
 app.use(express.static(path.resolve(__dirname, '..', 'build')));
+
 // Always return the main index.html, so react-router render the route in the client
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'));
